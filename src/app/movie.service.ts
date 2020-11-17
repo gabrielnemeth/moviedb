@@ -1,17 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { SearchResult } from './search-result';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  public constructor(private http: HttpClient) {}
+  private apiKey: string;
+
+  public constructor(private http: HttpClient) {
+    this.apiKey = environment.themoviedb.apiKey;
+  }
 
   public getResult(searchQuerry: string): Observable<SearchResult> {
     return this.http.get<SearchResult>(
-      `https://api.themoviedb.org/3/search/movie?api_key=<API_KEY>&language=en-US&query=${searchQuerry}`
+      `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }
 }
