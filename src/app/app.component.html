@@ -2,11 +2,30 @@
   <div class="container">
     <div class="field has-addons">
       <div class="control is-expanded">
-        <input class="input" type="text" placeholder="Find a repository" />
+        <input
+          #searchInput
+          class="input"
+          type="text"
+          placeholder="Find a movie"
+        />
       </div>
       <div class="control">
-        <a class="button is-info"> Search </a>
+        <a class="button is-info" (click)="searchForMovies(searchInput.value)">
+          Search
+        </a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" *ngIf="movies.length > 0">
+  <div class="container">
+    <div class="columns is-multiline">
+      <app-movie-card
+        class="column is-one-quarter"
+        *ngFor="let movie of movies"
+        [movie]="movie"
+      ></app-movie-card>
     </div>
   </div>
 </section>

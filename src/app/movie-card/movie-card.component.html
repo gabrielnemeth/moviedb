@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-3by4">
+      <img
+        src="https://image.tmdb.org/t/p/w1280/{{ movie.poster_path }}"
+        alt="{{ movie.title }}"
+      />
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4">{{ movie.title }}</p>
+      </div>
+    </div>
+
+    <div class="content">{{ movie.overview | slice: 0:250 }}</div>
+  </div>
+</div>
