@@ -1,0 +1,11 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <app-movie-card
+        class="column is-one-quarter"
+        *ngFor="let movie of movies"
+        [movie]="movie"
+      ></app-movie-card>
+    </div>
+  </div>
+</section>
