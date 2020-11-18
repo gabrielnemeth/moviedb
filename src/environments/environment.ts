@@ -7,6 +7,7 @@ import { themoviedb } from './themoviedb.environment';
 export const environment = {
   production: false,
   themoviedb: {
+    baseUrl: 'https://api.themoviedb.org/3/',
     apiKey: themoviedb.apiKey,
   },
 };

@@ -16,7 +16,7 @@ export class MovieService {
 
   public getResult(searchQuerry: string): Observable<SearchResult> {
     return this.http.get<SearchResult>(
-      `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
+      `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }
 }

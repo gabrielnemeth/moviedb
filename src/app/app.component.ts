@@ -13,9 +13,8 @@ export class AppComponent {
   public constructor(private movieService: MovieService) {}
 
   public searchForMovies(querry: string): void {
-    this.movieService.getResult(querry).subscribe((data) => {
-      console.log(data);
-      this.movies = data.results;
-    });
+    this.movieService
+      .getResult(querry)
+      .subscribe((data) => (this.movies = data.results));
   }
 }
