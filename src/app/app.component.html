@@ -18,4 +18,6 @@
   </div>
 </section>
 
-<app-movie-list *ngIf="movies.length > 0" [movies]="movies"></app-movie-list>
+<ng-container *ngIf="movies$ | async as movies">
+  <app-movie-list *ngIf="movies.length > 0" [movies]="movies"></app-movie-list>
+</ng-container>

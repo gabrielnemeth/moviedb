@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Movie } from './movie';
-import { MovieService } from './movie.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { movieSearch } from './store/movie.actions';
+import { selectMovies } from './store/movie.reducer';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,11 @@ import { MovieService } from './movie.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public movies: Movie[] = [];
+  public movies$: Observable<any> = this.store.select(selectMovies);
 
-  public constructor(private movieService: MovieService) {}
+  public constructor(private store: Store<any>) {}
 
-  public searchForMovies(querry: string): void {
-    this.movieService
-      .getResult(querry)
-      .subscribe((data) => (this.movies = data.results));
+  public searchForMovies(query: string): void {
+    this.store.dispatch(movieSearch({ query: query }));
   }
 }
