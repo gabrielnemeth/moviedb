@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { GenreEffects } from './store/genre.effects';
+import * as genreReducer from './store/genre.reducer';
 import { MovieEffects } from './store/movie.effects';
 import * as movieReducer from './store/movie.reducer';
 
@@ -22,12 +24,15 @@ import * as movieReducer from './store/movie.reducer';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ movies: movieReducer.reducer }),
+    StoreModule.forRoot({
+      movies: movieReducer.reducer,
+      genres: genreReducer.reducer,
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([MovieEffects]),
+    EffectsModule.forRoot([MovieEffects, GenreEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

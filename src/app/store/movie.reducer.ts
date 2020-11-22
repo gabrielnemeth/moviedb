@@ -1,16 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Movie } from './../movie';
 import { moviesLoaded } from './movie.actions';
-
-export interface State {
-  movies: MovieState;
-}
+import { State } from './state';
 
 export interface MovieState {
   list: Movie[];
 }
 
-export const initialState: MovieState = {
+const initialState: MovieState = {
   list: [],
 };
 
@@ -23,4 +20,4 @@ export function reducer(state: MovieState | undefined, action: Action) {
   return movieReducer(state, action);
 }
 
-export const selectMovies = (state: State) => state.movies.list;
+export const selectMovies = (state: State): Movie[] => state.movies.list;

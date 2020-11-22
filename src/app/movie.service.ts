@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Genre } from './genre';
 import { SearchResult } from './search-result';
 
 @Injectable({
@@ -18,5 +20,13 @@ export class MovieService {
     return this.http.get<SearchResult>(
       `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
+  }
+
+  public getGenres(): Observable<Genre[]> {
+    return this.http
+      .get<{ genres: Genre[] }>(
+        `${environment.themoviedb.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`
+      )
+      .pipe(map((data) => data.genres));
   }
 }
