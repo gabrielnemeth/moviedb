@@ -9,11 +9,18 @@
   </div>
 </div>
 
-<p class="title has-text-weight-bold is-5">{{ movie.title }}</p>
-<p>{{ getYear(movie.release_date) }}</p>
-<p>{{ getGenreString(movie.genre_ids) | async }}</p>
-<span class="icon">
-  <i class="fas fa-star"></i>
-  <p>{{ getAverageRating(movie.vote_average) }}</p>
-  <p>({{ movie.vote_count }})</p>
-</span>
+<div class="movie-detail">
+  <p class="title has-text-weight-bold is-5">{{ movie.title }}</p>
+  <div class="movie-info">
+    <p>{{ getYear(movie.release_date) }}</p>
+    <p class="mx-2">&bull;</p>
+    <p>{{ getGenreString(movie.genre_ids) | async }}</p>
+  </div>
+  <div class="movie-rating">
+    <span class="icon">
+      <i class="fas fa-star"></i>
+    </span>
+    <p>{{ getAverageRating(movie.vote_average) }}</p>
+    <p>({{ movie.vote_count }})</p>
+  </div>
+</div>
