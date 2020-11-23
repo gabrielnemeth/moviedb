@@ -2,6 +2,7 @@
   <div class="card-image">
     <figure class="image is-3by4">
       <img
+        *ngIf="movie.poster_path !== null; else noImage"
         src="https://image.tmdb.org/t/p/w1280/{{ movie.poster_path }}"
         alt="{{ movie.title }}"
       />
@@ -9,18 +10,30 @@
   </div>
 </div>
 
-<div class="movie-detail">
-  <p class="title has-text-weight-bold is-5">{{ movie.title }}</p>
-  <div class="movie-info">
-    <p>{{ getYear(movie.release_date) }}</p>
-    <p class="mx-2">&bull;</p>
-    <p>{{ getGenreString(movie.genre_ids) | async }}</p>
-  </div>
-  <div class="movie-rating">
-    <span class="icon">
-      <i class="fas fa-star"></i>
-    </span>
-    <p>{{ getAverageRating(movie.vote_average) }}</p>
-    <p>({{ movie.vote_count }})</p>
+<div class="movie-detail px-1 pt-4 pb-1">
+  <p class="movie-title title has-text-weight-bold is-5 mb-3">
+    {{ movie.title }}
+  </p>
+  <div class="movie-aditional-info has-text-weight-medium">
+    <div class="is-flex is-size-7">
+      <p *ngIf="movie.release_date.length > 0">
+        {{ getYear(movie.release_date) }}
+      </p>
+      <p class="mx-1" *ngIf="movie.genre_ids.length > 0">&bull;</p>
+      <p>{{ getGenreString(movie.genre_ids) | async }}</p>
+    </div>
+    <div class="is-flex is-size-7">
+      <span class="icon is-small rating-icon">
+        <i class="fas fa-star"></i>
+      </span>
+      <p class="mr-1">{{ getAverageRating(movie.vote_average) }}</p>
+      <p>({{ movie.vote_count }})</p>
+    </div>
   </div>
 </div>
+
+<ng-template #noImage>
+  <div class="no-image__wrapper">
+    <i class="far fa-file-image no-image__icon"></i>
+  </div>
+</ng-template>
