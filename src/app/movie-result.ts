@@ -1,6 +1,6 @@
 import { Movie } from './store/movie/movie';
 
-export interface SearchResult {
+export interface MovieResult {
   page: number;
   results: Movie[];
   total_results: number;

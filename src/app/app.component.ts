@@ -7,6 +7,7 @@ import { Movie } from './store/movie/movie';
 import { movieSearch } from './store/movie/movie.actions';
 import { selectMovies } from './store/movie/movie.reducer';
 import { State } from './store/state';
+import { fetchTrending as fetchTrending } from './store/trending/trending.actions';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   public constructor(private store: Store<State>) {}
 
   public ngOnInit(): void {
+    this.store.dispatch(fetchTrending());
     this.store.dispatch(fetchGenres());
   }
 

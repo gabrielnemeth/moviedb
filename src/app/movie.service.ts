@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { SearchResult } from './search-result';
+import { MovieResult } from './movie-result';
 import { Genre } from './store/genre/genre';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class MovieService {
     this.apiKey = environment.themoviedb.apiKey;
   }
 
-  public getResult(searchQuerry: string): Observable<SearchResult> {
-    return this.http.get<SearchResult>(
+  public getResult(searchQuerry: string): Observable<MovieResult> {
+    return this.http.get<MovieResult>(
       `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }
@@ -28,5 +28,11 @@ export class MovieService {
         `${environment.themoviedb.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`
       )
       .pipe(map((data) => data.genres));
+  }
+
+  public getTrending(): Observable<MovieResult> {
+    return this.http.get<MovieResult>(
+      `${environment.themoviedb.baseUrl}trending/all/day?api_key=${this.apiKey}`
+    );
   }
 }

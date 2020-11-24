@@ -15,6 +15,8 @@ import { GenreEffects } from './store/genre/genre.effects';
 import * as genreReducer from './store/genre/genre.reducer';
 import { MovieEffects } from './store/movie/movie.effects';
 import * as movieReducer from './store/movie/movie.reducer';
+import { TrendingEffects } from './store/trending/trending.effects';
+import * as trendingReducer from './store/trending/trending.reducer';
 
 @NgModule({
   declarations: [AppComponent, MovieCardComponent, MovieListComponent],
@@ -26,13 +28,14 @@ import * as movieReducer from './store/movie/movie.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot({
       movies: movieReducer.reducer,
+      trending: trendingReducer.reducer,
       genres: genreReducer.reducer,
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([MovieEffects, GenreEffects]),
+    EffectsModule.forRoot([MovieEffects, TrendingEffects, GenreEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
