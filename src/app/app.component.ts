@@ -5,9 +5,9 @@ import { Observable } from 'rxjs';
 import { fetchGenres } from './store/genre/genre.actions';
 import { Movie } from './store/movie/movie';
 import { movieSearch } from './store/movie/movie.actions';
-import { selectMovies } from './store/movie/movie.reducer';
 import { State } from './store/state';
 import { fetchTrending as fetchTrending } from './store/trending/trending.actions';
+import { selectTrending } from './store/trending/trending.reducer';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ import { fetchTrending as fetchTrending } from './store/trending/trending.action
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public movies$: Observable<Movie[]> = this.store.select(selectMovies);
+  public movies$: Observable<Movie[]> = this.store.select(selectTrending);
   public searchForm: FormGroup = new FormGroup({
     query: new FormControl(''),
   });

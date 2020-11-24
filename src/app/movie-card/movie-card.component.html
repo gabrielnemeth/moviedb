@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-image">
-    <figure class="image is-3by4">
+    <figure class="image is-2by3">
       <img
         *ngIf="movie.poster_path !== null; else noImage"
         src="https://image.tmdb.org/t/p/w1280/{{ movie.poster_path }}"
@@ -26,7 +26,7 @@
       <span class="icon is-small rating-icon">
         <i class="fas fa-star"></i>
       </span>
-      <p class="mr-1">{{ getAverageRating(movie.vote_average) }}</p>
+      <p class="mr-1">{{ movie.vote_average }}</p>
       <p>({{ movie.vote_count }})</p>
     </div>
   </div>

@@ -32,7 +32,7 @@ export class MovieService {
 
   public getTrending(): Observable<MovieResult> {
     return this.http.get<MovieResult>(
-      `${environment.themoviedb.baseUrl}trending/all/day?api_key=${this.apiKey}`
+      `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
     );
   }
 }

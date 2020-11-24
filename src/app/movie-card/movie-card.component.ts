@@ -27,10 +27,6 @@ export class MovieCardComponent {
       : of(undefined);
   }
 
-  public getAverageRating(rating: number): number {
-    return Math.round(rating);
-  }
-
   public getYear(date: string): string {
     return new Date(date).getFullYear().toString();
   }
