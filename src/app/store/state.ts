@@ -1,5 +1,5 @@
-import { GenreState } from './genre.reducer';
-import { MovieState } from './movie.reducer';
+import { GenreState } from './genre/genre.reducer';
+import { MovieState } from './movie/movie.reducer';
 
 export interface State {
   movies: MovieState;

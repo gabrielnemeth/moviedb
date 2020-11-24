@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Movie } from './../movie';
+import { State } from '../state';
+import { Movie } from './movie';
 import { moviesLoaded } from './movie.actions';
-import { State } from './state';
 
 export interface MovieState {
   list: Movie[];

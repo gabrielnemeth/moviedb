@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Genre } from './genre';
 import { SearchResult } from './search-result';
+import { Genre } from './store/genre/genre';
 
 @Injectable({
   providedIn: 'root',

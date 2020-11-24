@@ -1,4 +1,4 @@
-import { Movie } from './movie';
+import { Movie } from './store/movie/movie';
 
 export interface SearchResult {
   page: number;

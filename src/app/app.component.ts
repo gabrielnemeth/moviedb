@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Movie } from './movie';
-import { fetchGenres } from './store/genre.actions';
-import { movieSearch } from './store/movie.actions';
-import { selectMovies } from './store/movie.reducer';
+import { fetchGenres } from './store/genre/genre.actions';
+import { Movie } from './store/movie/movie';
+import { movieSearch } from './store/movie/movie.actions';
+import { selectMovies } from './store/movie/movie.reducer';
 import { State } from './store/state';
 
 @Component({

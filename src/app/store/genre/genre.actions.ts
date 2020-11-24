@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Genre } from '../genre';
+import { Genre } from './genre';
 
 export const fetchGenres = createAction('[Movie Page] Trigger Genre Fetch');
 

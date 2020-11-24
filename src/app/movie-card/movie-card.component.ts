@@ -2,9 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { getGenreById } from '../store/genre.reducer';
+import { getGenreById } from '../store/genre/genre.reducer';
+import { Movie } from '../store/movie/movie';
 import { State } from '../store/state';
-import { Movie } from './../movie';
 
 @Component({
   selector: 'app-movie-card',
