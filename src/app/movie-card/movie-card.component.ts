@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,7 +16,7 @@ export class MovieCardComponent {
   @Input()
   public movie: Movie;
 
-  public constructor(private store: Store<State>) {}
+  public constructor(private store: Store<State>, private router: Router) {}
 
   public getGenreString(ids: number[]): Observable<string | undefined> {
     // Return only first if there are more genres for the movie.
@@ -29,5 +30,9 @@ export class MovieCardComponent {
 
   public getYear(date: string): string {
     return new Date(date).getFullYear().toString();
+  }
+
+  public showMovie(id: number): void {
+    this.router.navigate(['/movie', id]);
   }
 }
