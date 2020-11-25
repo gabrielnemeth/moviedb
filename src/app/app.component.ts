@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { fetchGenres } from './store/genre/genre.actions';
@@ -17,7 +17,7 @@ import { selectTrending } from './store/trending/trending.reducer';
 export class AppComponent implements OnInit {
   public movies$: Observable<Movie[]> = this.store.select(selectTrending);
   public searchForm: FormGroup = new FormGroup({
-    query: new FormControl(''),
+    query: new FormControl('', Validators.required),
   });
 
   public constructor(private store: Store<State>) {}

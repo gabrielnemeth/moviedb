@@ -1,11 +1,11 @@
 <section class="section">
   <div class="container">
-    <div class="field has-addons">
-      <form
-        [formGroup]="searchForm"
-        (ngSubmit)="searchForMovies()"
-        class="control is-expanded"
-      >
+    <form
+      [formGroup]="searchForm"
+      (ngSubmit)="searchForMovies()"
+      class="field has-addons"
+    >
+      <div class="control is-expanded">
         <input
           formControlName="query"
           #searchInput
@@ -13,11 +13,17 @@
           type="text"
           placeholder="Find a movie"
         />
-      </form>
-      <div class="control">
-        <button type="submit" class="button is-info">Search</button>
       </div>
-    </div>
+      <div class="control">
+        <button
+          type="submit"
+          class="button is-info"
+          [disabled]="!searchForm.valid"
+        >
+          Search
+        </button>
+      </div>
+    </form>
   </div>
 </section>
 
