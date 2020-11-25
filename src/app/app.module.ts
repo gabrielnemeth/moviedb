@@ -17,9 +17,11 @@ import { MovieEffects } from './store/movie/movie.effects';
 import * as movieReducer from './store/movie/movie.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
+import { SearchComponent } from './search/search.component';
+import { TrendingComponent } from './trending/trending.component';
 
 @NgModule({
-  declarations: [AppComponent, MovieCardComponent, MovieListComponent],
+  declarations: [AppComponent, MovieCardComponent, MovieListComponent, SearchComponent, TrendingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
