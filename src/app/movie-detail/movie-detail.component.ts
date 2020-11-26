@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { MovieService } from './../movie.service';
+import { MovieDetail } from './../store/movie/movie.detail';
 
 @Component({
   selector: 'app-movie-detail',
@@ -7,9 +10,32 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie-detail.component.scss'],
 })
 export class MovieDetailComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
+  public movie$: Observable<MovieDetail>;
+
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService
+  ) {}
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('id'));
+    const movieId = this.route.snapshot.paramMap.get('id') || '';
+    this.movie$ = this.movieService.getMovieById(movieId);
+  }
+
+  public getStyle(
+    imagePath: string
+  ): {
+    [klass: string]: any;
+  } {
+    return {
+      'background-image': `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${imagePath})`,
+      'background-size': 'cover',
+      'background-repeat': 'no-repeat',
+      'background-color': 'black',
+    };
+  }
+
+  public getYear(date: string): string {
+    return new Date(date).getFullYear().toString();
   }
 }

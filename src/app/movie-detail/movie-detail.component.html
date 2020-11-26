@@ -1,1 +1,74 @@
-<p>movie-detail works!</p>
+<ng-container *ngIf="movie$ | async as movie">
+  <section
+    class="hero is-success is-fullheight"
+    [ngStyle]="getStyle(movie.backdrop_path)"
+  >
+    <div class="hero-bg">
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns">
+            <div class="column is-3">
+              <div class="card movie-image">
+                <div class="card-image">
+                  <figure class="image is-2by3">
+                    <img
+                      *ngIf="movie.poster_path !== null; else noImage"
+                      src="https://image.tmdb.org/t/p/w1280/{{
+                        movie.poster_path
+                      }}"
+                      alt="{{ movie.title }}"
+                    />
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <h1 class="title">
+                <span class="has-text-weight-bold mr-2 has-text-grey-lighter">{{
+                  movie.title
+                }}</span>
+                <span class="has-text-weight-normal has-text-grey-light"
+                  >({{ getYear(movie.release_date) }})</span
+                >
+              </h1>
+              <h2 class="subtitle">Subtitle</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero footer: will stick at the bottom -->
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+          <div class="container">
+            <ul>
+              <li class="is-active"><a>Overview</a></li>
+              <li><a>Modifiers</a></li>
+              <li><a>Grid</a></li>
+              <li><a>Elements</a></li>
+              <li><a>Components</a></li>
+              <li><a>Layout</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- <figure class="image is-2by3">
+    <img
+      *ngIf="movie.poster_path !== null; else noImage"
+      src="https://image.tmdb.org/t/p/w1280/{{ movie.poster_path }}"
+      alt="{{ movie.title }}"
+    />
+  </figure>
+
+  <p>{{ movie.title }}</p> -->
+</ng-container>
+
+<ng-template #noImage>
+  <div class="no-image__wrapper">
+    <i class="far fa-file-image no-image__icon"></i>
+  </div>
+</ng-template>

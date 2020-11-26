@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MovieResult } from './movie-result';
 import { Genre } from './store/genre/genre';
+import { MovieDetail } from './store/movie/movie.detail';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,12 @@ export class MovieService {
   public getTrending(): Observable<MovieResult> {
     return this.http.get<MovieResult>(
       `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
+    );
+  }
+
+  public getMovieById(id: string): Observable<MovieDetail> {
+    return this.http.get<MovieDetail>(
+      `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
     );
   }
 }

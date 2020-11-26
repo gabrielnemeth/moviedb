@@ -1,0 +1,14 @@
+.hero-bg {
+  align-items: stretch;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(0 0 0 / 84%);
+}
+
+.movie-image {
+  background-color: transparent;
+  box-shadow: 0 0.5em 1.6em 0.8em rgb(10 10 10 / 55%),
+    0 0px 0 1px rgba(10, 10, 10, 0.13);
+}
