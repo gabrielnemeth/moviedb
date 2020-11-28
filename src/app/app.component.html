@@ -1,30 +1,45 @@
 <section class="section">
   <div class="container">
-    <p id="logo">Screenz</p>
-    <form
-      [formGroup]="searchForm"
-      (ngSubmit)="searchForMovies()"
-      class="field has-addons"
-    >
-      <div class="control is-expanded">
-        <input
-          formControlName="query"
-          #searchInput
-          class="input"
-          type="text"
-          placeholder="Find a movie"
-        />
+    <div class="level">
+      <div class="level-left mr-6">
+        <div class="level-item">
+          <a routerLink="/" id="logo" class="has-text-dark is-size-3"
+            >Screenz</a
+          >
+        </div>
       </div>
-      <div class="control">
-        <button
-          type="submit"
-          class="button is-info"
-          [disabled]="!searchForm.valid"
-        >
-          Search
-        </button>
+
+      <div class="level-right is-flex-grow-1">
+        <div class="level-item is-flex-grow-1">
+          <form
+            [formGroup]="searchForm"
+            (ngSubmit)="searchForMovies()"
+            class="field has-addons is-flex-grow-1"
+          >
+            <div class="control is-expanded">
+              <input
+                formControlName="query"
+                #searchInput
+                class="input"
+                type="text"
+                placeholder="Find a movie"
+              />
+            </div>
+            <div class="control">
+              <button
+                type="submit"
+                class="button"
+                [disabled]="!searchForm.valid"
+              >
+                <span class="icon is-small">
+                  <i class="fas fa-search"></i>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </section>
 
