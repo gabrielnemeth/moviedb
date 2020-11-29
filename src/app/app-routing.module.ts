@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MovieDetailComponent } from './movie-detail/movie-detail.component';
-import { SearchComponent } from './search/search.component';
-import { TrendingComponent } from './trending/trending.component';
+import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
+import { SearchComponent } from './components/search/search.component';
+import { TrendingComponent } from './components/trending/trending.component';
 
 const routes: Routes = [
   { path: '', component: TrendingComponent },

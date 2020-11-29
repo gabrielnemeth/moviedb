@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { MovieListResult } from './interfaces/movie-list-result';
 import { fetchGenres } from './store/genre/genre.actions';
-import { Movie } from './store/movie/movie';
 import { movieSearch } from './store/movie/movie.actions';
 import { State } from './store/state';
 import { fetchTrending as fetchTrending } from './store/trending/trending.actions';
@@ -16,7 +16,9 @@ import { selectTrending } from './store/trending/trending.reducer';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public movies$: Observable<Movie[]> = this.store.select(selectTrending);
+  public movies$: Observable<MovieListResult[]> = this.store.select(
+    selectTrending
+  );
   public searchForm: FormGroup = new FormGroup({
     query: new FormControl('', Validators.required),
   });

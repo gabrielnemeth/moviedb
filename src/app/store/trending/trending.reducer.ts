@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Movie } from '../movie/movie';
+import { MovieListResult } from '../../interfaces/movie-list-result';
 import { MovieState } from '../movie/movie.reducer';
 import { State } from '../state';
 import { trendingLoaded } from './trending.actions';
 
 export interface TrendingState {
-  list: Movie[];
+  list: MovieListResult[];
 }
 
 const initialState: TrendingState = {
@@ -21,4 +21,5 @@ export function reducer(state: MovieState | undefined, action: Action) {
   return trendingReducer(state, action);
 }
 
-export const selectTrending = (state: State): Movie[] => state.trending.list;
+export const selectTrending = (state: State): MovieListResult[] =>
+  state.trending.list;

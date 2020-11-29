@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { getGenreById } from '../store/genre/genre.reducer';
-import { Movie } from '../store/movie/movie';
-import { State } from '../store/state';
+import { State } from 'src/app/store/state';
+import { MovieListResult } from '../../interfaces/movie-list-result';
+import { getGenreById } from './../../store/genre/genre.reducer';
 
 @Component({
   selector: 'app-movie-card',
@@ -14,7 +14,7 @@ import { State } from '../store/state';
 })
 export class MovieCardComponent {
   @Input()
-  public movie: Movie;
+  public movie: MovieListResult;
 
   public constructor(private store: Store<State>, private router: Router) {}
 

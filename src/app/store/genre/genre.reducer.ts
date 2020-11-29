@@ -1,6 +1,6 @@
 import { Action, createReducer, createSelector, on } from '@ngrx/store';
+import { Genre } from '../../interfaces/genre';
 import { State } from '../state';
-import { Genre } from './genre';
 import { genresLoaded } from './genre.actions';
 
 export interface GenreState {

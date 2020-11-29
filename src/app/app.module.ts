@@ -9,20 +9,27 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MovieCardComponent } from './movie-card/movie-card.component';
-import { MovieListComponent } from './movie-list/movie-list.component';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
+import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { SearchComponent } from './components/search/search.component';
+import { TrendingComponent } from './components/trending/trending.component';
 import { GenreEffects } from './store/genre/genre.effects';
 import * as genreReducer from './store/genre/genre.reducer';
 import { MovieEffects } from './store/movie/movie.effects';
 import * as movieReducer from './store/movie/movie.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
-import { SearchComponent } from './search/search.component';
-import { TrendingComponent } from './trending/trending.component';
-import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, MovieCardComponent, MovieListComponent, SearchComponent, TrendingComponent, MovieDetailComponent],
+  declarations: [
+    AppComponent,
+    MovieCardComponent,
+    MovieListComponent,
+    SearchComponent,
+    TrendingComponent,
+    MovieDetailComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

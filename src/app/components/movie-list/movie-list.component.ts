@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Movie } from '../store/movie/movie';
+import { MovieListResult } from '../../interfaces/movie-list-result';
 
 @Component({
   selector: 'app-movie-list',
@@ -7,5 +7,5 @@ import { Movie } from '../store/movie/movie';
 })
 export class MovieListComponent {
   @Input()
-  public movies: Movie[];
+  public movies: MovieListResult[];
 }

@@ -1,6 +1,6 @@
-import { Genre } from '../genre/genre';
+import { Genre } from './genre';
 
-export interface MovieDetail {
+export interface Movie {
   adult: boolean;
   backdrop_path: string | null;
   belongs_to_collection: null;

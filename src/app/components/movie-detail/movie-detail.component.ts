@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MovieService } from './../movie.service';
-import { MovieDetail } from './../store/movie/movie.detail';
+import { Movie } from '../../interfaces/movie';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-movie-detail',
@@ -10,7 +10,7 @@ import { MovieDetail } from './../store/movie/movie.detail';
   styleUrls: ['./movie-detail.component.scss'],
 })
 export class MovieDetailComponent implements OnInit {
-  public movie$: Observable<MovieDetail>;
+  public movie$: Observable<Movie>;
 
   constructor(
     private route: ActivatedRoute,

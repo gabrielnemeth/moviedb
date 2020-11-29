@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { MovieResult } from './movie-result';
-import { Genre } from './store/genre/genre';
-import { MovieDetail } from './store/movie/movie.detail';
+import { Genre } from '../interfaces/genre';
+import { Movie } from '../interfaces/movie';
+import { MovieSearchResponse } from '../interfaces/movie-result';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +17,8 @@ export class MovieService {
     this.apiKey = environment.themoviedb.apiKey;
   }
 
-  public getResult(searchQuerry: string): Observable<MovieResult> {
-    return this.http.get<MovieResult>(
+  public getResult(searchQuerry: string): Observable<MovieSearchResponse> {
+    return this.http.get<MovieSearchResponse>(
       `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }
@@ -31,14 +31,14 @@ export class MovieService {
       .pipe(map((data) => data.genres));
   }
 
-  public getTrending(): Observable<MovieResult> {
-    return this.http.get<MovieResult>(
+  public getTrending(): Observable<MovieSearchResponse> {
+    return this.http.get<MovieSearchResponse>(
       `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
     );
   }
 
-  public getMovieById(id: string): Observable<MovieDetail> {
-    return this.http.get<MovieDetail>(
+  public getMovieById(id: string): Observable<Movie> {
+    return this.http.get<Movie>(
       `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
     );
   }
