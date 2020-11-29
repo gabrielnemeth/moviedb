@@ -23,7 +23,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   public getStyle(
-    imagePath: string
+    imagePath: string | null
   ): {
     [klass: string]: any;
   } {
