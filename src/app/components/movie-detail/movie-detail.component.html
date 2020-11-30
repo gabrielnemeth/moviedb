@@ -9,19 +9,10 @@
         <div class="container">
           <div class="columns">
             <div class="column is-3">
-              <div class="card movie-image">
-                <div class="card-image">
-                  <figure class="image is-2by3">
-                    <img
-                      *ngIf="movie.poster_path !== null; else noImage"
-                      src="https://image.tmdb.org/t/p/w1280/{{
-                        movie.poster_path
-                      }}"
-                      alt="{{ movie.title }}"
-                    />
-                  </figure>
-                </div>
-              </div>
+              <app-item-image
+                [src]="movie.poster_path"
+                [alt]="movie.title"
+              ></app-item-image>
             </div>
             <div class="column">
               <h1 class="title">
@@ -55,20 +46,4 @@
       </div>
     </div>
   </section>
-
-  <!-- <figure class="image is-2by3">
-    <img
-      *ngIf="movie.poster_path !== null; else noImage"
-      src="https://image.tmdb.org/t/p/w1280/{{ movie.poster_path }}"
-      alt="{{ movie.title }}"
-    />
-  </figure>
-
-  <p>{{ movie.title }}</p> -->
 </ng-container>
-
-<ng-template #noImage>
-  <div class="no-image__wrapper">
-    <i class="far fa-file-image no-image__icon"></i>
-  </div>
-</ng-template>

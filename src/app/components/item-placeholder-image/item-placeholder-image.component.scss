@@ -1,0 +1,20 @@
+@import "../../../../node_modules/bulma/sass/utilities/initial-variables.sass";
+
+.placeholder__wrapper {
+  border-radius: 0.8rem;
+  box-shadow: 0 0.5em 1.1em 0.1em rgb(10 10 10 / 18%),
+    0 0px 0 1px rgb(10 10 10 / 0%);
+  display: flex;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  align-items: center;
+  top: 0;
+  justify-content: center;
+  background-color: $grey-light;
+  color: $grey-lighter;
+}
+
+.placeholder__icon {
+  font-size: 7rem;
+}

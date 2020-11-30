@@ -1,0 +1,11 @@
+<figure class="movie-image__wrapper image is-2by3">
+  <img
+    *ngIf="src !== null; else noImage"
+    src="https://image.tmdb.org/t/p/w1280/{{ src }}"
+    alt="{{ alt }}"
+  />
+</figure>
+
+<ng-template #noImage>
+  <app-item-placeholder-image></app-item-placeholder-image>
+</ng-template>

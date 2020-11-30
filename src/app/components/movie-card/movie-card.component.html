@@ -1,14 +1,8 @@
-<div class="card" (click)="showMovie(movie.id)">
-  <div class="card-image">
-    <figure class="image is-2by3">
-      <img
-        *ngIf="movie.poster_path !== null; else noImage"
-        src="https://image.tmdb.org/t/p/w1280/{{ movie.poster_path }}"
-        alt="{{ movie.title }}"
-      />
-    </figure>
-  </div>
-</div>
+<app-item-image
+  (click)="showMovie(movie.id)"
+  [src]="movie.poster_path"
+  [alt]="movie.title"
+></app-item-image>
 
 <div class="movie-detail px-1 pt-4 pb-1">
   <p class="movie-title title has-text-weight-bold is-6 mb-3">
@@ -31,9 +25,3 @@
     </div>
   </div>
 </div>
-
-<ng-template #noImage>
-  <div class="no-image__wrapper">
-    <i class="far fa-file-image no-image__icon"></i>
-  </div>
-</ng-template>

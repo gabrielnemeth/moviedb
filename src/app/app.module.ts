@@ -9,6 +9,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ItemImageComponent } from './components/item-image/item-image.component';
+import { ItemPlaceholderImageComponent } from './components/item-placeholder-image/item-placeholder-image.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
@@ -31,6 +33,8 @@ import * as trendingReducer from './store/trending/trending.reducer';
     SearchResultComponent,
     TrendingComponent,
     MovieDetailComponent,
+    ItemImageComponent,
+    ItemPlaceholderImageComponent,
   ],
   imports: [
     BrowserModule,

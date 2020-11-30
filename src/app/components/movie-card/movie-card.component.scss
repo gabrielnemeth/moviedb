@@ -7,19 +7,3 @@
 .rating-icon {
   color: $yellow;
 }
-
-.no-image__wrapper {
-  display: flex;
-  height: 100%;
-  position: absolute;
-  width: 100%;
-  align-items: center;
-  top: 0;
-  justify-content: center;
-  background-color: $grey-light;
-  color: $grey-lighter;
-}
-
-.no-image__icon {
-  font-size: 7rem;
-}
