@@ -1,1 +1,7 @@
 @import "~bulma/bulma";
+@import "~swiper/swiper-bundle.min.css";
+
+swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide,
+.swiper-container {
+  overflow: visible !important;
+}

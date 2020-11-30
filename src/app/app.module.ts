@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SwiperModule } from 'ngx-swiper-wrapper';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +43,7 @@ import * as trendingReducer from './store/trending/trending.reducer';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SwiperModule,
     StoreModule.forRoot({
       movies: movieReducer.reducer,
       trending: trendingReducer.reducer,

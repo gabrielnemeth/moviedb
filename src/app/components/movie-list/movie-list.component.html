@@ -1,5 +1,17 @@
 <section class="section">
   <div class="container">
+    <h1 class="title">Trending</h1>
+    <swiper [config]="config">
+      <app-movie-card
+        *ngFor="let movie of movies"
+        [movie]="movie"
+      ></app-movie-card>
+    </swiper>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
     <div class="columns is-multiline">
       <app-movie-card
         class="column is-2"
