@@ -1,5 +1,9 @@
 @import "../../../../node_modules/bulma/sass/utilities/initial-variables.sass";
 
+.movie-title {
+  cursor: pointer;
+}
+
 .movie-aditional-info {
   color: $grey;
 }
