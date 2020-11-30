@@ -11,4 +11,7 @@ export class ItemImageComponent {
 
   @Input()
   public alt: string;
+
+  @Input()
+  public clickable: boolean;
 }

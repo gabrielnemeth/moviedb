@@ -1,5 +1,45 @@
-.movie-image__wrapper img {
-  border-radius: 0.8rem;
+$border-radius: 0.8rem;
+
+.item-image__wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius;
+}
+
+.item-image__wrapper img {
+  border-radius: $border-radius;
   box-shadow: 0 0.5em 1.1em 0.1em rgb(10 10 10 / 18%),
     0 0px 0 1px rgb(10 10 10 / 0%);
+  transition: linear 0.1s;
+}
+
+.item-image-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: $border-radius;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  visibility: hidden;
+  transition: linear 0.1s;
+  opacity: 0;
+}
+
+.item-image--clickable {
+  cursor: pointer;
+}
+
+.item-image--clickable:hover .item-image__wrapper {
+  background-color: black;
+}
+
+.item-image--clickable:hover .item-image-blur {
+  visibility: visible;
+  opacity: 1;
+}
+
+.item-image--clickable:hover img {
+  transform: scale(1.01);
 }

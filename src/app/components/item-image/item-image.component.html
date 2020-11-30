@@ -1,9 +1,13 @@
-<figure class="movie-image__wrapper image is-2by3">
+<figure
+  class="item-image__wrapper image is-2by3"
+  [ngClass]="{ 'item-image--clickable': clickable }"
+>
   <img
     *ngIf="src !== null; else noImage"
     src="https://image.tmdb.org/t/p/w1280/{{ src }}"
     alt="{{ alt }}"
   />
+  <div class="item-image-blur"></div>
 </figure>
 
 <ng-template #noImage>
