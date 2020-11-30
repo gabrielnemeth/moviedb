@@ -1,0 +1,32 @@
+<form
+  [formGroup]="searchForm"
+  (ngSubmit)="searchForMovies()"
+  class="field has-addons"
+>
+  <p class="control">
+    <span class="select">
+      <select>
+        <option>All</option>
+        <option>Movies</option>
+        <option>TV Shows</option>
+        <option>People</option>
+      </select>
+    </span>
+  </p>
+  <div class="control is-expanded">
+    <input
+      formControlName="query"
+      #searchInput
+      class="input"
+      type="text"
+      placeholder="Find a movie"
+    />
+  </div>
+  <div class="control">
+    <button type="submit" class="button" [disabled]="!searchForm.valid">
+      <span class="icon is-small">
+        <i class="fas fa-search"></i>
+      </span>
+    </button>
+  </div>
+</form>

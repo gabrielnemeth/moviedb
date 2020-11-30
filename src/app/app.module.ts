@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { SearchFormComponent } from './components/search-form/search-form.component';
 import { SearchComponent } from './components/search/search.component';
 import { TrendingComponent } from './components/trending/trending.component';
 import { GenreEffects } from './store/genre/genre.effects';
@@ -26,6 +27,7 @@ import * as trendingReducer from './store/trending/trending.reducer';
     AppComponent,
     MovieCardComponent,
     MovieListComponent,
+    SearchFormComponent,
     SearchComponent,
     TrendingComponent,
     MovieDetailComponent,

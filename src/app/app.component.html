@@ -11,32 +11,7 @@
 
       <div class="level-right is-flex-grow-1">
         <div class="level-item is-flex-grow-1">
-          <form
-            [formGroup]="searchForm"
-            (ngSubmit)="searchForMovies()"
-            class="field has-addons is-flex-grow-1"
-          >
-            <div class="control is-expanded">
-              <input
-                formControlName="query"
-                #searchInput
-                class="input"
-                type="text"
-                placeholder="Find a movie"
-              />
-            </div>
-            <div class="control">
-              <button
-                type="submit"
-                class="button"
-                [disabled]="!searchForm.valid"
-              >
-                <span class="icon is-small">
-                  <i class="fas fa-search"></i>
-                </span>
-              </button>
-            </div>
-          </form>
+          <app-search-form class="is-flex-grow-1"></app-search-form>
         </div>
       </div>
     </div>
@@ -44,7 +19,3 @@
 </section>
 
 <router-outlet></router-outlet>
-
-<!-- <ng-container *ngIf="movies$ | async as movies">
-  <app-movie-list *ngIf="movies.length > 0" [movies]="movies"></app-movie-list>
-</ng-container> -->
