@@ -1,3 +1,7 @@
 <ng-container *ngIf="movies$ | async as movies">
-  <app-movie-list *ngIf="movies.length > 0" [movies]="movies"></app-movie-list>
+  <app-sliding-items
+    *ngIf="movies.length > 0"
+    [items]="movies"
+    [title]="'Trending'"
+  ></app-sliding-items>
 </ng-container>

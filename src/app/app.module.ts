@@ -17,6 +17,7 @@ import { MovieDetailComponent } from './components/movie-detail/movie-detail.com
 import { MovieListComponent } from './components/movie-list/movie-list.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
+import { SlidingItemsComponent } from './components/sliding-items/sliding-items.component';
 import { TrendingComponent } from './components/trending/trending.component';
 import { GenreEffects } from './store/genre/genre.effects';
 import * as genreReducer from './store/genre/genre.reducer';
@@ -36,6 +37,7 @@ import * as trendingReducer from './store/trending/trending.reducer';
     MovieDetailComponent,
     ItemImageComponent,
     ItemPlaceholderImageComponent,
+    SlidingItemsComponent,
   ],
   imports: [
     BrowserModule,

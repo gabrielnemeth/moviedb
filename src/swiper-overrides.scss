@@ -1,0 +1,63 @@
+swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide,
+.swiper-container {
+  overflow: visible !important;
+}
+
+.swiper-wrapper {
+  padding-bottom: 50px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: #ffffff !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  box-shadow: 0 0.5em 1.1em 0.1em rgb(10 10 10 / 18%),
+    0 0px 0 1px rgb(10 10 10 / 0%);
+  transition: linear 0.3s;
+  top: 30% !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: $grey-lightest !important;
+  box-shadow: 0 0.5em 2em 0.1em rgb(10 10 10 / 10%),
+    0 0px 0 1px rgba(10, 10, 10, 0);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  color: $grey !important;
+  transition: linear 0.3s;
+}
+
+.swiper-button-next:hover:after,
+.swiper-button-prev:hover:after {
+  color: $black !important;
+}
+
+.swiper-pagination {
+  pointer-events: all !important;
+}
+
+swiper
+  > .swiper.s-wrapper
+  .swiper-pagination
+  .swiper-pagination-handle
+  .swiper-pagination-bullet.swiper-pagination-bullet-first,
+swiper
+  > .swiper.s-wrapper
+  .swiper-pagination
+  .swiper-pagination-handle
+  .swiper-pagination-bullet.swiper-pagination-bullet-last {
+  border: none !important;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 0 !important;
+}

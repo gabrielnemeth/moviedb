@@ -1,0 +1,11 @@
+<section class="section">
+  <div class="container">
+    <h2 class="title">{{ title }}</h2>
+    <swiper [config]="config">
+      <app-movie-card
+        *ngFor="let item of items"
+        [movie]="item"
+      ></app-movie-card>
+    </swiper>
+  </div>
+</section>
