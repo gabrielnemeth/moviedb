@@ -4,17 +4,17 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { State } from 'src/app/store/state';
-import { MovieListResult } from '../../interfaces/movie-list-result';
-import { getGenreById } from './../../store/genre/genre.reducer';
+import { MovieListResult } from './../../../interfaces/movie-list-result';
+import { getGenreById } from './../../../store/genre/genre.reducer';
 
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss'],
+  selector: 'app-item-card',
+  templateUrl: './item-card.component.html',
+  styleUrls: ['./item-card.component.scss'],
 })
-export class MovieCardComponent {
+export class ItemCardComponent {
   @Input()
-  public movie: MovieListResult;
+  public item: MovieListResult;
 
   public constructor(private store: Store<State>, private router: Router) {}
 
@@ -32,7 +32,7 @@ export class MovieCardComponent {
     return new Date(date).getFullYear().toString();
   }
 
-  public showMovie(id: number): void {
+  public showItem(id: number): void {
     this.router.navigate(['/movie', id]);
   }
 }

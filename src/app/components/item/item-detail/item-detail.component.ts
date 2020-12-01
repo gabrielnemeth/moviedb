@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Movie } from '../../interfaces/movie';
-import { MovieService } from '../../services/movie.service';
+import { Movie } from './../../../interfaces/movie';
+import { MovieService } from './../../../services/movie.service';
 
 @Component({
-  selector: 'app-movie-detail',
-  templateUrl: './movie-detail.component.html',
-  styleUrls: ['./movie-detail.component.scss'],
+  selector: 'app-item-detail',
+  templateUrl: './item-detail.component.html',
+  styleUrls: ['./item-detail.component.scss'],
 })
-export class MovieDetailComponent implements OnInit {
+export class ItemDetailComponent implements OnInit {
   public movie$: Observable<Movie>;
 
   constructor(
@@ -18,8 +18,8 @@ export class MovieDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const movieId = this.route.snapshot.paramMap.get('id') || '';
-    this.movie$ = this.movieService.getMovieById(movieId);
+    const itemId = this.route.snapshot.paramMap.get('id') || '';
+    this.movie$ = this.movieService.getMovieById(itemId);
   }
 
   public getStyle(

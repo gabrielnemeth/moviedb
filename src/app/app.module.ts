@@ -10,11 +10,11 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ItemImageComponent } from './components/item-image/item-image.component';
-import { ItemPlaceholderImageComponent } from './components/item-placeholder-image/item-placeholder-image.component';
-import { MovieCardComponent } from './components/movie-card/movie-card.component';
-import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
-import { MovieListComponent } from './components/movie-list/movie-list.component';
+import { ItemCardComponent } from './components/item/item-card/item-card.component';
+import { ItemDetailComponent } from './components/item/item-detail/item-detail.component';
+import { ItemImageComponent } from './components/item/item-image/item-image.component';
+import { ItemListComponent } from './components/item/item-list/item-list.component';
+import { ItemPlaceholderImageComponent } from './components/item/item-placeholder-image/item-placeholder-image.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SlidingItemsComponent } from './components/sliding-items/sliding-items.component';
@@ -29,12 +29,12 @@ import * as trendingReducer from './store/trending/trending.reducer';
 @NgModule({
   declarations: [
     AppComponent,
-    MovieCardComponent,
-    MovieListComponent,
+    ItemCardComponent,
+    ItemListComponent,
     SearchFormComponent,
     SearchResultComponent,
     TrendingComponent,
-    MovieDetailComponent,
+    ItemDetailComponent,
     ItemImageComponent,
     ItemPlaceholderImageComponent,
     SlidingItemsComponent,
