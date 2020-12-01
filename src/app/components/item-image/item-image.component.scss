@@ -8,6 +8,14 @@ $border-radius: 0.8rem;
     0 0px 0 1px rgb(10 10 10 / 0%);
 }
 
+.item-image__wrapper.item-image--clickable {
+  transition: linear 0.1s;
+}
+
+.item-image__wrapper.item-image--clickable:hover {
+  transform: scale(1.05);
+}
+
 .item-image__wrapper img {
   border-radius: $border-radius;
   transition: linear 0.1s;
@@ -38,8 +46,4 @@ $border-radius: 0.8rem;
 .item-image--clickable:hover .item-image-blur {
   visibility: visible;
   opacity: 1;
-}
-
-.item-image--clickable:hover img {
-  transform: scale(1.01);
 }
