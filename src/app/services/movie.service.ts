@@ -5,7 +5,8 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../interfaces/genre';
 import { Movie } from '../interfaces/movie';
-import { MovieSearchResponse } from '../interfaces/movie-result';
+import { MovieSearchResponse } from '../interfaces/movie-search-response';
+import { MultiSearchResponse } from '../interfaces/multi-search-response';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +18,19 @@ export class MovieService {
     this.apiKey = environment.themoviedb.apiKey;
   }
 
-  public getResult(searchQuerry: string): Observable<MovieSearchResponse> {
+  public getMovieSearchResult(
+    searchQuerry: string
+  ): Observable<MovieSearchResponse> {
     return this.http.get<MovieSearchResponse>(
       `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
+    );
+  }
+
+  public getMultiSearchResult(
+    searchQuerry: string
+  ): Observable<MultiSearchResponse> {
+    return this.http.get<MovieSearchResponse>(
+      `${environment.themoviedb.baseUrl}search/multi?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }
 

@@ -1,3 +1,4 @@
+import { MediaType } from './media-type';
 import { MovieListResult } from './movie-list-result';
 import { TvListResult } from './tv-list-result';
 export interface PersonListResult {
@@ -7,4 +8,5 @@ export interface PersonListResult {
   known_for: (TvListResult | MovieListResult)[];
   name: string;
   popularity: number;
+  media_type?: MediaType;
 }

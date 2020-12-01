@@ -11,7 +11,7 @@ export class MovieEffects {
       ofType(movieSearch),
       mergeMap((action) =>
         this.movieService
-          .getResult(action.query)
+          .getMovieSearchResult(action.query)
           .pipe(map((result) => moviesLoaded({ list: result.results })))
       )
     )

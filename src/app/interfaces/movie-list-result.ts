@@ -1,3 +1,5 @@
+import { MediaType } from './media-type';
+
 export interface MovieListResult {
   poster_path: string | null;
   adult: boolean;
@@ -13,4 +15,5 @@ export interface MovieListResult {
   vote_count: number;
   video: boolean;
   vote_average: number;
+  media_type?: MediaType;
 }
