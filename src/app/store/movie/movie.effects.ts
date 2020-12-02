@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
-import { MovieService } from '../../services/movie.service';
+import { MediaType } from 'src/app/interfaces/media-type';
+import { MediaService } from '../../services/media.service';
 import { movieSearch, moviesLoaded } from './movie.actions';
 
 @Injectable()
@@ -12,13 +13,22 @@ export class MovieEffects {
       mergeMap((action) =>
         this.movieService
           .getMovieSearchResult(action.query)
-          .pipe(map((result) => moviesLoaded({ list: result.results })))
+          .pipe(
+            map((result) =>
+              moviesLoaded({
+                list: result.results.map((res) => ({
+                  ...res,
+                  media_type: MediaType.movie,
+                })),
+              })
+            )
+          )
       )
     )
   );
 
   public constructor(
     private actions$: Actions,
-    private movieService: MovieService
+    private movieService: MediaService
   ) {}
 }

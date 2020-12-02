@@ -1,8 +1,8 @@
-import { MovieListResult } from './movie-list-result';
+import { MovieListResponse } from './movie-list-response';
 
 export interface MovieSearchResponse {
   page: number;
-  results: MovieListResult[];
+  results: MovieListResponse[];
   total_results: number;
   total_pages: number;
 }

@@ -1,6 +1,4 @@
-import { MediaType } from './media-type';
-
-export interface TvListResult {
+export interface TvListResponse {
   poster_path: string | null;
   popularity: number;
   id: number;
@@ -14,5 +12,4 @@ export interface TvListResult {
   vote_count: number;
   name: string;
   original_name: string;
-  media_type: MediaType;
 }

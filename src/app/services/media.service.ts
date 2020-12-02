@@ -5,13 +5,13 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../interfaces/genre';
 import { Movie } from '../interfaces/movie';
-import { MovieSearchResponse } from '../interfaces/movie-search-response';
-import { MultiSearchResponse } from '../interfaces/multi-search-response';
+import { MovieSearchResponse } from '../interfaces/response/movie-search-response';
+import { MultiSearchResponse } from '../interfaces/response/multi-search-response';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MovieService {
+export class MediaService {
   private apiKey: string;
 
   public constructor(private http: HttpClient) {
@@ -29,7 +29,7 @@ export class MovieService {
   public getMultiSearchResult(
     searchQuerry: string
   ): Observable<MultiSearchResponse> {
-    return this.http.get<MovieSearchResponse>(
+    return this.http.get<MultiSearchResponse>(
       `${environment.themoviedb.baseUrl}search/multi?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }

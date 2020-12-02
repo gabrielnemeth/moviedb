@@ -8,5 +8,5 @@ export interface PersonListResult {
   known_for: (TvListResult | MovieListResult)[];
   name: string;
   popularity: number;
-  media_type?: MediaType;
+  media_type: MediaType;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Movie } from '../../../interfaces/movie';
-import { MovieService } from '../../../services/movie.service';
+import { MediaService } from '../../../services/media.service';
 
 @Component({
   selector: 'app-media-item-detail',
@@ -14,7 +14,7 @@ export class MediaItemDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MediaService
   ) {}
 
   ngOnInit(): void {

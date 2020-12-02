@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
-import { MovieService } from '../../services/movie.service';
+import { MediaService } from '../../services/media.service';
 import { fetchGenres, genresLoaded } from './genre.actions';
 
 @Injectable()
@@ -19,6 +19,6 @@ export class GenreEffects {
 
   public constructor(
     private actions$: Actions,
-    private movieService: MovieService
+    private movieService: MediaService
   ) {}
 }
