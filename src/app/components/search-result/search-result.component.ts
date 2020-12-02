@@ -10,7 +10,7 @@ import { State } from '../../store/state';
   templateUrl: './search-result.component.html',
 })
 export class SearchResultComponent {
-  public movies$: Observable<MovieListResult[]> = this.store.select(
+  public mediaItems$: Observable<MovieListResult[]> = this.store.select(
     selectMovies
   );
 

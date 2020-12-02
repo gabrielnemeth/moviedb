@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Movie } from './../../../interfaces/movie';
-import { MovieService } from './../../../services/movie.service';
+import { Movie } from '../../../interfaces/movie';
+import { MovieService } from '../../../services/movie.service';
 
 @Component({
-  selector: 'app-item-detail',
-  templateUrl: './item-detail.component.html',
-  styleUrls: ['./item-detail.component.scss'],
+  selector: 'app-media-item-detail',
+  templateUrl: './media-item-detail.component.html',
+  styleUrls: ['./media-item-detail.component.scss'],
 })
-export class ItemDetailComponent implements OnInit {
-  public movie$: Observable<Movie>;
+export class MediaItemDetailComponent implements OnInit {
+  public mediaItem$: Observable<Movie>;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,8 +18,8 @@ export class ItemDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const itemId = this.route.snapshot.paramMap.get('id') || '';
-    this.movie$ = this.movieService.getMovieById(itemId);
+    const mediaItemId = this.route.snapshot.paramMap.get('id') || '';
+    this.mediaItem$ = this.movieService.getMovieById(mediaItemId);
   }
 
   public getStyle(

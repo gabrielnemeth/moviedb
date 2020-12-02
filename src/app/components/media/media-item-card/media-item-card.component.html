@@ -1,0 +1,31 @@
+<app-media-item-image
+  (click)="showMediaItem(mediaItem.id)"
+  [src]="mediaItem.poster_path"
+  [alt]="mediaItem.title"
+  [clickable]="true"
+></app-media-item-image>
+
+<div class="px-1 pt-4 pb-1">
+  <p
+    (click)="showMediaItem(mediaItem.id)"
+    class="media-item-title title has-text-weight-bold is-6 mb-3"
+  >
+    {{ mediaItem.title }}
+  </p>
+  <div class="media-item-aditional-info has-text-weight-medium">
+    <div class="is-flex is-size-7">
+      <p *ngIf="mediaItem.release_date.length > 0">
+        {{ getYear(mediaItem.release_date) }}
+      </p>
+      <p class="mx-1" *ngIf="mediaItem.genre_ids.length > 0">&bull;</p>
+      <p>{{ getGenreString(mediaItem.genre_ids) | async }}</p>
+    </div>
+    <div class="is-flex is-size-7">
+      <span class="icon is-small rating-icon">
+        <i class="fas fa-star"></i>
+      </span>
+      <p class="mr-1">{{ mediaItem.vote_average }}</p>
+      <p>({{ mediaItem.vote_count }})</p>
+    </div>
+  </div>
+</div>

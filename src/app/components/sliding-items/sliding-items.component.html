@@ -2,7 +2,10 @@
   <div class="container">
     <h2 class="title">{{ title }}</h2>
     <swiper [config]="config">
-      <app-item-card *ngFor="let item of items" [item]="item"></app-item-card>
+      <app-media-item-card
+        *ngFor="let mediaItem of mediaItems"
+        [mediaItem]="mediaItem"
+      ></app-media-item-card>
     </swiper>
   </div>
 </section>

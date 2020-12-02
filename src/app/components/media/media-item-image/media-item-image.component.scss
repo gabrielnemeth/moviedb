@@ -1,6 +1,6 @@
 $border-radius: 0.8rem;
 
-.item-image__wrapper {
+.media-item-image__wrapper {
   position: relative;
   overflow: hidden;
   border-radius: $border-radius;
@@ -8,20 +8,20 @@ $border-radius: 0.8rem;
     0 0px 0 1px rgb(10 10 10 / 0%);
 }
 
-.item-image__wrapper.item-image--clickable {
+.media-item-image__wrapper.media-item-image--clickable {
   transition: linear 0.1s;
 }
 
-.item-image__wrapper.item-image--clickable:hover {
+.media-item-image__wrapper.media-item-image--clickable:hover {
   transform: scale(1.05);
 }
 
-.item-image__wrapper img {
+.media-item-image__wrapper img {
   border-radius: $border-radius;
   transition: linear 0.1s;
 }
 
-.item-image-blur {
+.media-item-image-blur {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,15 +35,15 @@ $border-radius: 0.8rem;
   opacity: 0;
 }
 
-.item-image--clickable {
+.media-item-image--clickable {
   cursor: pointer;
 }
 
-.item-image--clickable:hover .item-image__wrapper {
+.media-item-image--clickable:hover .media-item-image__wrapper {
   background-color: black;
 }
 
-.item-image--clickable:hover .item-image-blur {
+.media-item-image--clickable:hover .media-item-image-blur {
   visibility: visible;
   opacity: 1;
 }

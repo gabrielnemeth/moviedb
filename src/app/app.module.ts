@@ -10,11 +10,11 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ItemCardComponent } from './components/item/item-card/item-card.component';
-import { ItemDetailComponent } from './components/item/item-detail/item-detail.component';
-import { ItemImageComponent } from './components/item/item-image/item-image.component';
-import { ItemListComponent } from './components/item/item-list/item-list.component';
-import { ItemPlaceholderImageComponent } from './components/item/item-placeholder-image/item-placeholder-image.component';
+import { MediaItemCardComponent } from './components/media/media-item-card/media-item-card.component';
+import { MediaItemDetailComponent } from './components/media/media-item-detail/media-item-detail.component';
+import { MediaItemImageComponent } from './components/media/media-item-image/media-item-image.component';
+import { MediaItemListComponent } from './components/media/media-item-list/media-item-list.component';
+import { MediaItemPlaceholderImageComponent } from './components/media/media-item-placeholder-image/media-item-placeholder-image.component';
 import { SearchFormComponent } from './components/search-form/search-form.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SlidingItemsComponent } from './components/sliding-items/sliding-items.component';
@@ -29,14 +29,14 @@ import * as trendingReducer from './store/trending/trending.reducer';
 @NgModule({
   declarations: [
     AppComponent,
-    ItemCardComponent,
-    ItemListComponent,
+    MediaItemCardComponent,
+    MediaItemListComponent,
     SearchFormComponent,
     SearchResultComponent,
     TrendingComponent,
-    ItemDetailComponent,
-    ItemImageComponent,
-    ItemPlaceholderImageComponent,
+    MediaItemDetailComponent,
+    MediaItemImageComponent,
+    MediaItemPlaceholderImageComponent,
     SlidingItemsComponent,
   ],
   imports: [

@@ -8,7 +8,7 @@ import { MovieListResult } from '../../interfaces/movie-list-result';
 })
 export class SlidingItemsComponent {
   @Input()
-  public items: MovieListResult[];
+  public mediaItems: MovieListResult[];
 
   @Input()
   public title: string;

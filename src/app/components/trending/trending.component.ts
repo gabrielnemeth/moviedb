@@ -10,7 +10,7 @@ import { selectTrending } from './../../store/trending/trending.reducer';
   templateUrl: './trending.component.html',
 })
 export class TrendingComponent {
-  public movies$: Observable<MovieListResult[]> = this.store.select(
+  public mediaItems$: Observable<MovieListResult[]> = this.store.select(
     selectTrending
   );
 

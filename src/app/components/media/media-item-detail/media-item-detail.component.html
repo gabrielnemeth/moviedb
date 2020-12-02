@@ -1,7 +1,7 @@
-<ng-container *ngIf="movie$ | async as item">
+<ng-container *ngIf="mediaItem$ | async as mediaItem">
   <section
     class="hero is-success is-fullheight"
-    [ngStyle]="getStyle(item.backdrop_path)"
+    [ngStyle]="getStyle(mediaItem.backdrop_path)"
   >
     <div class="hero-bg">
       <!-- Hero content: will be in the middle -->
@@ -9,18 +9,18 @@
         <div class="container">
           <div class="columns">
             <div class="column is-3">
-              <app-item-image
-                [src]="item.poster_path"
-                [alt]="item.title"
-              ></app-item-image>
+              <app-media-item-image
+                [src]="mediaItem.poster_path"
+                [alt]="mediaItem.title"
+              ></app-media-item-image>
             </div>
             <div class="column">
               <h1 class="title">
                 <span class="has-text-weight-bold mr-2 has-text-grey-lighter">{{
-                  item.title
+                  mediaItem.title
                 }}</span>
                 <span class="has-text-weight-normal has-text-grey-light"
-                  >({{ getYear(item.release_date) }})</span
+                  >({{ getYear(mediaItem.release_date) }})</span
                 >
               </h1>
               <h2 class="subtitle">Subtitle</h2>

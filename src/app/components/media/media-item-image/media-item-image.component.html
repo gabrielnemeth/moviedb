@@ -1,0 +1,15 @@
+<figure
+  class="media-item-image__wrapper image is-2by3"
+  [ngClass]="{ 'media-item-image--clickable': clickable }"
+>
+  <img
+    *ngIf="src !== null; else noImage"
+    src="https://image.tmdb.org/t/p/w1280/{{ src }}"
+    alt="{{ alt }}"
+  />
+  <div class="media-item-image-blur"></div>
+</figure>
+
+<ng-template #noImage>
+  <app-media-item-placeholder-image></app-media-item-placeholder-image>
+</ng-template>
