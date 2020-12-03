@@ -1,9 +1,9 @@
 import { GenreState } from './genre/genre.reducer';
-import { MovieState } from './movie/movie.reducer';
 import { TrendingState } from './trending/trending.reducer';
+import { SearchedMediaState } from './searched-media/searched-media.reducer';
 
 export interface State {
-  movies: MovieState;
+  searchResult: SearchedMediaState;
   trending: TrendingState;
   genres: GenreState;
 }

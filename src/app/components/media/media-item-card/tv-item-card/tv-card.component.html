@@ -1,0 +1,31 @@
+<app-media-item-image
+  (click)="showMediaItem(tv.id)"
+  [src]="tv.poster_path"
+  [alt]="tv.name"
+  [clickable]="true"
+></app-media-item-image>
+
+<div class="px-1 pt-4 pb-1">
+  <p
+    (click)="showMediaItem(tv.id)"
+    class="media-item-title title has-text-weight-bold is-6 mb-3"
+  >
+    {{ tv.name }}
+  </p>
+  <div class="media-item-aditional-info has-text-weight-medium">
+    <div class="is-flex is-size-7">
+      <p *ngIf="tv.first_air_date.length > 0">
+        {{ getYear(tv.first_air_date) }}
+      </p>
+      <p class="mx-1" *ngIf="tv.genre_ids.length > 0">&bull;</p>
+      <p>{{ getGenreString(tv.genre_ids) | async }}</p>
+    </div>
+    <div class="is-flex is-size-7">
+      <span class="icon is-small rating-icon">
+        <i class="fas fa-star"></i>
+      </span>
+      <p class="mr-1">{{ tv.vote_average }}</p>
+      <p>({{ tv.vote_count }})</p>
+    </div>
+  </div>
+</div>

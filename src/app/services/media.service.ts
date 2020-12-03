@@ -7,6 +7,8 @@ import { Genre } from '../interfaces/genre';
 import { Movie } from '../interfaces/movie';
 import { MovieSearchResponse } from '../interfaces/response/movie-search-response';
 import { MultiSearchResponse } from '../interfaces/response/multi-search-response';
+import { PersonSearchResponse } from '../interfaces/response/person-search-response';
+import { TvSearchResponse } from '../interfaces/response/tv-search-response';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +25,20 @@ export class MediaService {
   ): Observable<MovieSearchResponse> {
     return this.http.get<MovieSearchResponse>(
       `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
+    );
+  }
+
+  public getTvSearchResult(searchQuerry: string): Observable<TvSearchResponse> {
+    return this.http.get<TvSearchResponse>(
+      `${environment.themoviedb.baseUrl}search/tv?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
+    );
+  }
+
+  public getPersonSearchResult(
+    searchQuerry: string
+  ): Observable<PersonSearchResponse> {
+    return this.http.get<PersonSearchResponse>(
+      `${environment.themoviedb.baseUrl}search/person?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
     );
   }
 

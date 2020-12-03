@@ -22,9 +22,13 @@ import { TrendingComponent } from './components/trending/trending.component';
 import { GenreEffects } from './store/genre/genre.effects';
 import * as genreReducer from './store/genre/genre.reducer';
 import { MovieEffects } from './store/movie/movie.effects';
-import * as movieReducer from './store/movie/movie.reducer';
+import { SearchedMediaEffects } from './store/searched-media/searched-media.effects';
+import * as searchedMediaReducer from './store/searched-media/searched-media.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
+import { MovieCardComponent } from './components/media/media-item-card/movie-item-card/movie-card.component';
+import { TvCardComponent } from './components/media/media-item-card/tv-item-card/tv-card.component';
+import { PersonCardComponent } from './components/media/media-item-card/person-item-card/person-card.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,9 @@ import * as trendingReducer from './store/trending/trending.reducer';
     MediaItemImageComponent,
     MediaItemPlaceholderImageComponent,
     SlidingItemsComponent,
+    MovieCardComponent,
+    TvCardComponent,
+    PersonCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +54,7 @@ import * as trendingReducer from './store/trending/trending.reducer';
     ReactiveFormsModule,
     SwiperModule,
     StoreModule.forRoot({
-      movies: movieReducer.reducer,
+      searchResult: searchedMediaReducer.reducer,
       trending: trendingReducer.reducer,
       genres: genreReducer.reducer,
     }),
@@ -55,7 +62,12 @@ import * as trendingReducer from './store/trending/trending.reducer';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([MovieEffects, TrendingEffects, GenreEffects]),
+    EffectsModule.forRoot([
+      MovieEffects,
+      TrendingEffects,
+      GenreEffects,
+      SearchedMediaEffects,
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent],

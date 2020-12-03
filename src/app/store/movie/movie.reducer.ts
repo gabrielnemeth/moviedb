@@ -16,9 +16,9 @@ const movieReducer = createReducer(
   on(moviesLoaded, (state, data) => ({ ...state, list: data.list }))
 );
 
-export function reducer(state: MovieState | undefined, action: Action) {
+export function reducer(
+  state: MovieState | undefined,
+  action: Action
+): MovieState {
   return movieReducer(state, action);
 }
-
-export const selectMovies = (state: State): MovieListResult[] =>
-  state.movies.list;

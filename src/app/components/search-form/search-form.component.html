@@ -5,11 +5,10 @@
 >
   <p class="control">
     <span class="select">
-      <select>
-        <option>All</option>
-        <option>Movies</option>
-        <option>TV Shows</option>
-        <option>People</option>
+      <select formControlName="selectedSearchType">
+        <option *ngFor="let searchType of searchTypes" [ngValue]="searchType">
+          {{ searchType.name }}
+        </option>
       </select>
     </span>
   </p>

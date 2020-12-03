@@ -1,0 +1,23 @@
+<app-media-item-image
+  (click)="showMediaItem(person.id)"
+  [src]="person.profile_path"
+  [alt]="person.name"
+  [clickable]="true"
+></app-media-item-image>
+
+<div class="px-1 pt-4 pb-1">
+  <p
+    (click)="showMediaItem(person.id)"
+    class="media-item-title title has-text-weight-bold is-6 mb-3"
+  >
+    {{ person.name }}
+  </p>
+  <div class="media-item-aditional-info has-text-weight-medium">
+    <div class="is-flex is-size-7">
+      <span class="icon is-small rating-icon">
+        <i class="fas fa-star"></i>
+      </span>
+      <p class="mr-1">{{ person.popularity }}</p>
+    </div>
+  </div>
+</div>

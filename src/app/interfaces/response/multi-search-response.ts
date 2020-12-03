@@ -1,10 +1,8 @@
-import { MovieListResponse } from './movie-list-response';
-import { PersonListResponse } from './person-list-response';
-import { TvListResponse } from './tv-list-response';
+import { MediaListResult } from '../media-list-result';
 
 export interface MultiSearchResponse {
   page: number;
-  results: MovieListResponse[] | TvListResponse[] | PersonListResponse[];
+  results: MediaListResult[];
   total_results: number;
   total_pages: number;
 }
