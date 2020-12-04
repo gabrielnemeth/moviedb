@@ -9,6 +9,8 @@ import { MovieSearchResponse } from '../interfaces/response/movie-search-respons
 import { MultiSearchResponse } from '../interfaces/response/multi-search-response';
 import { PersonSearchResponse } from '../interfaces/response/person-search-response';
 import { TvSearchResponse } from '../interfaces/response/tv-search-response';
+import { Tv } from '../interfaces/tv';
+import { Person } from '../interfaces/person';
 
 @Injectable({
   providedIn: 'root',
@@ -67,6 +69,18 @@ export class MediaService {
   public getMovieById(id: string): Observable<Movie> {
     return this.http.get<Movie>(
       `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
+    );
+  }
+
+  public getTvById(id: string): Observable<Tv> {
+    return this.http.get<Tv>(
+      `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US`
+    );
+  }
+
+  public getPersonById(id: string): Observable<Person> {
+    return this.http.get<Person>(
+      `${environment.themoviedb.baseUrl}person/${id}?api_key=${this.apiKey}&language=en-US`
     );
   }
 }

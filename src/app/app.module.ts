@@ -11,7 +11,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MediaItemCardComponent } from './components/media/media-item-card/media-item-card.component';
-import { MediaItemDetailComponent } from './components/media/media-item-detail/media-item-detail.component';
 import { MediaItemImageComponent } from './components/media/media-item-image/media-item-image.component';
 import { MediaItemListComponent } from './components/media/media-item-list/media-item-list.component';
 import { MediaItemPlaceholderImageComponent } from './components/media/media-item-placeholder-image/media-item-placeholder-image.component';
@@ -26,9 +25,12 @@ import { SearchedMediaEffects } from './store/searched-media/searched-media.effe
 import * as searchedMediaReducer from './store/searched-media/searched-media.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
-import { MovieCardComponent } from './components/media/media-item-card/movie-item-card/movie-card.component';
-import { TvCardComponent } from './components/media/media-item-card/tv-item-card/tv-card.component';
-import { PersonCardComponent } from './components/media/media-item-card/person-item-card/person-card.component';
+import { MovieCardComponent } from './components/media/media-item-card/movie-card/movie-card.component';
+import { TvCardComponent } from './components/media/media-item-card/tv-card/tv-card.component';
+import { PersonCardComponent } from './components/media/media-item-card/person-card/person-card.component';
+import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
+import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
+import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +40,15 @@ import { PersonCardComponent } from './components/media/media-item-card/person-i
     SearchFormComponent,
     SearchResultComponent,
     TrendingComponent,
-    MediaItemDetailComponent,
     MediaItemImageComponent,
     MediaItemPlaceholderImageComponent,
     SlidingItemsComponent,
     MovieCardComponent,
     TvCardComponent,
     PersonCardComponent,
+    MovieDetailComponent,
+    TvDetailComponent,
+    PersonDetailComponent,
   ],
   imports: [
     BrowserModule,

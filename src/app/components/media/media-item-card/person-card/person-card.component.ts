@@ -3,24 +3,18 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MediaListResult } from 'src/app/interfaces/media-list-result';
-import { MediaType } from 'src/app/interfaces/media-type';
-import { MovieListResult } from 'src/app/interfaces/movie-list-result';
-import { TvListResponse } from 'src/app/interfaces/response/tv-list-response';
 import { State } from 'src/app/store/state';
 import { getGenreById } from '../../../../store/genre/genre.reducer';
-import { PersonListResponse } from '../../../../interfaces/response/person-list-response';
-import { TvListResult } from '../../../../interfaces/tv-list-result';
 import { PersonListResult } from '../../../../interfaces/person-list-result';
 
 @Component({
-  selector: 'app-tv-card',
-  templateUrl: './tv-card.component.html',
-  styleUrls: ['./tv-card.component.scss'],
+  selector: 'app-person-card',
+  templateUrl: './person-card.component.html',
+  styleUrls: ['./person-card.component.scss'],
 })
-export class TvCardComponent {
+export class PersonCardComponent {
   @Input()
-  public tv: TvListResult;
+  public person: PersonListResult;
 
   public constructor(private store: Store<State>, private router: Router) {}
 
@@ -39,6 +33,6 @@ export class TvCardComponent {
   }
 
   public showMediaItem(id: number): void {
-    this.router.navigate(['/movie', id]);
+    this.router.navigate(['/person', id]);
   }
 }
