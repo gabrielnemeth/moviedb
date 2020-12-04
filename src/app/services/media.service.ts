@@ -13,74 +13,76 @@ import { Tv } from '../interfaces/tv';
 import { Person } from '../interfaces/person';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class MediaService {
-  private apiKey: string;
+    private readonly apiKey: string;
 
-  public constructor(private http: HttpClient) {
-    this.apiKey = environment.themoviedb.apiKey;
-  }
+    public constructor(private http: HttpClient) {
+        this.apiKey = environment.themoviedb.apiKey;
+    }
 
-  public getMovieSearchResult(
-    searchQuerry: string
-  ): Observable<MovieSearchResponse> {
-    return this.http.get<MovieSearchResponse>(
-      `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
-    );
-  }
+    public getMovieSearchResult(
+        searchQuery: string
+    ): Observable<MovieSearchResponse> {
+        return this.http.get<MovieSearchResponse>(
+            `${environment.themoviedb.baseUrl}search/movie?api_key=${this.apiKey}&language=en-US&query=${searchQuery}`
+        );
+    }
 
-  public getTvSearchResult(searchQuerry: string): Observable<TvSearchResponse> {
-    return this.http.get<TvSearchResponse>(
-      `${environment.themoviedb.baseUrl}search/tv?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
-    );
-  }
+    public getTvSearchResult(
+        searchQuery: string
+    ): Observable<TvSearchResponse> {
+        return this.http.get<TvSearchResponse>(
+            `${environment.themoviedb.baseUrl}search/tv?api_key=${this.apiKey}&language=en-US&query=${searchQuery}`
+        );
+    }
 
-  public getPersonSearchResult(
-    searchQuerry: string
-  ): Observable<PersonSearchResponse> {
-    return this.http.get<PersonSearchResponse>(
-      `${environment.themoviedb.baseUrl}search/person?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
-    );
-  }
+    public getPersonSearchResult(
+        searchQuery: string
+    ): Observable<PersonSearchResponse> {
+        return this.http.get<PersonSearchResponse>(
+            `${environment.themoviedb.baseUrl}search/person?api_key=${this.apiKey}&language=en-US&query=${searchQuery}`
+        );
+    }
 
-  public getMultiSearchResult(
-    searchQuerry: string
-  ): Observable<MultiSearchResponse> {
-    return this.http.get<MultiSearchResponse>(
-      `${environment.themoviedb.baseUrl}search/multi?api_key=${this.apiKey}&language=en-US&query=${searchQuerry}`
-    );
-  }
+    public getMultiSearchResult(
+        searchQuery: string
+    ): Observable<MultiSearchResponse> {
+        return this.http.get<MultiSearchResponse>(
+            `${environment.themoviedb.baseUrl}search/multi?api_key=${this.apiKey}&language=en-US&query=${searchQuery}`
+        );
+    }
 
-  public getGenres(): Observable<Genre[]> {
-    return this.http
-      .get<{ genres: Genre[] }>(
-        `${environment.themoviedb.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`
-      )
-      .pipe(map((data) => data.genres));
-  }
+    public getGenres(): Observable<Genre[]> {
+        return this.http
+            .get<{ genres: Genre[] }>(
+                `${environment.themoviedb.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`
+            )
+            .pipe(map((data) => data.genres));
+    }
 
-  public getTrending(): Observable<MovieSearchResponse> {
-    return this.http.get<MovieSearchResponse>(
-      `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
-    );
-  }
+    public getTrending(): Observable<MovieSearchResponse> {
+        return this.http.get<MovieSearchResponse>(
+            `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
+        );
+    }
 
-  public getMovieById(id: string): Observable<Movie> {
-    return this.http.get<Movie>(
-      `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
-    );
-  }
+    public getMovieById(id: string): Observable<Movie> {
+        return this.http.get<Movie>(
+            `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
+        );
+    }
 
-  public getTvById(id: string): Observable<Tv> {
-    return this.http.get<Tv>(
-      `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US`
-    );
-  }
+    public getTvById(id: string): Observable<Tv> {
+        return this.http.get<Tv>(
+            `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US`
+        );
+    }
 
-  public getPersonById(id: string): Observable<Person> {
-    return this.http.get<Person>(
-      `${environment.themoviedb.baseUrl}person/${id}?api_key=${this.apiKey}&language=en-US`
-    );
-  }
+    public getPersonById(id: string): Observable<Person> {
+        return this.http.get<Person>(
+            `${environment.themoviedb.baseUrl}person/${id}?api_key=${this.apiKey}&language=en-US`
+        );
+    }
 }

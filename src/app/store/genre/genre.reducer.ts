@@ -4,26 +4,29 @@ import { State } from '../state';
 import { genresLoaded } from './genre.actions';
 
 export interface GenreState {
-  list: Genre[];
+    list: Genre[];
 }
 
 const initialState: GenreState = {
-  list: [],
+    list: [],
 };
 
 const _genreReducer = createReducer(
-  initialState,
-  on(genresLoaded, (state, data) => ({ ...state, list: data.list }))
+    initialState,
+    on(genresLoaded, (state, data) => ({ ...state, list: data.list }))
 );
 
-export function reducer(state: GenreState | undefined, action: Action) {
-  return _genreReducer(state, action);
+export function reducer(
+    state: GenreState | undefined,
+    action: Action
+): GenreState {
+    return _genreReducer(state, action);
 }
 
 export const selectGenres = (state: State): Genre[] => state.genres.list;
 
 export const getGenreById = createSelector(
-  selectGenres,
-  (genres: Genre[], props: { id: number }) =>
-    genres?.find((g) => g.id === props.id)
+    selectGenres,
+    (genres: Genre[], props: { id: number }) =>
+        genres?.find((g) => g.id === props.id)
 );

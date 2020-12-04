@@ -1,31 +1,33 @@
 <form
-  [formGroup]="searchForm"
-  (ngSubmit)="searchForMovies()"
-  class="field has-addons"
+    [formGroup]="searchForm"
+    (ngSubmit)="searchForMovies()"
+    class="field has-addons"
 >
-  <p class="control">
-    <span class="select">
-      <select formControlName="selectedSearchType">
-        <option *ngFor="let searchType of searchTypes" [ngValue]="searchType">
-          {{ searchType.name }}
-        </option>
-      </select>
-    </span>
-  </p>
-  <div class="control is-expanded">
-    <input
-      formControlName="query"
-      #searchInput
-      class="input"
-      type="text"
-      placeholder="Find a movie"
-    />
-  </div>
-  <div class="control">
-    <button type="submit" class="button" [disabled]="!searchForm.valid">
-      <span class="icon is-small">
-        <i class="fas fa-search"></i>
-      </span>
-    </button>
-  </div>
+    <p class="control">
+        <span class="select">
+            <select formControlName="selectedSearchType">
+                <option
+                    *ngFor="let searchType of searchTypes"
+                    [ngValue]="searchType"
+                >
+                    {{ searchType.name }}
+                </option>
+            </select>
+        </span>
+    </p>
+    <div class="control is-expanded">
+        <input
+            formControlName="query"
+            class="input"
+            type="text"
+            placeholder="Find a movie"
+        />
+    </div>
+    <div class="control">
+        <button type="submit" class="button" [disabled]="!searchForm.valid">
+            <span class="icon is-small">
+                <i class="fas fa-search"></i>
+            </span>
+        </button>
+    </div>
 </form>

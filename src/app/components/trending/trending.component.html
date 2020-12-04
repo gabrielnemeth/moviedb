@@ -1,7 +1,7 @@
 <ng-container *ngIf="mediaItems$ | async as mediaItems">
-  <app-sliding-items
-    *ngIf="mediaItems.length > 0"
-    [mediaItems]="mediaItems"
-    [title]="'Trending'"
-  ></app-sliding-items>
+    <app-sliding-items
+        *ngIf="mediaItems.length > 0"
+        [mediaItems]="mediaItems"
+        [title]="'Trending'"
+    ></app-sliding-items>
 </ng-container>

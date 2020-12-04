@@ -7,15 +7,15 @@ import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 
 const routes: Routes = [
-  { path: '', component: TrendingComponent },
-  { path: 'search', component: SearchResultComponent },
-  { path: 'movie/:id', component: MovieDetailComponent },
-  { path: 'tv/:id', component: TvDetailComponent },
-  { path: 'person/:id', component: PersonDetailComponent },
+    { path: '', component: TrendingComponent },
+    { path: 'search', component: SearchResultComponent },
+    { path: 'movie/:id', component: MovieDetailComponent },
+    { path: 'tv/:id', component: TvDetailComponent },
+    { path: 'person/:id', component: PersonDetailComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}

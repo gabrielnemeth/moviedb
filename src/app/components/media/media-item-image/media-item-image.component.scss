@@ -1,49 +1,49 @@
 $border-radius: 0.8rem;
 
 .media-item-image__wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: $border-radius;
-  box-shadow: 0 0.5em 1.1em 0.1em rgb(10 10 10 / 18%),
-    0 0px 0 1px rgb(10 10 10 / 0%);
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius;
+    box-shadow: 0 0.5em 1.1em 0.1em rgb(10 10 10 / 18%),
+        0 0 0 1px rgb(10 10 10 / 0%);
 }
 
 .media-item-image__wrapper.media-item-image--clickable {
-  transition: linear 0.1s;
+    transition: linear 0.1s;
 }
 
 .media-item-image__wrapper.media-item-image--clickable:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .media-item-image__wrapper img {
-  border-radius: $border-radius;
-  transition: linear 0.1s;
+    border-radius: $border-radius;
+    transition: linear 0.1s;
 }
 
 .media-item-image-blur {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: $border-radius;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  visibility: hidden;
-  transition: linear 0.1s;
-  opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: $border-radius;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    visibility: hidden;
+    transition: linear 0.1s;
+    opacity: 0;
 }
 
 .media-item-image--clickable {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .media-item-image--clickable:hover .media-item-image__wrapper {
-  background-color: black;
+    background-color: black;
 }
 
 .media-item-image--clickable:hover .media-item-image-blur {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }

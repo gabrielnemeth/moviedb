@@ -6,19 +6,19 @@ import { fetchGenres, genresLoaded } from './genre.actions';
 
 @Injectable()
 export class GenreEffects {
-  public getGenres$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(fetchGenres),
-      mergeMap((_) =>
-        this.movieService
-          .getGenres()
-          .pipe(map((result) => genresLoaded({ list: result })))
-      )
-    )
-  );
+    public getGenres$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fetchGenres),
+            mergeMap((_) =>
+                this.movieService
+                    .getGenres()
+                    .pipe(map((result) => genresLoaded({ list: result })))
+            )
+        )
+    );
 
-  public constructor(
-    private actions$: Actions,
-    private movieService: MediaService
-  ) {}
+    public constructor(
+        private actions$: Actions,
+        private movieService: MediaService
+    ) {}
 }

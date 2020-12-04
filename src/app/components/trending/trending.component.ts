@@ -6,13 +6,13 @@ import { State } from './../../store/state';
 import { selectTrending } from './../../store/trending/trending.reducer';
 
 @Component({
-  selector: 'app-trending',
-  templateUrl: './trending.component.html',
+    selector: 'app-trending',
+    templateUrl: './trending.component.html',
 })
 export class TrendingComponent {
-  public mediaItems$: Observable<MovieListResult[]> = this.store.select(
-    selectTrending
-  );
+    public mediaItems$: Observable<MovieListResult[]> = this.store.select(
+        selectTrending
+    );
 
-  public constructor(private store: Store<State>) {}
+    public constructor(private store: Store<State>) {}
 }

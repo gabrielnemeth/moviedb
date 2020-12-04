@@ -6,29 +6,29 @@ import { TvListResult } from '../../../interfaces/tv-list-result';
 import { PersonListResult } from '../../../interfaces/person-list-result';
 
 @Component({
-  selector: 'app-media-item-card',
-  templateUrl: './media-item-card.component.html',
+    selector: 'app-media-item-card',
+    templateUrl: './media-item-card.component.html',
 })
 export class MediaItemCardComponent {
-  private _mediaItem: MediaListResult;
+    private _mediaItem: MediaListResult;
 
-  @Input()
-  public set mediaItem(item: MediaListResult) {
-    this._mediaItem = item;
+    @Input()
+    public set mediaItem(item: MediaListResult) {
+        this._mediaItem = item;
 
-    switch (item.media_type) {
-      case MediaType.movie:
-        this.movieItem = item as MovieListResult;
-        break;
-      case MediaType.tv:
-        this.tvItem = item as TvListResult;
-        break;
-      case MediaType.person:
-        this.personItem = item as PersonListResult;
+        switch (item.media_type) {
+            case MediaType.movie:
+                this.movieItem = item as MovieListResult;
+                break;
+            case MediaType.tv:
+                this.tvItem = item as TvListResult;
+                break;
+            case MediaType.person:
+                this.personItem = item as PersonListResult;
+        }
     }
-  }
 
-  public movieItem: MovieListResult;
-  public tvItem: TvListResult;
-  public personItem: PersonListResult;
+    public movieItem: MovieListResult;
+    public tvItem: TvListResult;
+    public personItem: PersonListResult;
 }

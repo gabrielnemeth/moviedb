@@ -5,21 +5,24 @@ import { State } from '../state';
 import { trendingLoaded } from './trending.actions';
 
 export interface TrendingState {
-  list: MovieListResult[];
+    list: MovieListResult[];
 }
 
 const initialState: TrendingState = {
-  list: [],
+    list: [],
 };
 
 const trendingReducer = createReducer(
-  initialState,
-  on(trendingLoaded, (state, data) => ({ ...state, list: data.list }))
+    initialState,
+    on(trendingLoaded, (state, data) => ({ ...state, list: data.list }))
 );
 
-export function reducer(state: MovieState | undefined, action: Action) {
-  return trendingReducer(state, action);
+export function reducer(
+    state: MovieState | undefined,
+    action: Action
+): TrendingState {
+    return trendingReducer(state, action);
 }
 
 export const selectTrending = (state: State): MovieListResult[] =>
-  state.trending.list;
+    state.trending.list;
