@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
 import { MediaType } from '../../../interfaces/media-type';
+import * as Plyr from 'plyr';
 
 @Component({
     selector: 'app-home-page',
@@ -15,13 +16,13 @@ import { MediaType } from '../../../interfaces/media-type';
 })
 export class HomePageComponent implements OnInit {
     public trending$: Observable<MovieListResult>;
-    public videoId: string;
     public playVideo: boolean;
 
     constructor(
         private store: Store<State>,
         private mediaService: MediaService
     ) {}
+    public videoSources: Plyr.Source[];
 
     public ngOnInit(): void {
         this.trending$ = this.store
@@ -46,8 +47,15 @@ export class HomePageComponent implements OnInit {
         this.mediaService
             .getVideo(id, MediaType.movie)
             .subscribe((videoData) => {
+                this.videoSources = videoData.results.map((result) => ({
+                    provider: 'youtube',
+                    src: `https://youtube.com/watch?v=${result.key}`,
+                }));
                 this.playVideo = true;
-                this.videoId = videoData.results[0].key;
             });
+    }
+
+    public closePlayer(): void {
+        this.playVideo = false;
     }
 }

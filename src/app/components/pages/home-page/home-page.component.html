@@ -24,5 +24,5 @@
         </div>
     </div>
 </section>
-<app-video-player [open]="playVideo" [id]="videoId"></app-video-player>
+<app-video-player *ngIf="playVideo" (closePlayer)="closePlayer()" [videoSources]="videoSources"></app-video-player>
 <app-trending></app-trending>

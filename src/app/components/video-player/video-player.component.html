@@ -1,7 +1,12 @@
 <div class="modal" [ngClass]="{'is-active': open}">
     <div class="modal-background"></div>
     <div class="modal-content">
-        <div plyr style="width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrInit)="player = $event"></div>
+        <div class="player-wrapper" [ngClass]="{'player--ready': isPlayerReady}" [ngStyle]="{'visibility': isPlayerReady ? 'visible' : 'hidden'}">
+            <div plyr style="width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrReady)="playerReady()" (plyrInit)="player = $event"></div>
+        </div>
+    </div>
+    <div class="spinner fa-3x" *ngIf="!isPlayerReady">
+        <i class="fas fa-circle-notch fa-spin"></i>
     </div>
     <button class="modal-close is-large" aria-label="close" (click)="close()"></button>
 </div>

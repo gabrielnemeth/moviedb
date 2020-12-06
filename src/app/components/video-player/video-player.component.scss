@@ -1,0 +1,15 @@
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.player-wrapper {
+    opacity: 0;
+    transition: linear .3s;
+}
+
+.player--ready {
+    opacity: 1;
+}
