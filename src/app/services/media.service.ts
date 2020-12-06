@@ -11,6 +11,8 @@ import { PersonSearchResponse } from '../interfaces/response/person-search-respo
 import { TvSearchResponse } from '../interfaces/response/tv-search-response';
 import { Tv } from '../interfaces/tv';
 import { Person } from '../interfaces/person';
+import { MediaType } from '../interfaces/media-type';
+import { VideoResponse } from '../interfaces/response/video-response';
 
 @Injectable({
     providedIn: 'root',
@@ -84,5 +86,18 @@ export class MediaService {
         return this.http.get<Person>(
             `${environment.themoviedb.baseUrl}person/${id}?api_key=${this.apiKey}&language=en-US`
         );
+    }
+
+    public getVideo(
+        id: number,
+        mediaType: MediaType
+    ): Observable<VideoResponse> {
+        console.assert(
+            mediaType === MediaType.movie || mediaType === MediaType.tv,
+            'Wrong media type was provided'
+        );
+        const type = mediaType === MediaType.movie ? 'movie' : 'tv';
+        const url = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${this.apiKey}&language=en-US`;
+        return this.http.get<VideoResponse>(url);
     }
 }

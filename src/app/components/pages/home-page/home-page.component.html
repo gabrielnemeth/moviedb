@@ -5,7 +5,7 @@
             <app-header-bar></app-header-bar>
         </div>
 
-        <div class="hero-body">
+        <div class="hero-body" (click)="getVid(trending.id)">
             <div class="container">
                 <div class="columns">
                     <div class="column is-3">
@@ -24,4 +24,5 @@
         </div>
     </div>
 </section>
+<app-video-player [open]="playVideo" [id]="videoId"></app-video-player>
 <app-trending></app-trending>

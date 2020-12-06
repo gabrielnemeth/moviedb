@@ -33,6 +33,8 @@ import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 import { HeaderBarComponent } from './components/header-bar/header-bar.component';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
+import { PlyrModule } from 'ngx-plyr';
 
 @NgModule({
     declarations: [
@@ -53,6 +55,7 @@ import { HomePageComponent } from './components/pages/home-page/home-page.compon
         PersonDetailComponent,
         HeaderBarComponent,
         HomePageComponent,
+        VideoPlayerComponent,
     ],
     imports: [
         BrowserModule,
@@ -61,6 +64,7 @@ import { HomePageComponent } from './components/pages/home-page/home-page.compon
         HttpClientModule,
         ReactiveFormsModule,
         SwiperModule,
+        PlyrModule,
         StoreModule.forRoot({
             searchResult: searchedMediaReducer.reducer,
             trending: trendingReducer.reducer,

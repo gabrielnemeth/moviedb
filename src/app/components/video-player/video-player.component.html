@@ -1,0 +1,7 @@
+<div class="modal" [ngClass]="{'is-active': open}">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div plyr style="width: 640px;" plyrTitle="Video 1" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrInit)="player = $event"></div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)="close()"></button>
+</div>

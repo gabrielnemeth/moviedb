@@ -5,6 +5,8 @@ import { selectTrending } from '../../../store/trending/trending.reducer';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MovieListResult } from '../../../interfaces/movie-list-result';
+import { MediaService } from '../../../services/media.service';
+import { MediaType } from '../../../interfaces/media-type';
 
 @Component({
     selector: 'app-home-page',
@@ -13,8 +15,13 @@ import { MovieListResult } from '../../../interfaces/movie-list-result';
 })
 export class HomePageComponent implements OnInit {
     public trending$: Observable<MovieListResult>;
+    public videoId: string;
+    public playVideo: boolean;
 
-    constructor(private store: Store<State>) {}
+    constructor(
+        private store: Store<State>,
+        private mediaService: MediaService
+    ) {}
 
     public ngOnInit(): void {
         this.trending$ = this.store
@@ -33,5 +40,14 @@ export class HomePageComponent implements OnInit {
             'background-repeat': 'no-repeat',
             'background-color': 'black',
         };
+    }
+
+    public getVid(id: number): void {
+        this.mediaService
+            .getVideo(id, MediaType.movie)
+            .subscribe((videoData) => {
+                this.playVideo = true;
+                this.videoId = videoData.results[0].key;
+            });
     }
 }
