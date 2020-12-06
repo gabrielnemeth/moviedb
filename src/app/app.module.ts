@@ -31,6 +31,8 @@ import { PersonCardComponent } from './components/media/media-item-card/person-c
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
+import { HeaderBarComponent } from './components/header-bar/header-bar.component';
+import { HomePageComponent } from './components/pages/home-page/home-page.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +51,8 @@ import { PersonDetailComponent } from './components/person-detail/person-detail.
         MovieDetailComponent,
         TvDetailComponent,
         PersonDetailComponent,
+        HeaderBarComponent,
+        HomePageComponent,
     ],
     imports: [
         BrowserModule,
