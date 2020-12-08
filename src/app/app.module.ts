@@ -34,7 +34,7 @@ import { PersonDetailComponent } from './components/person-detail/person-detail.
 import { HeaderBarComponent } from './components/header-bar/header-bar.component';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
-import { PlyrModule } from 'ngx-plyr';
+import { VimeModule } from '@vime/angular';
 
 @NgModule({
     declarations: [
@@ -64,7 +64,7 @@ import { PlyrModule } from 'ngx-plyr';
         HttpClientModule,
         ReactiveFormsModule,
         SwiperModule,
-        PlyrModule,
+        VimeModule,
         StoreModule.forRoot({
             searchResult: searchedMediaReducer.reducer,
             trending: trendingReducer.reducer,

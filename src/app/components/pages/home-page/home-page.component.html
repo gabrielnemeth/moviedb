@@ -24,5 +24,6 @@
         </div>
     </div>
 </section>
-<app-video-player *ngIf="playVideo" (closePlayer)="closePlayer()" [videoSources]="videoSources"></app-video-player>
+<app-video-player *ngIf="(youtubeId$ | async) as youtubeId" (closePlayer)="closePlayer()"
+                  [youtubeId]="youtubeId"></app-video-player>
 <app-trending></app-trending>

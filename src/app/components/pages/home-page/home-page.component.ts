@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
 import { selectTrending } from '../../../store/trending/trending.reducer';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, mapTo, switchMap } from 'rxjs/operators';
+import { merge, Observable, of, Subject } from 'rxjs';
 import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
 import { MediaType } from '../../../interfaces/media-type';
-import * as Plyr from 'plyr';
+import { isNil } from 'lodash-es';
 
 @Component({
     selector: 'app-home-page',
@@ -16,18 +16,33 @@ import * as Plyr from 'plyr';
 })
 export class HomePageComponent implements OnInit {
     public trending$: Observable<MovieListResult>;
-    public playVideo: boolean;
 
     constructor(
         private store: Store<State>,
         private mediaService: MediaService
     ) {}
-    public videoSources: Plyr.Source[];
+
+    public videoId$: Subject<number> = new Subject<number>();
+    public closeVideoModal$: Subject<void> = new Subject<void>();
+    public youtubeId$: Observable<string | undefined>;
 
     public ngOnInit(): void {
         this.trending$ = this.store
             .select(selectTrending)
             .pipe(map((trending) => trending[1]));
+
+        this.youtubeId$ = merge(
+            this.closeVideoModal$.pipe(mapTo(undefined)),
+            this.videoId$
+        ).pipe(
+            switchMap((id) =>
+                isNil(id)
+                    ? of(undefined)
+                    : this.mediaService
+                          .getVideo(id, MediaType.movie)
+                          .pipe(map((videoData) => videoData.results[0].key))
+            )
+        );
     }
 
     public getStyle(
@@ -44,18 +59,10 @@ export class HomePageComponent implements OnInit {
     }
 
     public getVid(id: number): void {
-        this.mediaService
-            .getVideo(id, MediaType.movie)
-            .subscribe((videoData) => {
-                this.videoSources = videoData.results.map((result) => ({
-                    provider: 'youtube',
-                    src: `https://youtube.com/watch?v=${result.key}`,
-                }));
-                this.playVideo = true;
-            });
+        this.videoId$.next(id);
     }
 
     public closePlayer(): void {
-        this.playVideo = false;
+        this.closeVideoModal$.next();
     }
 }

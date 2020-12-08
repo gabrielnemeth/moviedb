@@ -6,9 +6,14 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import * as Plyr from 'plyr';
-import { PlyrComponent } from 'ngx-plyr';
-import { animate, style, transition, trigger } from '@angular/animations';
+import {
+    animate,
+    state,
+    style,
+    transition,
+    trigger,
+} from '@angular/animations';
+import { VimePlayer } from '@vime/angular';
 
 @Component({
     selector: 'app-video-player',
@@ -22,6 +27,21 @@ import { animate, style, transition, trigger } from '@angular/animations';
             ]),
             transition(':leave', [animate('.1s', style({ opacity: 0 }))]),
         ]),
+        trigger('showHide', [
+            state(
+                'show',
+                style({
+                    opacity: 1,
+                })
+            ),
+            state(
+                'hide',
+                style({
+                    opacity: 0,
+                })
+            ),
+            transition('show <=> hide', [animate('.3s')]),
+        ]),
     ],
 })
 export class VideoPlayerComponent {
@@ -30,26 +50,16 @@ export class VideoPlayerComponent {
         return this.open ? 'open' : 'closed';
     }
 
-    @ViewChild(PlyrComponent, { static: true })
-    public plyr: PlyrComponent;
-
-    private _videoSources: Plyr.Source[];
-
     @Input()
-    public set videoSources(sources: Plyr.Source[]) {
-        this._videoSources = sources;
-        this.open = true;
-    }
-
-    public get videoSources(): Plyr.Source[] {
-        return this._videoSources;
-    }
+    public youtubeId: string;
 
     @Output()
     public closePlayer: EventEmitter<void> = new EventEmitter();
 
-    public player: Plyr;
-    public open: boolean;
+    @ViewChild('player')
+    public player!: VimePlayer;
+
+    public open = true;
     public isPlayerReady: boolean;
 
     public close(): void {
@@ -58,7 +68,7 @@ export class VideoPlayerComponent {
         this.closePlayer.emit();
     }
 
-    public playerReady(): void {
+    public posterLoaded(): void {
         this.isPlayerReady = true;
     }
 }
