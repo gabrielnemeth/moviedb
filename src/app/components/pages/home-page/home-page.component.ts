@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
 import { selectTrending } from '../../../store/trending/trending.reducer';
-import { map, mapTo, switchMap } from 'rxjs/operators';
-import { merge, Observable, of, Subject } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
 import { MediaType } from '../../../interfaces/media-type';
@@ -16,31 +16,27 @@ import { isNil } from 'lodash-es';
 })
 export class HomePageComponent implements OnInit {
     public trending$: Observable<MovieListResult>;
+    public youtubeId$: Observable<string | undefined>;
+    public youtubeId: string;
+    public openModal: boolean;
 
     constructor(
         private store: Store<State>,
         private mediaService: MediaService
     ) {}
 
-    public videoId$: Subject<number> = new Subject<number>();
-    public closeVideoModal$: Subject<void> = new Subject<void>();
-    public youtubeId$: Observable<string | undefined>;
-
     public ngOnInit(): void {
-        this.trending$ = this.store
-            .select(selectTrending)
-            .pipe(map((trending) => trending[1]));
+        this.trending$ = this.store.select(selectTrending).pipe(
+            map((trending) => trending[10]),
+            filter((trending) => !isNil(trending)),
+            tap(console.log)
+        );
 
-        this.youtubeId$ = merge(
-            this.closeVideoModal$.pipe(mapTo(undefined)),
-            this.videoId$
-        ).pipe(
-            switchMap((id) =>
-                isNil(id)
-                    ? of(undefined)
-                    : this.mediaService
-                          .getVideo(id, MediaType.movie)
-                          .pipe(map((videoData) => videoData.results[0].key))
+        this.youtubeId$ = this.trending$.pipe(
+            switchMap((trending) =>
+                this.mediaService
+                    .getVideo(trending.id, MediaType.movie)
+                    .pipe(map((videoData) => videoData.results[0].key))
             )
         );
     }
@@ -58,11 +54,12 @@ export class HomePageComponent implements OnInit {
         };
     }
 
-    public getVid(id: number): void {
-        this.videoId$.next(id);
+    public playVideo(youtubeId: string): void {
+        this.youtubeId = youtubeId;
+        this.openModal = true;
     }
 
     public closePlayer(): void {
-        this.closeVideoModal$.next();
+        this.openModal = false;
     }
 }

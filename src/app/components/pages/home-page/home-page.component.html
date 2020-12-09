@@ -5,7 +5,7 @@
             <app-header-bar></app-header-bar>
         </div>
 
-        <div class="hero-body" (click)="getVid(trending.id)">
+        <div class="hero-body">
             <div class="container">
                 <div class="columns">
                     <div class="column is-3">
@@ -18,12 +18,18 @@
                         <h1 class="title has-text-white">
                             {{ trending.title }}
                         </h1>
+                        <a *ngIf="(youtubeId$ | async) as youtubeId" (click)="playVideo(youtubeId)">
+                            <span class="icon">
+                              <i class="far fa-play-circle"></i>
+                            </span>
+                            <span>Play trailer</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<app-video-player *ngIf="(youtubeId$ | async) as youtubeId" (closePlayer)="closePlayer()"
+<app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"
                   [youtubeId]="youtubeId"></app-video-player>
 <app-trending></app-trending>
