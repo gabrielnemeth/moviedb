@@ -8,6 +8,8 @@ import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
 import { MediaType } from '../../../interfaces/media-type';
 import { isNil } from 'lodash-es';
+import { getGenresByIds } from '../../../store/genre/genre.reducer';
+import { Genre } from '../../../interfaces/genre';
 
 @Component({
     selector: 'app-home-page',
@@ -19,6 +21,7 @@ export class HomePageComponent implements OnInit {
     public youtubeId$: Observable<string | undefined>;
     public youtubeId: string;
     public openModal: boolean;
+    public genres$: Observable<(Genre | undefined)[]>;
 
     constructor(
         private store: Store<State>,
@@ -36,6 +39,14 @@ export class HomePageComponent implements OnInit {
                 this.mediaService
                     .getVideo(trending.id, MediaType.movie)
                     .pipe(map((videoData) => videoData.results[0].key))
+            )
+        );
+
+        this.genres$ = this.trending$.pipe(
+            switchMap((trending) =>
+                this.store.select(getGenresByIds, {
+                    ids: trending.genre_ids,
+                })
             )
         );
     }

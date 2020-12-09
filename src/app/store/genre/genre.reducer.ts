@@ -30,3 +30,9 @@ export const getGenreById = createSelector(
     (genres: Genre[], props: { id: number }) =>
         genres?.find((g) => g.id === props.id)
 );
+
+export const getGenresByIds = createSelector(
+    selectGenres,
+    (genres: Genre[], props: { ids: number[] }) =>
+        props.ids.map((id) => genres.find((genre) => genre.id === id))
+);

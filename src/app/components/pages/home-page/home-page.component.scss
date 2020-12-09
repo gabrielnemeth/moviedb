@@ -14,3 +14,12 @@
 .rt-logo {
     width: 16px;
 }
+
+.genre:after {
+    content: " \00b7";
+    padding-left: 0.25rem;
+}
+
+.genre:last-of-type:after {
+    content: none;
+}
