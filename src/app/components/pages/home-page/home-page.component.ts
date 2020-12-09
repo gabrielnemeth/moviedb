@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
 
     public ngOnInit(): void {
         this.trending$ = this.store.select(selectTrending).pipe(
-            map((trending) => trending[10]),
+            map((trending) => trending[8]),
             filter((trending) => !isNil(trending))
         );
 

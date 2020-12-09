@@ -1,14 +1,19 @@
-.hero {
-    filter: blur(2);
-}
-
-.hero-bg {
+.hero-bg,
+.hero-gradient {
     align-items: stretch;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.hero-bg {
     background-color: rgb(18 18 18 / 84%);
+}
+
+.hero-gradient {
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,0.8382703423166141) 0%, rgba(0,0,0,0) 34%);
 }
 
 .rt-logo {

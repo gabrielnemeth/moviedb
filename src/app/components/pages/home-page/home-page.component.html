@@ -1,6 +1,7 @@
 <section class="hero is-fullheight" *ngIf="(trending$ | async) as trending"
          [ngStyle]="getStyle(trending.backdrop_path)">
-    <div class="hero-bg">
+    <div class="hero-gradient">
+        <div class="hero-bg">
         <div class="hero-head">
             <app-header-bar></app-header-bar>
         </div>
@@ -10,6 +11,7 @@
                 <div class="columns">
                     <div class="column is-3">
                         <app-media-item-image
+                            [largeShadow]="true"
                             [src]="trending.poster_path"
                             [alt]="trending.title"
                         ></app-media-item-image>
@@ -21,13 +23,13 @@
                             </h1>
                             <div class="is-flex mb-2">
                                 <span *ngIf="trending.vote_average || trending.vote_average > 0"
-                                      class="tag is-warning mr-2"><i
+                                      class="tag is-warning mr-4"><i
                                     class="fas fa-star mr-1"></i><b>{{trending.vote_average}}</b>/10</span>
                                 <span *ngIf="!trending.vote_average || trending.vote_average === 0"
-                                      class="tag is-light mr-2"><b>Not yet rated</b></span>
+                                      class="tag is-light mr-4"><b>Not yet rated</b></span>
                                 <a class="has-text-white" *ngIf="(youtubeId$ | async) as youtubeId"
                                    (click)="playVideo(youtubeId)">
-                                <span class="icon">
+                                <span class="icon mr-1">
                                     <i class="far fa-play-circle"></i>
                                 </span>
                                     <span>Play trailer</span>
@@ -41,6 +43,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"

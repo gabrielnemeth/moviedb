@@ -14,4 +14,7 @@ export class MediaItemImageComponent {
 
     @Input()
     public clickable: boolean;
+
+    @Input()
+    public largeShadow: boolean;
 }

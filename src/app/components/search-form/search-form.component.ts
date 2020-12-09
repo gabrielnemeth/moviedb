@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SearchType } from 'src/app/interfaces/search-type';
 import { mediaSearch } from 'src/app/store/searched-media/searched-media.actions';
-import { State } from './../../store/state';
+import { State } from '../../store/state';
 
 @Component({
     selector: 'app-search-form',
     templateUrl: 'search-form.component.html',
+    styleUrls: ['search-form.component.scss'],
 })
 export class SearchFormComponent {
     public searchTypes: {

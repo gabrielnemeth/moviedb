@@ -1,0 +1,13 @@
+.button, .button[disabled], fieldset[disabled] .button, .select select, .textarea, .input {
+    background-color: hsl(0, 0%, 21%);
+    border-color: hsl(0, 0%, 21%);
+    color: hsl(0, 0%, 60%);
+}
+
+.input::placeholder {
+    color: hsl(0, 0%, 40%);
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: hsl(0, 0%, 60%);
+}

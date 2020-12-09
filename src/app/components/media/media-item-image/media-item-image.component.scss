@@ -8,6 +8,10 @@ $border-radius: 0.8rem;
         0 0 0 1px rgb(10 10 10 / 0%);
 }
 
+.media-item-image__wrapper--large-shadow {
+    box-shadow: 0 0.5em 2em 0.4em rgb(10 10 10 / 39%), 0 0 0 1px rgba(10, 10, 10, 0);
+}
+
 .media-item-image__wrapper.media-item-image--clickable {
     transition: linear 0.1s;
 }

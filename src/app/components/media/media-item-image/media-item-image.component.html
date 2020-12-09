@@ -1,6 +1,6 @@
 <figure
     class="media-item-image__wrapper image is-2by3"
-    [ngClass]="{ 'media-item-image--clickable': clickable }"
+    [ngClass]="{ 'media-item-image--clickable': clickable, 'media-item-image__wrapper--large-shadow': largeShadow }"
 >
     <img
         *ngIf="src !== null; else noImage"
