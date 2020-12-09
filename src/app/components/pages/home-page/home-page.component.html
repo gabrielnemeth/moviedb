@@ -15,15 +15,21 @@
                         ></app-media-item-image>
                     </div>
                     <div class="column is-flex is-align-items-flex-end">
+                        <div class="is-flex is-flex-direction-column">
                         <h1 class="title has-text-white">
                             {{ trending.title }}
                         </h1>
-                        <a *ngIf="(youtubeId$ | async) as youtubeId" (click)="playVideo(youtubeId)">
-                            <span class="icon">
-                              <i class="far fa-play-circle"></i>
-                            </span>
-                            <span>Play trailer</span>
-                        </a>
+                        <div class="is-flex">
+                            <span class="tag is-warning mr-2"><b class="mr-1">Imdb</b> 7.6</span>
+                            <span class="tag mr-2"><img class="rt-logo mr-1" src="assets/img/rt-logo.png" alt=""> 7.6</span>
+                            <a class="has-text-white" *ngIf="(youtubeId$ | async) as youtubeId" (click)="playVideo(youtubeId)">
+                                <span class="icon">
+                                    <i class="far fa-play-circle"></i>
+                                </span>
+                                <span>Play trailer</span>
+                            </a>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>

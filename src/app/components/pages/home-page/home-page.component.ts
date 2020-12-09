@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
 import { selectTrending } from '../../../store/trending/trending.reducer';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
@@ -28,8 +28,7 @@ export class HomePageComponent implements OnInit {
     public ngOnInit(): void {
         this.trending$ = this.store.select(selectTrending).pipe(
             map((trending) => trending[10]),
-            filter((trending) => !isNil(trending)),
-            tap(console.log)
+            filter((trending) => !isNil(trending))
         );
 
         this.youtubeId$ = this.trending$.pipe(
