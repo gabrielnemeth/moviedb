@@ -20,8 +20,8 @@
                             {{ trending.title }}
                         </h1>
                         <div class="is-flex">
-                            <span class="tag is-warning mr-2"><b class="mr-1">Imdb</b> 7.6</span>
-                            <span class="tag mr-2"><img class="rt-logo mr-1" src="assets/img/rt-logo.png" alt=""> 7.6</span>
+                            <span *ngIf="trending.vote_average || trending.vote_average > 0" class="tag is-warning mr-2"><i class="fas fa-star mr-1"></i><b>{{trending.vote_average}}</b>/10</span>
+                            <span *ngIf="!trending.vote_average || trending.vote_average === 0" class="tag is-light mr-2"><b>Not yet rated</b></span>
                             <a class="has-text-white" *ngIf="(youtubeId$ | async) as youtubeId" (click)="playVideo(youtubeId)">
                                 <span class="icon">
                                     <i class="far fa-play-circle"></i>
