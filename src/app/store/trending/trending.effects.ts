@@ -3,20 +3,43 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { MediaType } from 'src/app/interfaces/media-type';
 import { MediaService } from '../../services/media.service';
-import { fetchTrending, trendingLoaded } from './trending.actions';
+import {
+    fetchTrendingMovies,
+    fetchTrendingTvs,
+    trendingMoviesLoaded,
+    trendingTvsLoaded,
+} from './trending.actions';
 
 @Injectable()
 export class TrendingEffects {
-    public loadTrending$ = createEffect(() =>
+    public loadTrendingMovies$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(fetchTrending),
+            ofType(fetchTrendingMovies),
             mergeMap((_) =>
-                this.movieService.getTrending().pipe(
+                this.movieService.getTrendingMovies().pipe(
                     map((result) =>
-                        trendingLoaded({
-                            list: result.results.map((res) => ({
+                        trendingMoviesLoaded({
+                            movies: result.results.map((res) => ({
                                 ...res,
                                 media_type: MediaType.movie,
+                            })),
+                        })
+                    )
+                )
+            )
+        )
+    );
+
+    public loadTrendingTvs$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fetchTrendingTvs),
+            mergeMap((_) =>
+                this.movieService.getTrendingTvs().pipe(
+                    map((result) =>
+                        trendingTvsLoaded({
+                            tv: result.results.map((res) => ({
+                                ...res,
+                                media_type: MediaType.tv,
                             })),
                         })
                     )

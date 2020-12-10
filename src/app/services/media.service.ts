@@ -64,9 +64,15 @@ export class MediaService {
             .pipe(map((data) => data.genres));
     }
 
-    public getTrending(): Observable<MovieSearchResponse> {
+    public getTrendingMovies(): Observable<MovieSearchResponse> {
         return this.http.get<MovieSearchResponse>(
             `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
+        );
+    }
+
+    public getTrendingTvs(): Observable<TvSearchResponse> {
+        return this.http.get<TvSearchResponse>(
+            `${environment.themoviedb.baseUrl}trending/tv/day?api_key=${this.apiKey}`
         );
     }
 

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
-import { selectTrending } from '../../../store/trending/trending.reducer';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
 import { MediaType } from '../../../interfaces/media-type';
-import { isNil } from 'lodash-es';
 import { getGenresByIds } from '../../../store/genre/genre.reducer';
 import { Genre } from '../../../interfaces/genre';
+import { selectTrendingMovies } from 'src/app/store/trending/trending.reducer';
+import { isNil } from 'lodash-es';
 
 @Component({
     selector: 'app-home-page',
@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.trending$ = this.store.select(selectTrending).pipe(
+        this.trending$ = this.store.select(selectTrendingMovies).pipe(
             map((trending) => trending[8]),
             filter((trending) => !isNil(trending))
         );
