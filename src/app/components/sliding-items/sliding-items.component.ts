@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { MovieListResult } from '../../interfaces/movie-list-result';
+import { MediaType } from '../../interfaces/media-type';
 
 @Component({
     selector: 'app-sliding-items',
@@ -12,6 +13,17 @@ export class SlidingItemsComponent {
 
     @Input()
     public title: string;
+
+    @Input()
+    public mediaTypeSwitcher: boolean;
+
+    @Input()
+    public selectedMediaType: MediaType | null;
+
+    @Output()
+    public mediaTypeSelect: EventEmitter<MediaType> = new EventEmitter<MediaType>();
+
+    public MediaType: typeof MediaType = MediaType;
 
     public config: SwiperConfigInterface = {
         navigation: true,
@@ -47,4 +59,12 @@ export class SlidingItemsComponent {
             },
         },
     };
+
+    public isActive(mediaType: MediaType): boolean {
+        return this.selectedMediaType === mediaType;
+    }
+
+    public onTypeSelect(mediaType: MediaType): void {
+        this.mediaTypeSelect.emit(mediaType);
+    }
 }
