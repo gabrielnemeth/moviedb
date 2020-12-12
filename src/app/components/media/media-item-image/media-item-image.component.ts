@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class MediaItemImageComponent {
     @Input()
-    public src: string | null;
+    public src: string | null | undefined;
 
     @Input()
     public alt: string;

@@ -1,3 +1,30 @@
-<app-movie-card *ngIf="movieItem" [movie]="movieItem"></app-movie-card>
-<app-tv-card *ngIf="tvItem" [tv]="tvItem"></app-tv-card>
-<app-person-card *ngIf="personItem" [person]="personItem"></app-person-card>
+<app-media-item-image
+    (click)="showMediaItem(media.type, media.id)"
+    [src]="media?.img?.poster"
+    [alt]="media.title"
+    [clickable]="true"
+></app-media-item-image>
+
+<div class="px-1 pt-4 pb-1">
+    <p
+        (click)="showMediaItem(media.type, media.id)"
+        class="media-item-title title has-text-weight-bold is-6 mb-3"
+    >
+        {{ media.title }}
+    </p>
+    <div class="media-item-aditional-info has-text-weight-medium">
+        <div class="is-flex is-size-7">
+            <p *ngIf="media.releaseDate">
+                {{ getYear(media.releaseDate) }}
+            </p>
+            <p class="mx-1" *ngIf="media.genresIds && media.genresIds.length > 0">&bull;</p>
+            <p *ngIf="media.genresIds && media.genresIds.length > 0">{{ getGenreString(media.genresIds) | async }}</p>
+        </div>
+        <div class="is-flex is-size-7">
+            <span class="icon is-small rating-icon">
+                <i class="fas fa-star"></i>
+            </span>
+            <p class="mr-1">{{ media.voteAverage }}/10</p>
+        </div>
+    </div>
+</div>

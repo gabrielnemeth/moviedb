@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { MovieListResult } from '../../interfaces/movie-list-result';
 import { MediaType } from '../../interfaces/media-type';
-import { TvListResult } from '../../interfaces/tv-list-result';
+import { MediaListItem } from '../../interfaces/media-list-item';
+
+export const fetchTrendingMedia = createAction(
+    '[Trending Component] Initiating Trending Media Fetch'
+);
 
 export const fetchTrendingMovies = createAction(
     '[Trending Component] Initiating Trending Movies Fetch'
@@ -13,12 +16,12 @@ export const fetchTrendingTvs = createAction(
 
 export const trendingMoviesLoaded = createAction(
     '[Movies API] Trending Movies Loaded Success',
-    props<{ movies: MovieListResult[] }>()
+    props<{ list: MediaListItem[] }>()
 );
 
 export const trendingTvsLoaded = createAction(
     '[Movies API] Trending TV Shows Loaded Success',
-    props<{ tv: TvListResult[] }>()
+    props<{ list: MediaListItem[] }>()
 );
 
 export const setSelectedMediaType = createAction(

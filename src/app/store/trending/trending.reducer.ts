@@ -1,5 +1,4 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { MovieListResult } from '../../interfaces/movie-list-result';
 import { State } from '../state';
 import {
     setSelectedMediaType,
@@ -7,17 +6,15 @@ import {
     trendingTvsLoaded,
 } from './trending.actions';
 import { MediaType } from '../../interfaces/media-type';
-import { TvListResult } from '../../interfaces/tv-list-result';
+import { MediaListItem } from '../../interfaces/media-list-item';
 
 export interface TrendingState {
-    movies: MovieListResult[];
-    tv: TvListResult[];
+    list: MediaListItem[];
     selectedMediaType: MediaType;
 }
 
 const initialState: TrendingState = {
-    movies: [],
-    tv: [],
+    list: [],
     selectedMediaType: MediaType.movie,
 };
 
@@ -25,11 +22,11 @@ const trendingReducer = createReducer(
     initialState,
     on(trendingMoviesLoaded, (state, data) => ({
         ...state,
-        movies: data.movies,
+        list: [...state.list, ...data.list],
     })),
     on(trendingTvsLoaded, (state, data) => ({
         ...state,
-        tv: data.tv,
+        list: [...state.list, ...data.list],
     })),
     on(setSelectedMediaType, (state, data) => ({
         ...state,
@@ -43,11 +40,8 @@ export function reducer(
     return trendingReducer(state, action);
 }
 
-export const selectTrendingMovies = (state: State): MovieListResult[] =>
-    state.trending.movies;
-
-export const selectTrendingTvs = (state: State): TvListResult[] =>
-    state.trending.tv;
+export const selectTrendingMedia = (state: State): MediaListItem[] =>
+    state.trending.list;
 
 export const selectSelectedMediaType = (state: State): MediaType =>
     state.trending.selectedMediaType;

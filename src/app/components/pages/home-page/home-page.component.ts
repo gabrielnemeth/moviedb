@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { MovieListResult } from '../../../interfaces/movie-list-result';
 import { MediaService } from '../../../services/media.service';
 import { MediaType } from '../../../interfaces/media-type';
-import { getGenresByIds } from '../../../store/genre/genre.reducer';
 import { Genre } from '../../../interfaces/genre';
-import { selectTrendingMovies } from 'src/app/store/trending/trending.reducer';
+import { selectTrendingMedia } from 'src/app/store/trending/trending.reducer';
 import { isNil } from 'lodash-es';
+import { MediaListItem } from '../../../interfaces/media-list-item';
+import { getGenresByIds } from '../../../store/genre/genre.reducer';
 
 @Component({
     selector: 'app-home-page',
@@ -17,7 +17,7 @@ import { isNil } from 'lodash-es';
     styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-    public trending$: Observable<MovieListResult>;
+    public trending$: Observable<MediaListItem>;
     public youtubeId$: Observable<string | undefined>;
     public youtubeId: string;
     public openModal: boolean;
@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.trending$ = this.store.select(selectTrendingMovies).pipe(
+        this.trending$ = this.store.select(selectTrendingMedia).pipe(
             map((trending) => trending[8]),
             filter((trending) => !isNil(trending))
         );
@@ -42,17 +42,24 @@ export class HomePageComponent implements OnInit {
             )
         );
 
-        this.genres$ = this.trending$.pipe(
-            switchMap((trending) =>
+        const trendingGenreIds$ = this.trending$.pipe(
+            filter(
+                (trending) => !isNil(trending) && !isNil(trending.genresIds)
+            ),
+            map((trending) => trending.genresIds as number[])
+        );
+
+        this.genres$ = trendingGenreIds$.pipe(
+            switchMap((ids) =>
                 this.store.select(getGenresByIds, {
-                    ids: trending.genre_ids,
+                    ids,
                 })
             )
         );
     }
 
     public getStyle(
-        imagePath: string | null
+        imagePath: string | null | undefined
     ): {
         [klass: string]: any;
     } {

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
-import { MovieListResult } from '../../interfaces/movie-list-result';
 import { MediaType } from '../../interfaces/media-type';
-import { TvListResult } from '../../interfaces/tv-list-result';
+import { MediaListItem } from '../../interfaces/media-list-item';
 
 @Component({
     selector: 'app-sliding-items',
@@ -10,7 +9,7 @@ import { TvListResult } from '../../interfaces/tv-list-result';
 })
 export class SlidingItemsComponent {
     @Input()
-    public mediaItems: MovieListResult[] | TvListResult[];
+    public mediaItems: MediaListItem[];
 
     @Input()
     public title: string;

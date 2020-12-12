@@ -1,34 +1,52 @@
 import { Component, Input } from '@angular/core';
-import { MediaListResult } from 'src/app/interfaces/media-list-result';
-import { MediaType } from 'src/app/interfaces/media-type';
-import { MovieListResult } from 'src/app/interfaces/movie-list-result';
-import { TvListResult } from '../../../interfaces/tv-list-result';
-import { PersonListResult } from '../../../interfaces/person-list-result';
+import { MediaListItem } from '../../../interfaces/media-list-item';
+import { Observable, of } from 'rxjs';
+import { getGenreById } from '../../../store/genre/genre.reducer';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { State } from '../../../store/state';
+import { Router } from '@angular/router';
+import { MediaType } from '../../../interfaces/media-type';
 
 @Component({
     selector: 'app-media-item-card',
     templateUrl: './media-item-card.component.html',
+    styleUrls: ['./media-item-card.component.scss'],
 })
 export class MediaItemCardComponent {
-    private _mediaItem: MediaListResult;
-
     @Input()
-    public set mediaItem(item: MediaListResult) {
-        this._mediaItem = item;
+    public media: MediaListItem;
 
-        switch (item.media_type) {
-            case MediaType.movie:
-                this.movieItem = item as MovieListResult;
-                break;
-            case MediaType.tv:
-                this.tvItem = item as TvListResult;
-                break;
-            case MediaType.person:
-                this.personItem = item as PersonListResult;
-        }
+    public constructor(private store: Store<State>, private router: Router) {}
+
+    public getGenreString(ids: number[]): Observable<string | undefined> {
+        // Return only first if there are more genres for the movie.
+        const firstId = ids.slice(0, 1);
+        return firstId.length > 0
+            ? this.store
+                  .select(getGenreById, { id: firstId[0] })
+                  .pipe(map((g) => g?.name))
+            : of(undefined);
     }
 
-    public movieItem: MovieListResult;
-    public tvItem: TvListResult;
-    public personItem: PersonListResult;
+    public getYear(date: string): string {
+        return new Date(date).getFullYear().toString();
+    }
+
+    public showMediaItem(type: MediaType, id: number): void {
+        let path;
+        if (type === MediaType.movie) {
+            path = '/movie';
+        }
+
+        if (type === MediaType.tv) {
+            path = '/tv';
+        }
+
+        if (type === MediaType.person) {
+            path = '/person';
+        }
+
+        this.router.navigate([path, id]);
+    }
 }
