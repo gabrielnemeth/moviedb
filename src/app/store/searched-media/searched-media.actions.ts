@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { MediaListResult } from 'src/app/interfaces/media-list-result';
 import { SearchType } from './../../interfaces/search-type';
+import { MediaListItem } from '../../interfaces/media-list-item';
 
 export const SEARCH_MEDIA_LOADED_SUCCESS =
     '[Movies API] Searched Media Loaded Success';
@@ -12,5 +12,5 @@ export const mediaSearch = createAction(
 
 export const searchedMediaLoaded = createAction(
     SEARCH_MEDIA_LOADED_SUCCESS,
-    props<{ list: MediaListResult[] }>()
+    props<{ list: MediaListItem[] }>()
 );

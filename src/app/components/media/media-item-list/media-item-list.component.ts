@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MediaListResult } from 'src/app/interfaces/media-list-result';
+import { MediaListItem } from '../../../interfaces/media-list-item';
 
 @Component({
     selector: 'app-media-item-list',
@@ -7,5 +7,5 @@ import { MediaListResult } from 'src/app/interfaces/media-list-result';
 })
 export class MediaItemListComponent {
     @Input()
-    public mediaItems: MediaListResult[];
+    public mediaItems: MediaListItem[];
 }

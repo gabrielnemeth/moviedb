@@ -20,7 +20,7 @@
             <p class="mx-1" *ngIf="media.genresIds && media.genresIds.length > 0">&bull;</p>
             <p *ngIf="media.genresIds && media.genresIds.length > 0">{{ getGenreString(media.genresIds) | async }}</p>
         </div>
-        <div class="is-flex is-size-7">
+        <div *ngIf="media.voteAverage" class="is-flex is-size-7">
             <span class="icon is-small rating-icon">
                 <i class="fas fa-star"></i>
             </span>

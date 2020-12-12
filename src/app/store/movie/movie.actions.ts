@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { MovieListResult } from '../../interfaces/movie-list-result';
+import { MediaListItem } from '../../interfaces/media-list-item';
 
 export const movieSearch = createAction(
     '[Movie Page] Search Movies',
@@ -8,5 +8,5 @@ export const movieSearch = createAction(
 
 export const moviesLoaded = createAction(
     '[Movies API] Movies Loaded Success',
-    props<{ list: MovieListResult[] }>()
+    props<{ list: MediaListItem[] }>()
 );

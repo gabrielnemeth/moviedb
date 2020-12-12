@@ -1,10 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { MediaListResult } from 'src/app/interfaces/media-list-result';
 import { State } from '../state';
 import { searchedMediaLoaded } from './searched-media.actions';
+import { MediaListItem } from '../../interfaces/media-list-item';
 
 export interface SearchedMediaState {
-    list: MediaListResult[];
+    list: MediaListItem[];
 }
 
 const initialState: SearchedMediaState = {
@@ -23,5 +23,5 @@ export function reducer(
     return movieReducer(state, action);
 }
 
-export const selectSearchedMedia = (state: State): MediaListResult[] =>
+export const selectSearchedMedia = (state: State): MediaListItem[] =>
     state.searchResult.list;
