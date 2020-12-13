@@ -1,3 +1,15 @@
 #logo {
     width: 120px;
 }
+
+@media screen and (max-width: 1023px) {
+    a.has-text-white:hover, a.has-text-white:focus {
+        background-color: hsl(0, 0%, 21%);
+    }
+
+    .navbar-menu.is-active {
+        position: absolute;
+        width: 100%;
+        box-shadow: 1px 1.2em 1.2em 0.1em rgb(10 10 10 / 30%), 0 0 1px 8px rgba(10, 10, 10, 0);
+    }
+}

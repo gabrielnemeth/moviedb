@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
     templateUrl: './header-bar.component.html',
     styleUrls: ['./header-bar.component.scss'],
 })
-export class HeaderBarComponent {}
+export class HeaderBarComponent {
+    public isMenuActive: boolean;
+
+    public toggleMenu(): void {
+        this.isMenuActive = !this.isMenuActive;
+    }
+}

@@ -1,17 +1,17 @@
 <header class="navbar is-spaced is-transparent">
     <div class="container">
-        <div class="navbar-brand">
+        <div class="navbar-brand" [ngClass]="{'navbar-brand-mobile--open has-background-black-ter': isMenuActive}">
             <a class="navbar-item" routerLink="/">
                 <img id="logo" src="/assets/img/logo--inverted.svg" alt="Screenz"
                 />
             </a>
-            <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+            <span class="navbar-burger burger" [ngClass]="{'is-active has-background-black-ter': isMenuActive}" data-target="navbarMenuHeroC" (click)="toggleMenu()">
             <span></span>
             <span></span>
             <span></span>
           </span>
         </div>
-        <div id="navbarMenuHeroC" class="navbar-menu">
+        <div id="navbarMenuHeroC" class="navbar-menu" [ngClass]="{'is-active has-background-black-ter': isMenuActive}">
             <div class="navbar-start">
                 <a class="navbar-item has-text-white">Movies</a>
                 <a class="navbar-item has-text-white">TV Shows</a>
