@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../interfaces/genre';
 import { Movie } from '../interfaces/movie';
@@ -17,6 +17,9 @@ import { MediaListItem } from '../interfaces/media-list-item';
 import { MovieListResponse } from '../interfaces/response/movie-list-response';
 import { TvListResponse } from '../interfaces/response/tv-list-response';
 import { PersonListResponse } from '../interfaces/response/person-list-response';
+import { Store } from '@ngrx/store';
+import { State } from '../store/state';
+import { selectTimeWindow } from '../store/trending/trending.reducer';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +27,7 @@ import { PersonListResponse } from '../interfaces/response/person-list-response'
 export class MediaService {
     private readonly apiKey: string;
 
-    public constructor(private http: HttpClient) {
+    public constructor(private http: HttpClient, private store: Store<State>) {
         this.apiKey = environment.themoviedb.apiKey;
     }
 
@@ -75,17 +78,27 @@ export class MediaService {
     }
 
     public getTrendingMovies(): Observable<MediaListItem[]> {
-        return this.http
-            .get<MovieSearchResponse>(
-                `${environment.themoviedb.baseUrl}trending/movie/day?api_key=${this.apiKey}`
+        return this.store
+            .select(selectTimeWindow)
+            .pipe(
+                switchMap((timeWindow) =>
+                    this.http.get<MovieSearchResponse>(
+                        `${environment.themoviedb.baseUrl}trending/movie/${timeWindow}?api_key=${this.apiKey}`
+                    )
+                )
             )
             .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
     }
 
     public getTrendingTvs(): Observable<MediaListItem[]> {
-        return this.http
-            .get<TvSearchResponse>(
-                `${environment.themoviedb.baseUrl}trending/tv/day?api_key=${this.apiKey}`
+        return this.store
+            .select(selectTimeWindow)
+            .pipe(
+                switchMap((timeWindow) =>
+                    this.http.get<TvSearchResponse>(
+                        `${environment.themoviedb.baseUrl}trending/tv/${timeWindow}?api_key=${this.apiKey}`
+                    )
+                )
             )
             .pipe(map((tvs) => this.createMediaListItemsFromTvs(tvs)));
     }

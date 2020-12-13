@@ -1,0 +1,14 @@
+<div class="field has-addons">
+    <p class="control">
+        <button class="button is-small" [ngClass]="{'is-active is-link': isActive('day')}"
+                (click)="timeWindowSelect.emit('day')">
+            <span>Today</span>
+        </button>
+    </p>
+    <p class="control">
+        <button class="button is-small" [ngClass]="{'is-active is-link': isActive('week')}"
+                (click)="timeWindowSelect.emit('week')">
+            <span>This week</span>
+        </button>
+    </p>
+</div>

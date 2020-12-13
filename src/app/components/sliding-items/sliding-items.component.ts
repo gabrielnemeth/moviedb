@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { MediaType } from '../../interfaces/media-type';
 import { MediaListItem } from '../../interfaces/media-list-item';
+import { TimeWindow } from '../../interfaces/time-window';
 
 @Component({
     selector: 'app-sliding-items',
@@ -18,10 +19,19 @@ export class SlidingItemsComponent {
     public mediaTypeSwitcher: boolean;
 
     @Input()
+    public timeWindowSwitcher: boolean;
+
+    @Input()
     public selectedMediaType: MediaType | null;
+
+    @Input()
+    public selectedTimeWindow: TimeWindow | null;
 
     @Output()
     public mediaTypeSelect: EventEmitter<MediaType> = new EventEmitter<MediaType>();
+
+    @Output()
+    public timeWindowSelect: EventEmitter<TimeWindow> = new EventEmitter<TimeWindow>();
 
     public MediaType: typeof MediaType = MediaType;
 
@@ -59,12 +69,4 @@ export class SlidingItemsComponent {
             },
         },
     };
-
-    public isActive(mediaType: MediaType): boolean {
-        return this.selectedMediaType === mediaType;
-    }
-
-    public onTypeSelect(mediaType: MediaType): void {
-        this.mediaTypeSelect.emit(mediaType);
-    }
 }

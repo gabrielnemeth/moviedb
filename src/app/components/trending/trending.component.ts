@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { State } from './../../store/state';
+import { State } from '../../store/state';
 import {
     selectSelectedMediaType,
+    selectTimeWindow,
     selectTrendingMedia,
-} from './../../store/trending/trending.reducer';
+} from '../../store/trending/trending.reducer';
 import { MediaType } from '../../interfaces/media-type';
 import {
     fetchTrendingMedia,
-    fetchTrendingMovies,
-    fetchTrendingTvs,
     setSelectedMediaType,
+    setSelectedTimeWindow,
 } from '../../store/trending/trending.actions';
 import { MediaListItem } from '../../interfaces/media-list-item';
+import { TimeWindow } from '../../interfaces/time-window';
 
 @Component({
     selector: 'app-trending',
@@ -22,6 +23,10 @@ import { MediaListItem } from '../../interfaces/media-list-item';
 export class TrendingComponent implements OnInit {
     public selectedMediaType$: Observable<MediaType | null> = this.store.select(
         selectSelectedMediaType
+    );
+
+    public selectedTimeWindow$: Observable<TimeWindow | null> = this.store.select(
+        selectTimeWindow
     );
 
     public mediaItems$: Observable<MediaListItem[]> = this.store.select(
@@ -34,12 +39,14 @@ export class TrendingComponent implements OnInit {
         this.store.dispatch(
             setSelectedMediaType({ selectedMediaType: mediaType })
         );
-        if (mediaType === MediaType.movie) {
-            this.store.dispatch(fetchTrendingMovies());
-        }
-        if (mediaType === MediaType.tv) {
-            this.store.dispatch(fetchTrendingTvs());
-        }
+    }
+
+    public onTimeWindowSelect(timeWindow: TimeWindow): void {
+        this.store.dispatch(
+            setSelectedTimeWindow({
+                selectedTimeWindow: timeWindow,
+            })
+        );
     }
 
     public ngOnInit(): void {

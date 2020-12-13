@@ -2,25 +2,12 @@
     <div class="container">
         <div class="is-flex is-align-items-center mb-5">
             <h2 class="title mb-0 mr-4">{{ title }}</h2>
-            <div *ngIf="mediaTypeSwitcher" class="field has-addons">
-                <p class="control">
-                    <button class="button is-small" [ngClass]="{'is-active is-link': isActive(MediaType.movie)}"
-                            (click)="onTypeSelect(MediaType.movie)">
-                  <span class="icon is-small">
-                    <i class="fas fa-film"></i>
-                  </span><span>Movies</span>
-                    </button>
-                </p>
-                <p class="control">
-                    <button class="button is-small" [ngClass]="{'is-active is-link': isActive(MediaType.tv)}"
-                            (click)="onTypeSelect(MediaType.tv)">
-                      <span class="icon is-small">
-                        <i class="fas fa-tv"></i>
-                      </span>
-                        <span>TV Shows</span>
-                    </button>
-                </p>
-            </div>
+            <app-media-type-switch [selectedMediaType]="selectedMediaType"
+                                   (mediaTypeSelect)="mediaTypeSelect.emit($event)"
+                                   *ngIf="mediaTypeSwitcher"></app-media-type-switch>
+            <app-time-switch *ngIf="timeWindowSwitcher"
+                             [selectedTimeWindow]="selectedTimeWindow"
+                             (timeWindowSelect)="timeWindowSelect.emit($event)"></app-time-switch>
         </div>
         <swiper [config]="config">
             <app-media-item-card

@@ -2,9 +2,9 @@
     <app-sliding-items
         *ngIf="mediaItems.length > 0"
         [mediaItems]="mediaItems"
-        [mediaTypeSwitcher]="true"
-        [selectedMediaType]="selectedMediaType$ | async"
-        (mediaTypeSelect)="onMediaTypeSelect($event)"
+        [selectedTimeWindow]="selectedTimeWindow$ | async"
+        [timeWindowSwitcher]="true"
+        (timeWindowSelect)="onTimeWindowSelect($event)"
         [title]="'Trending'"
     ></app-sliding-items>
 </ng-container>

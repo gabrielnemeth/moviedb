@@ -6,12 +6,14 @@ import {
     fetchTrendingMedia,
     fetchTrendingMovies,
     fetchTrendingTvs,
+    trendingMediaLoaded,
     trendingMoviesLoaded,
     trendingTvsLoaded,
 } from './trending.actions';
 import { State } from '../state';
 import { Store } from '@ngrx/store';
 import { selectTrendingMedia } from './trending.reducer';
+import { merge } from 'rxjs';
 
 @Injectable()
 export class TrendingEffects {
@@ -22,8 +24,23 @@ export class TrendingEffects {
                 switchMap((_) => this.store.select(selectTrendingMedia)),
                 tap((media) => {
                     if (media.length === 0) {
-                        this.store.dispatch(fetchTrendingMovies());
-                        this.store.dispatch(fetchTrendingTvs());
+                        return merge([
+                            this.movieService.getTrendingMovies(),
+                            this.movieService.getTrendingTvs(),
+                        ]).pipe(
+                            switchMap((mediaListItems$) =>
+                                mediaListItems$.pipe(
+                                    map((mediaListItems) =>
+                                        trendingMediaLoaded({
+                                            list: mediaListItems,
+                                        })
+                                    )
+                                )
+                            ),
+                            tap(console.log)
+                        );
+                    } else {
+                        return media;
                     }
                 })
             ),

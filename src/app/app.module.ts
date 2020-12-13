@@ -35,6 +35,8 @@ import { HeaderBarComponent } from './components/header-bar/header-bar.component
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { VimeModule } from '@vime/angular';
+import { MediaTypeSwitchComponent } from './components/media-type-switch/media-type-switch.component';
+import { TimeSwitchComponent } from './components/time-switch/time-switch.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +58,8 @@ import { VimeModule } from '@vime/angular';
         HeaderBarComponent,
         HomePageComponent,
         VideoPlayerComponent,
+        MediaTypeSwitchComponent,
+        TimeSwitchComponent,
     ],
     imports: [
         BrowserModule,
