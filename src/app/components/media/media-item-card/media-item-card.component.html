@@ -18,7 +18,7 @@
                 {{ getYear(media.releaseDate) }}
             </p>
             <p class="mx-1" *ngIf="media.genresIds && media.genresIds.length > 0">&bull;</p>
-            <p *ngIf="media.genresIds && media.genresIds.length > 0">{{ getGenreString(media.genresIds) | async }}</p>
+            <p *ngIf="media.genresIds && media.genresIds.length > 0">{{ getGenreString(media.genresIds, media.type) | async }}</p>
         </div>
         <div *ngIf="media.voteAverage" class="is-flex is-size-7">
             <span class="icon is-small rating-icon">

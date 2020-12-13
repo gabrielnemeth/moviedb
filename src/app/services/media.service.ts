@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../interfaces/genre';
@@ -70,12 +70,15 @@ export class MediaService {
             .pipe(map((multi) => this.createMediaListItemsFromMulti(multi)));
     }
 
-    public getGenres(): Observable<Genre[]> {
-        return this.http
-            .get<{ genres: Genre[] }>(
+    public getGenres(): Observable<{ movie: Genre[]; tv: Genre[] }> {
+        return zip(
+            this.http.get<{ genres: Genre[] }>(
                 `${environment.themoviedb.baseUrl}genre/movie/list?api_key=${this.apiKey}&language=en-US`
+            ),
+            this.http.get<{ genres: Genre[] }>(
+                `${environment.themoviedb.baseUrl}genre/tv/list?api_key=${this.apiKey}&language=en-US`
             )
-            .pipe(map((data) => data.genres));
+        ).pipe(map(([movie, tv]) => ({ movie: movie.genres, tv: tv.genres })));
     }
 
     public getTrendingMovies(): Observable<MediaListItem[]> {

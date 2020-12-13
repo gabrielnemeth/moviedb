@@ -19,12 +19,15 @@ export class MediaItemCardComponent {
 
     public constructor(private store: Store<State>, private router: Router) {}
 
-    public getGenreString(ids: number[]): Observable<string | undefined> {
+    public getGenreString(
+        ids: number[],
+        mediaType: MediaType
+    ): Observable<string | undefined> {
         // Return only first if there are more genres for the movie.
         const firstId = ids.slice(0, 1);
         return firstId.length > 0
             ? this.store
-                  .select(getGenreById, { id: firstId[0] })
+                  .select(getGenreById, { id: firstId[0], mediaType })
                   .pipe(map((g) => g?.name))
             : of(undefined);
     }

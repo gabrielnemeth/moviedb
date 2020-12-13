@@ -38,7 +38,7 @@ export class HomePageComponent implements OnInit {
             switchMap((trending) => {
                 return this.mediaService
                     .getVideo(trending.id, trending.type)
-                    .pipe(map((videoData) => videoData.results[0].key));
+                    .pipe(map((videoData) => videoData.results[0]?.key));
             })
         );
 
@@ -46,13 +46,17 @@ export class HomePageComponent implements OnInit {
             filter(
                 (trending) => !isNil(trending) && !isNil(trending.genresIds)
             ),
-            map((trending) => trending.genresIds as number[])
+            map((trending) => ({
+                ids: trending.genresIds as number[],
+                type: trending.type,
+            }))
         );
 
         this.genres$ = trendingGenreIds$.pipe(
-            switchMap((ids) =>
+            switchMap((data) =>
                 this.store.select(getGenresByIds, {
-                    ids,
+                    ids: data.ids,
+                    mediaType: data.type,
                 })
             )
         );

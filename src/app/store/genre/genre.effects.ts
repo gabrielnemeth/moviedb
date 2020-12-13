@@ -12,7 +12,7 @@ export class GenreEffects {
             mergeMap((_) =>
                 this.mediaService
                     .getGenres()
-                    .pipe(map((result) => genresLoaded({ list: result })))
+                    .pipe(map((result) => genresLoaded(result)))
             )
         )
     );
