@@ -10,7 +10,7 @@ export class GenreEffects {
         this.actions$.pipe(
             ofType(fetchGenres),
             mergeMap((_) =>
-                this.movieService
+                this.mediaService
                     .getGenres()
                     .pipe(map((result) => genresLoaded({ list: result })))
             )
@@ -19,6 +19,6 @@ export class GenreEffects {
 
     public constructor(
         private actions$: Actions,
-        private movieService: MediaService
+        private mediaService: MediaService
     ) {}
 }

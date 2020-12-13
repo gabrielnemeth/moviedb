@@ -20,6 +20,7 @@ import { PersonListResponse } from '../interfaces/response/person-list-response'
 import { Store } from '@ngrx/store';
 import { State } from '../store/state';
 import { selectTimeWindow } from '../store/trending/trending.reducer';
+import { MediaItem } from '../interfaces/media-item';
 
 @Injectable({
     providedIn: 'root',
@@ -99,22 +100,28 @@ export class MediaService {
         );
     }
 
-    public getMovieById(id: string): Observable<Movie> {
-        return this.http.get<Movie>(
-            `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
-        );
+    public getMovieById(id: string): Observable<MediaItem> {
+        return this.http
+            .get<Movie>(
+                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
+            )
+            .pipe(map((movie) => this.createMovieItem(movie)));
     }
 
-    public getTvById(id: string): Observable<Tv> {
-        return this.http.get<Tv>(
-            `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US`
-        );
+    public getTvById(id: string): Observable<MediaItem> {
+        return this.http
+            .get<Tv>(
+                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US`
+            )
+            .pipe(map((tv) => this.createTvItem(tv)));
     }
 
-    public getPersonById(id: string): Observable<Person> {
-        return this.http.get<Person>(
-            `${environment.themoviedb.baseUrl}person/${id}?api_key=${this.apiKey}&language=en-US`
-        );
+    public getPersonById(id: string): Observable<MediaItem> {
+        return this.http
+            .get<Person>(
+                `${environment.themoviedb.baseUrl}person/${id}?api_key=${this.apiKey}&language=en-US`
+            )
+            .pipe(map((person) => this.createPersonItem(person)));
     }
 
     public getVideo(
@@ -134,11 +141,11 @@ export class MediaService {
         movieSearchResponse: MovieSearchResponse
     ): MediaListItem[] {
         return movieSearchResponse.results.map((movie) =>
-            this.createMovie(movie)
+            this.createMovieListItem(movie)
         );
     }
 
-    private createMovie(movie: MovieListResponse): MediaListItem {
+    private createMovieListItem(movie: MovieListResponse): MediaListItem {
         return {
             id: movie.id,
             title: movie.title,
@@ -154,13 +161,29 @@ export class MediaService {
         };
     }
 
+    private createMovieItem(movie: Movie): MediaItem {
+        return {
+            id: movie.id,
+            title: movie.title,
+            genresIds: movie.genres.map((genre) => genre.id),
+            img: {
+                poster: movie.poster_path,
+                backdrop: movie.backdrop_path,
+            },
+            releaseDate: movie.release_date,
+            voteAverage: movie.vote_average,
+            popularity: movie.popularity,
+            type: MediaType.movie,
+        };
+    }
+
     private createMediaListItemsFromTvs(
         tvSearchResponse: TvSearchResponse
     ): MediaListItem[] {
-        return tvSearchResponse.results.map((tv) => this.createTv(tv));
+        return tvSearchResponse.results.map((tv) => this.createTvListItem(tv));
     }
 
-    private createTv(tv: TvListResponse): MediaListItem {
+    private createTvListItem(tv: TvListResponse): MediaListItem {
         return {
             id: tv.id,
             title: tv.name,
@@ -176,15 +199,31 @@ export class MediaService {
         };
     }
 
+    private createTvItem(tv: Tv): MediaItem {
+        return {
+            id: tv.id,
+            title: tv.name,
+            genresIds: tv.genres.map((genre) => genre.id),
+            img: {
+                poster: tv.poster_path,
+                backdrop: tv.backdrop_path,
+            },
+            releaseDate: tv.first_air_date,
+            voteAverage: tv.vote_average,
+            popularity: tv.popularity,
+            type: MediaType.tv,
+        };
+    }
+
     private createMediaListItemsFromPeople(
         personSearchResponse: PersonSearchResponse
     ): MediaListItem[] {
         return personSearchResponse.results.map((person) =>
-            this.createPerson(person)
+            this.createPersonListItem(person)
         );
     }
 
-    private createPerson(person: PersonListResponse): MediaListItem {
+    private createPersonListItem(person: PersonListResponse): MediaListItem {
         return {
             id: person.id,
             title: person.name,
@@ -196,20 +235,32 @@ export class MediaService {
         };
     }
 
+    private createPersonItem(person: Person): MediaItem {
+        return {
+            id: person.id,
+            title: person.name,
+            img: {
+                poster: person.profile_path,
+            },
+            popularity: person.popularity,
+            type: MediaType.tv,
+        };
+    }
+
     private createMediaListItemsFromMulti(
         multiSearchResponse: MultiSearchResponse
     ): MediaListItem[] {
         return multiSearchResponse.results.map((multi) => {
             if (multi.media_type === MediaType.movie) {
-                return this.createMovie(multi as MovieListResponse);
+                return this.createMovieListItem(multi as MovieListResponse);
             }
 
             if (multi.media_type === MediaType.tv) {
-                return this.createTv(multi as TvListResponse);
+                return this.createTvListItem(multi as TvListResponse);
             }
 
             if (multi.media_type === MediaType.person) {
-                return this.createPerson(multi as PersonListResponse);
+                return this.createPersonListItem(multi as PersonListResponse);
             }
 
             throw new TypeError(`MediaListItem can't be undefined.`);

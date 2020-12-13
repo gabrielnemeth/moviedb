@@ -3,8 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { MediaService } from '../../services/media.service';
 import { fetchTrendingMedia, trendingMediaLoaded } from './trending.actions';
-import { State } from '../state';
-import { Store } from '@ngrx/store';
 import { zip } from 'rxjs';
 
 @Injectable()
@@ -14,8 +12,8 @@ export class TrendingEffects {
             ofType(fetchTrendingMedia),
             mergeMap((media) => {
                 return zip(
-                    this.movieService.getTrendingMovies(),
-                    this.movieService.getTrendingTvs()
+                    this.mediaService.getTrendingMovies(),
+                    this.mediaService.getTrendingTvs()
                 ).pipe(
                     map(([tvList, movieList]) =>
                         trendingMediaLoaded({
@@ -29,7 +27,6 @@ export class TrendingEffects {
 
     public constructor(
         private actions$: Actions,
-        private movieService: MediaService,
-        private store: Store<State>
+        private mediaService: MediaService
     ) {}
 }

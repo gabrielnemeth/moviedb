@@ -10,7 +10,7 @@ export class MovieEffects {
         this.actions$.pipe(
             ofType(movieSearch),
             mergeMap((action) =>
-                this.movieService.getMovieSearchResult(action.query).pipe(
+                this.mediaService.getMovieSearchResult(action.query).pipe(
                     map((media) =>
                         moviesLoaded({
                             list: media,
@@ -23,6 +23,6 @@ export class MovieEffects {
 
     public constructor(
         private actions$: Actions,
-        private movieService: MediaService
+        private mediaService: MediaService
     ) {}
 }

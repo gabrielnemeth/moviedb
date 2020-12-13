@@ -25,18 +25,16 @@ import { SearchedMediaEffects } from './store/searched-media/searched-media.effe
 import * as searchedMediaReducer from './store/searched-media/searched-media.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
-import { MovieCardComponent } from './components/media/media-item-card/movie-card/movie-card.component';
-import { TvCardComponent } from './components/media/media-item-card/tv-card/tv-card.component';
-import { PersonCardComponent } from './components/media/media-item-card/person-card/person-card.component';
-import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
-import { TvDetailComponent } from './components/tv-detail/tv-detail.component';
-import { PersonDetailComponent } from './components/person-detail/person-detail.component';
+import { MovieDetailComponent } from './components/media/media-detail/movie-detail/movie-detail.component';
+import { TvDetailComponent } from './components/media/media-detail/tv-detail/tv-detail.component';
+import { PersonDetailComponent } from './components/media/media-detail/person-detail/person-detail.component';
 import { HeaderBarComponent } from './components/header-bar/header-bar.component';
 import { HomePageComponent } from './components/pages/home-page/home-page.component';
 import { VideoPlayerComponent } from './components/video-player/video-player.component';
 import { VimeModule } from '@vime/angular';
 import { MediaTypeSwitchComponent } from './components/media-type-switch/media-type-switch.component';
 import { TimeSwitchComponent } from './components/time-switch/time-switch.component';
+import { MediaDetailComponent } from './components/media/media-detail/media-detail.component';
 
 @NgModule({
     declarations: [
@@ -49,9 +47,6 @@ import { TimeSwitchComponent } from './components/time-switch/time-switch.compon
         MediaItemImageComponent,
         MediaItemPlaceholderImageComponent,
         SlidingItemsComponent,
-        MovieCardComponent,
-        TvCardComponent,
-        PersonCardComponent,
         MovieDetailComponent,
         TvDetailComponent,
         PersonDetailComponent,
@@ -60,6 +55,7 @@ import { TimeSwitchComponent } from './components/time-switch/time-switch.compon
         VideoPlayerComponent,
         MediaTypeSwitchComponent,
         TimeSwitchComponent,
+        MediaDetailComponent,
     ],
     imports: [
         BrowserModule,
