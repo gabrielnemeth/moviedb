@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MediaService } from '../../../services/media.service';
 import { Genre } from '../../../interfaces/genre';
@@ -30,15 +30,16 @@ export class HomePageComponent implements OnInit {
     public ngOnInit(): void {
         this.trending$ = this.store.select(selectTrendingMedia).pipe(
             map((trending) => trending[random(0, trending.length - 1)]),
-            filter((trending) => !isNil(trending))
+            filter((trending) => !isNil(trending)),
+            shareReplay(1)
         );
 
         this.youtubeId$ = this.trending$.pipe(
-            switchMap((trending) =>
-                this.mediaService
+            switchMap((trending) => {
+                return this.mediaService
                     .getVideo(trending.id, trending.type)
-                    .pipe(map((videoData) => videoData.results[0].key))
-            )
+                    .pipe(map((videoData) => videoData.results[0].key));
+            })
         );
 
         const trendingGenreIds$ = this.trending$.pipe(
