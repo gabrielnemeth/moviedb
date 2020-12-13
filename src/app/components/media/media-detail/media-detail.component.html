@@ -1,10 +1,12 @@
 <ng-container *ngIf="mediaItem">
     <section
-        class="hero is-success is-fullheight"
+        class="hero is-fullheight"
         [ngStyle]="getStyle(mediaItem?.img?.backdrop)"
     >
         <div class="hero-bg">
-            <!-- Hero content: will be in the middle -->
+            <div class="hero-head">
+                <app-header-bar></app-header-bar>
+            </div>
             <div class="hero-body">
                 <div class="container">
                     <div class="columns">
