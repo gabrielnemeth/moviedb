@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { MediaService } from '../../services/media.service';
 import {
     fetchTrendingMedia,
@@ -11,6 +11,7 @@ import {
 } from './trending.actions';
 import { State } from '../state';
 import { Store } from '@ngrx/store';
+import { selectTrendingMedia } from './trending.reducer';
 
 @Injectable()
 export class TrendingEffects {
@@ -18,9 +19,12 @@ export class TrendingEffects {
         () =>
             this.actions$.pipe(
                 ofType(fetchTrendingMedia),
-                tap((_) => {
-                    this.store.dispatch(fetchTrendingMovies());
-                    this.store.dispatch(fetchTrendingTvs());
+                switchMap((_) => this.store.select(selectTrendingMedia)),
+                tap((media) => {
+                    if (media.length === 0) {
+                        this.store.dispatch(fetchTrendingMovies());
+                        this.store.dispatch(fetchTrendingTvs());
+                    }
                 })
             ),
         { dispatch: false }
