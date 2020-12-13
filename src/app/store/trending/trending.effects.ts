@@ -1,79 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { MediaService } from '../../services/media.service';
-import {
-    fetchTrendingMedia,
-    fetchTrendingMovies,
-    fetchTrendingTvs,
-    trendingMediaLoaded,
-    trendingMoviesLoaded,
-    trendingTvsLoaded,
-} from './trending.actions';
+import { fetchTrendingMedia, trendingMediaLoaded } from './trending.actions';
 import { State } from '../state';
 import { Store } from '@ngrx/store';
-import { selectTrendingMedia } from './trending.reducer';
-import { merge } from 'rxjs';
+import { zip } from 'rxjs';
 
 @Injectable()
 export class TrendingEffects {
-    public loadingTrendingMedia$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(fetchTrendingMedia),
-                switchMap((_) => this.store.select(selectTrendingMedia)),
-                tap((media) => {
-                    if (media.length === 0) {
-                        return merge([
-                            this.movieService.getTrendingMovies(),
-                            this.movieService.getTrendingTvs(),
-                        ]).pipe(
-                            switchMap((mediaListItems$) =>
-                                mediaListItems$.pipe(
-                                    map((mediaListItems) =>
-                                        trendingMediaLoaded({
-                                            list: mediaListItems,
-                                        })
-                                    )
-                                )
-                            ),
-                            tap(console.log)
-                        );
-                    } else {
-                        return media;
-                    }
-                })
-            ),
-        { dispatch: false }
-    );
-
-    public loadTrendingMovies$ = createEffect(() =>
+    public loadingTrendingMedia$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(fetchTrendingMovies),
-            mergeMap((_) =>
-                this.movieService.getTrendingMovies().pipe(
-                    map((media) =>
-                        trendingMoviesLoaded({
-                            list: media,
+            ofType(fetchTrendingMedia),
+            mergeMap((media) => {
+                return zip(
+                    this.movieService.getTrendingMovies(),
+                    this.movieService.getTrendingTvs()
+                ).pipe(
+                    map(([tvList, movieList]) =>
+                        trendingMediaLoaded({
+                            list: [...tvList, ...movieList],
                         })
                     )
-                )
-            )
-        )
-    );
-
-    public loadTrendingTvs$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(fetchTrendingTvs),
-            mergeMap((_) =>
-                this.movieService.getTrendingTvs().pipe(
-                    map((media) =>
-                        trendingTvsLoaded({
-                            list: media,
-                        })
-                    )
-                )
-            )
+                );
+            })
         )
     );
 

@@ -78,29 +78,25 @@ export class MediaService {
     }
 
     public getTrendingMovies(): Observable<MediaListItem[]> {
-        return this.store
-            .select(selectTimeWindow)
-            .pipe(
-                switchMap((timeWindow) =>
-                    this.http.get<MovieSearchResponse>(
-                        `${environment.themoviedb.baseUrl}trending/movie/${timeWindow}?api_key=${this.apiKey}`
-                    )
+        return this.store.select(selectTimeWindow).pipe(
+            switchMap((timeWindow) =>
+                this.http.get<MovieSearchResponse>(
+                    `${environment.themoviedb.baseUrl}trending/movie/${timeWindow}?api_key=${this.apiKey}`
                 )
-            )
-            .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
+            ),
+            map((movies) => this.createMediaListItemsFromMovies(movies))
+        );
     }
 
     public getTrendingTvs(): Observable<MediaListItem[]> {
-        return this.store
-            .select(selectTimeWindow)
-            .pipe(
-                switchMap((timeWindow) =>
-                    this.http.get<TvSearchResponse>(
-                        `${environment.themoviedb.baseUrl}trending/tv/${timeWindow}?api_key=${this.apiKey}`
-                    )
+        return this.store.select(selectTimeWindow).pipe(
+            switchMap((timeWindow) =>
+                this.http.get<TvSearchResponse>(
+                    `${environment.themoviedb.baseUrl}trending/tv/${timeWindow}?api_key=${this.apiKey}`
                 )
-            )
-            .pipe(map((tvs) => this.createMediaListItemsFromTvs(tvs)));
+            ),
+            map((tvs) => this.createMediaListItemsFromTvs(tvs))
+        );
     }
 
     public getMovieById(id: string): Observable<Movie> {
@@ -153,6 +149,7 @@ export class MediaService {
             },
             releaseDate: movie.release_date,
             voteAverage: movie.vote_average,
+            popularity: movie.popularity,
             type: MediaType.movie,
         };
     }
@@ -174,6 +171,7 @@ export class MediaService {
             },
             releaseDate: tv.first_air_date,
             voteAverage: tv.vote_average,
+            popularity: tv.popularity,
             type: MediaType.tv,
         };
     }
@@ -193,6 +191,7 @@ export class MediaService {
             img: {
                 poster: person.profile_path,
             },
+            popularity: person.popularity,
             type: MediaType.person,
         };
     }

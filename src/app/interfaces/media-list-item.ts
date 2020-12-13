@@ -11,4 +11,5 @@ export interface MediaListItem {
     releaseDate?: string;
     genresIds?: number[];
     voteAverage?: number;
+    popularity?: number;
 }

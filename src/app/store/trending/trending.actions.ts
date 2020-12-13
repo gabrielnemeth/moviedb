@@ -7,14 +7,6 @@ export const fetchTrendingMedia = createAction(
     '[Trending Component] Initiating Trending Media Fetch'
 );
 
-export const fetchTrendingMovies = createAction(
-    '[Trending Component] Initiating Trending Movies Fetch'
-);
-
-export const fetchTrendingTvs = createAction(
-    '[Trending Component] Initiating Trending TV Shows Fetch'
-);
-
 export const trendingMoviesLoaded = createAction(
     '[Movies API] Trending Movies Loaded Success',
     props<{ list: MediaListItem[] }>()
@@ -26,7 +18,7 @@ export const trendingTvsLoaded = createAction(
 );
 
 export const trendingMediaLoaded = createAction(
-    '[Movies API] Trending TV Shows Loaded Success',
+    '[Movies API] Trending Media Loaded Success',
     props<{ list: MediaListItem[] }>()
 );
 

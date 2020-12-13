@@ -4,8 +4,6 @@ import {
     setSelectedMediaType,
     setSelectedTimeWindow,
     trendingMediaLoaded,
-    trendingMoviesLoaded,
-    trendingTvsLoaded,
 } from './trending.actions';
 import { MediaType } from '../../interfaces/media-type';
 import { MediaListItem } from '../../interfaces/media-list-item';
@@ -25,14 +23,6 @@ const initialState: TrendingState = {
 
 const trendingReducer = createReducer(
     initialState,
-    on(trendingMoviesLoaded, (state, data) => ({
-        ...state,
-        list: [...state.list, ...data.list],
-    })),
-    on(trendingTvsLoaded, (state, data) => ({
-        ...state,
-        list: [...state.list, ...data.list],
-    })),
     on(trendingMediaLoaded, (state, data) => ({
         ...state,
         list: [...data.list],

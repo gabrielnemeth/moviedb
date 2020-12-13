@@ -13,7 +13,6 @@ export class TimeSwitchComponent {
     public timeWindowSelect: EventEmitter<TimeWindow> = new EventEmitter<TimeWindow>();
 
     public isActive(timeWindow: TimeWindow): boolean {
-        console.log(this.selectedTimeWindow);
         return this.selectedTimeWindow === timeWindow;
     }
 }

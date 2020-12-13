@@ -4,10 +4,9 @@ import { State } from '../../../store/state';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MediaService } from '../../../services/media.service';
-import { MediaType } from '../../../interfaces/media-type';
 import { Genre } from '../../../interfaces/genre';
 import { selectTrendingMedia } from 'src/app/store/trending/trending.reducer';
-import { isNil } from 'lodash-es';
+import { isNil, random } from 'lodash-es';
 import { MediaListItem } from '../../../interfaces/media-list-item';
 import { getGenresByIds } from '../../../store/genre/genre.reducer';
 
@@ -30,14 +29,14 @@ export class HomePageComponent implements OnInit {
 
     public ngOnInit(): void {
         this.trending$ = this.store.select(selectTrendingMedia).pipe(
-            map((trending) => trending[8]),
+            map((trending) => trending[random(0, trending.length - 1)]),
             filter((trending) => !isNil(trending))
         );
 
         this.youtubeId$ = this.trending$.pipe(
             switchMap((trending) =>
                 this.mediaService
-                    .getVideo(trending.id, MediaType.movie)
+                    .getVideo(trending.id, trending.type)
                     .pipe(map((videoData) => videoData.results[0].key))
             )
         );

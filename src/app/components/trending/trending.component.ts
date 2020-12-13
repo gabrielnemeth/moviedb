@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { State } from '../../store/state';
 import {
-    selectSelectedMediaType,
     selectTimeWindow,
     selectTrendingMedia,
 } from '../../store/trending/trending.reducer';
@@ -15,22 +14,30 @@ import {
 } from '../../store/trending/trending.actions';
 import { MediaListItem } from '../../interfaces/media-list-item';
 import { TimeWindow } from '../../interfaces/time-window';
+import { map } from 'rxjs/operators';
+import { shuffle, take } from 'lodash-es';
 
 @Component({
     selector: 'app-trending',
     templateUrl: './trending.component.html',
 })
 export class TrendingComponent implements OnInit {
-    public selectedMediaType$: Observable<MediaType | null> = this.store.select(
-        selectSelectedMediaType
-    );
-
     public selectedTimeWindow$: Observable<TimeWindow | null> = this.store.select(
         selectTimeWindow
     );
 
-    public mediaItems$: Observable<MediaListItem[]> = this.store.select(
+    private mediaItems$: Observable<MediaListItem[]> = this.store.select(
         selectTrendingMedia
+    );
+
+    private shuffledMediaItems$: Observable<
+        MediaListItem[]
+    > = this.mediaItems$.pipe(map((mediaItems) => shuffle(mediaItems)));
+
+    public firstMediaItems$: Observable<
+        MediaListItem[]
+    > = this.shuffledMediaItems$.pipe(
+        map((mediaItems) => take(mediaItems, 15))
     );
 
     public constructor(private store: Store<State>) {}
