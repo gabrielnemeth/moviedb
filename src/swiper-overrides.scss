@@ -14,7 +14,7 @@ swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide,
     width: 40px !important;
     height: 40px !important;
     box-shadow: 0 0.5em 1.1em 0.1em rgb(10 10 10 / 18%),
-        0 0px 0 1px rgb(10 10 10 / 0%);
+    0 0px 0 1px rgb(10 10 10 / 0%);
     transition: linear 0.3s;
     top: 30% !important;
 }
@@ -23,7 +23,7 @@ swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide,
 .swiper-button-prev:hover {
     background-color: $grey-lightest !important;
     box-shadow: 0 0.5em 2em 0.1em rgb(10 10 10 / 10%),
-        0 0px 0 1px rgba(10, 10, 10, 0);
+    0 0px 0 1px rgba(10, 10, 10, 0);
 }
 
 .swiper-button-next:after,
@@ -44,15 +44,14 @@ swiper > .swiper.s-wrapper .swiper-wrapper .swiper-slide,
 }
 
 swiper
-    > .swiper.s-wrapper
-    .swiper-pagination
-    .swiper-pagination-handle
-    .swiper-pagination-bullet.swiper-pagination-bullet-first,
-swiper
-    > .swiper.s-wrapper
-    .swiper-pagination
-    .swiper-pagination-handle
-    .swiper-pagination-bullet.swiper-pagination-bullet-last {
+> .swiper.s-wrapper
+.swiper-pagination
+.swiper-pagination-handle
+.swiper-pagination-bullet.swiper-pagination-bullet-first,
+swiper > .swiper.s-wrapper
+.swiper-pagination
+.swiper-pagination-handle
+.swiper-pagination-bullet.swiper-pagination-bullet-last {
     border: none !important;
 }
 

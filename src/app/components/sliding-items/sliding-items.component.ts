@@ -7,6 +7,7 @@ import { TimeWindow } from '../../interfaces/time-window';
 @Component({
     selector: 'app-sliding-items',
     templateUrl: './sliding-items.component.html',
+    styleUrls: ['./sliding-items.component.scss'],
 })
 export class SlidingItemsComponent {
     @Input()
