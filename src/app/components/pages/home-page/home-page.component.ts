@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
     public openModal: boolean;
     public genres$: Observable<(Genre | undefined)[]>;
 
-    constructor(
+    public constructor(
         private store: Store<State>,
         private mediaService: MediaService
     ) {}

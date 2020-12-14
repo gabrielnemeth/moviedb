@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MediaService } from '../../../services/media.service';
 import { MediaItem } from '../../../interfaces/media-item';
 
 @Component({
@@ -11,11 +9,6 @@ import { MediaItem } from '../../../interfaces/media-item';
 export class MediaDetailComponent {
     @Input()
     public mediaItem: MediaItem | null;
-
-    constructor(
-        private route: ActivatedRoute,
-        private mediaService: MediaService
-    ) {}
 
     public getStyle(
         imagePath: string | null | undefined
