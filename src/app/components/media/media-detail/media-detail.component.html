@@ -1,34 +1,44 @@
-<ng-container *ngIf="mediaItem">
-    <section
-        class="hero is-fullheight"
-        [ngStyle]="getStyle(mediaItem?.img?.backdrop)"
-    >
-        <div class="hero-bg">
-            <div class="hero-head">
-                <app-header-bar></app-header-bar>
-            </div>
-            <div class="hero-body">
-                <div class="container">
-                    <div class="columns">
-                        <div class="column is-3">
-                            <app-media-item-image
-                                [src]="mediaItem?.img?.poster"
-                                [alt]="mediaItem.title"
-                            ></app-media-item-image>
+<section
+    *ngIf="mediaItem"
+    class="hero is-fullheight"
+    [ngStyle]="getStyle(mediaItem?.img?.backdrop)"
+>
+    <div class="hero-bg">
+        <div class="hero-head">
+            <app-header-bar></app-header-bar>
+        </div>
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-3">
+                        <app-media-item-image
+                            [src]="mediaItem?.img?.poster"
+                            [alt]="mediaItem.title"
+                        ></app-media-item-image>
+                    </div>
+                    <div class="column is-6">
+                        <h1 class="title has-text-weight-bold mr-2 has-text-grey-lighter">
+                            {{ mediaItem.title }}
+                        </h1>
+                        <div class="level">
+                            <div class="level-left">
+                                <div *ngIf="mediaItem?.voteAverage" class="level-item">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <p><b>{{ mediaItem.voteAverage }}</b>/10</p>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item" *ngIf="mediaItem.genres as genres">
+                                    <p class="mr-2" *ngFor="let genre of genres">{{ genre }}</p>
+                                </div>
+                                <p class="level-item" *ngIf="mediaItem?.runtime">{{ formatRuntime(mediaItem.runtime) }}</p>
+                                <p *ngIf="mediaItem?.releaseDate" class="level-item">{{ getYear(mediaItem.releaseDate) }}</p>
+                            </div>
                         </div>
-                        <div class="column">
-                            <h1 class="title">
-                                <span
-                                    class="has-text-weight-bold mr-2 has-text-grey-lighter"
-                                >{{ mediaItem.title }}</span>
-                                <span *ngIf="mediaItem?.releaseDate"
-                                    class="has-text-weight-normal has-text-grey-light"
-                                >({{getYear(mediaItem?.releaseDate)}})</span>
-                            </h1>
-                        </div>
+                        <p class="has-text-white">{{mediaItem?.overview}}</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-</ng-container>
+    </div>
+</section>

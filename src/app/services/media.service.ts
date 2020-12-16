@@ -21,6 +21,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/state';
 import { selectTimeWindow } from '../store/trending/trending.reducer';
 import { MediaItem } from '../interfaces/media-item';
+import { take } from 'lodash-es';
 
 @Injectable({
     providedIn: 'root',
@@ -168,7 +169,10 @@ export class MediaService {
         return {
             id: movie.id,
             title: movie.title,
-            genresIds: movie.genres.map((genre) => genre.id),
+            genres: take(
+                movie.genres.map((genre) => genre.name),
+                2
+            ),
             img: {
                 poster: movie.poster_path,
                 backdrop: movie.backdrop_path,
@@ -176,6 +180,8 @@ export class MediaService {
             releaseDate: movie.release_date,
             voteAverage: movie.vote_average,
             popularity: movie.popularity,
+            overview: movie.overview,
+            runtime: movie.runtime,
             type: MediaType.movie,
         };
     }
@@ -206,7 +212,7 @@ export class MediaService {
         return {
             id: tv.id,
             title: tv.name,
-            genresIds: tv.genres.map((genre) => genre.id),
+            genres: tv.genres.map((genre) => genre.name),
             img: {
                 poster: tv.poster_path,
                 backdrop: tv.backdrop_path,
@@ -214,6 +220,7 @@ export class MediaService {
             releaseDate: tv.first_air_date,
             voteAverage: tv.vote_average,
             popularity: tv.popularity,
+            overview: tv.overview,
             type: MediaType.tv,
         };
     }

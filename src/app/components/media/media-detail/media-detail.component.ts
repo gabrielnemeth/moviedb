@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
+import * as moment from 'moment';
 import { MediaItem } from '../../../interfaces/media-item';
+import { isNil } from 'lodash-es';
 
 @Component({
     selector: 'app-media-detail',
@@ -25,5 +27,17 @@ export class MediaDetailComponent {
 
     public getYear(date: string | undefined): string {
         return date ? new Date(date).getFullYear().toString() : '';
+    }
+
+    public formatRuntime(runtime: number | undefined): string {
+        console.assert(!isNil(runtime), `Runtime can't be undefined.`);
+        const hours = moment.duration(runtime, 'minutes').hours();
+        const minutes = moment.duration(runtime, 'minutes').minutes();
+
+        if (hours <= 0) {
+            return `${minutes}m`;
+        }
+
+        return `${hours}h ${minutes}m`;
     }
 }

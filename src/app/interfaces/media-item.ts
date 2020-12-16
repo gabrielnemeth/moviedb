@@ -9,7 +9,9 @@ export interface MediaItem {
         backdrop?: string | null;
     };
     releaseDate?: string;
-    genresIds?: number[];
+    genres?: string[];
     voteAverage?: number;
     popularity?: number;
+    overview?: string;
+    runtime?: number;
 }

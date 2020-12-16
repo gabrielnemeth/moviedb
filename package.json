@@ -29,6 +29,7 @@
         "@vime/angular": "^4.7.3",
         "bulma": "^0.9.1",
         "lodash-es": "^4.17.15",
+        "moment": "^2.29.1",
         "ngx-swiper-wrapper": "^10.0.0",
         "rxjs": "~6.6.0",
         "swiper": "^6.3.5",

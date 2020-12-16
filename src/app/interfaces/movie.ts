@@ -11,14 +11,14 @@ export interface Movie {
     imdb_id: string | null;
     original_language: string;
     original_title: string;
-    overview: string | null;
+    overview?: string;
     popularity: number;
     poster_path: string | null;
     production_companies: ProductionCompany[];
     production_countries: ProductionCountry[];
     release_date: string;
     revenue: number;
-    runtime: number | null;
+    runtime?: number;
     spoken_languages: SpokenLanguage[];
     status: string;
     tagline: string | null;
