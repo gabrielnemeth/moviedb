@@ -1,4 +1,5 @@
 import { Genre } from './genre';
+import { Video } from './video';
 
 export interface Tv {
     backdrop_path: string | null;
@@ -30,6 +31,9 @@ export interface Tv {
     status: string;
     tagline: string;
     type: string;
+    videos?: {
+        results: Video[];
+    };
     vote_average: number;
     vote_count: number;
 }

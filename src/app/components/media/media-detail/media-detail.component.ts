@@ -12,6 +12,9 @@ export class MediaDetailComponent {
     @Input()
     public mediaItem: MediaItem | null;
 
+    public youtubeId: string;
+    public openModal: boolean;
+
     public getStyle(
         imagePath: string | null | undefined
     ): {
@@ -39,5 +42,17 @@ export class MediaDetailComponent {
         }
 
         return `${hours}h ${minutes}m`;
+    }
+
+    public playVideo(youtubeId: string | undefined): void {
+        if (isNil(youtubeId)) {
+            return;
+        }
+        this.youtubeId = youtubeId;
+        this.openModal = true;
+    }
+
+    public closePlayer(): void {
+        this.openModal = false;
     }
 }

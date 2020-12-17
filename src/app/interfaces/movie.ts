@@ -1,4 +1,5 @@
 import { Genre } from './genre';
+import { Video } from './video';
 
 export interface Movie {
     adult: boolean;
@@ -24,6 +25,9 @@ export interface Movie {
     tagline: string | null;
     title: string;
     video: boolean;
+    videos?: {
+        results: Video[];
+    };
     vote_average: number;
     vote_count: number;
 }

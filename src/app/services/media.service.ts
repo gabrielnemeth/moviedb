@@ -21,7 +21,8 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/state';
 import { selectTimeWindow } from '../store/trending/trending.reducer';
 import { MediaItem } from '../interfaces/media-item';
-import { take } from 'lodash-es';
+import { isNil, take } from 'lodash-es';
+import { Video } from '../interfaces/video';
 
 @Injectable({
     providedIn: 'root',
@@ -107,7 +108,7 @@ export class MediaService {
     public getMovieById(id: string): Observable<MediaItem> {
         return this.http
             .get<Movie>(
-                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US`
+                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`
             )
             .pipe(map((movie) => this.createMovieItem(movie)));
     }
@@ -115,7 +116,7 @@ export class MediaService {
     public getTvById(id: string): Observable<MediaItem> {
         return this.http
             .get<Tv>(
-                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US`
+                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`
             )
             .pipe(map((tv) => this.createTvItem(tv)));
     }
@@ -182,6 +183,7 @@ export class MediaService {
             popularity: movie.popularity,
             overview: movie.overview,
             runtime: movie.runtime,
+            trailerVideoId: this.getTrailerVideoId(movie?.videos?.results),
             type: MediaType.movie,
         };
     }
@@ -221,6 +223,7 @@ export class MediaService {
             voteAverage: tv.vote_average,
             popularity: tv.popularity,
             overview: tv.overview,
+            trailerVideoId: this.getTrailerVideoId(tv?.videos?.results),
             type: MediaType.tv,
         };
     }
@@ -275,5 +278,22 @@ export class MediaService {
 
             throw new TypeError(`MediaListItem can't be undefined.`);
         });
+    }
+
+    private getTrailerVideoId(videos: Video[] | undefined): string | undefined {
+        if (isNil(videos)) {
+            return videos;
+        }
+
+        const trailerVideo = videos.find((video) => video.type === 'Trailer');
+        const teaserVideo = videos.find((video) => video.type === 'Teaser');
+
+        if (isNil(trailerVideo) && isNil(teaserVideo)) {
+            return undefined;
+        }
+
+        const videoToReturn = isNil(trailerVideo) ? teaserVideo : trailerVideo;
+
+        return videoToReturn?.key;
     }
 }

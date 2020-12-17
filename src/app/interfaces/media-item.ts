@@ -14,4 +14,5 @@ export interface MediaItem {
     popularity?: number;
     overview?: string;
     runtime?: number;
+    trailerVideoId?: string;
 }

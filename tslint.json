@@ -86,7 +86,6 @@
         "typedef": [
             true,
             "call-signature",
-            "member-variable-declaration",
             "parameter",
             "property-declaration"
         ],

@@ -22,6 +22,17 @@
                         </h1>
                         <div class="level">
                             <div class="level-left">
+                                <a class="level-item has-text-white is-size-5" *ngIf="mediaItem?.trailerVideoId"
+                                   (click)="playVideo(mediaItem.trailerVideoId)">
+                                <span class="icon mr-1">
+                                    <i class="far fa-play-circle"></i>
+                                </span>
+                                    <span>Play trailer</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level has-text-grey-light">
+                            <div class="level-left">
                                 <div *ngIf="mediaItem?.voteAverage" class="level-item">
                                     <i class="fas fa-star mr-1"></i>
                                     <p><b>{{ mediaItem.voteAverage }}</b>/10</p>
@@ -42,3 +53,5 @@
         </div>
     </div>
 </section>
+<app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"
+                  [youtubeId]="youtubeId"></app-video-player>
