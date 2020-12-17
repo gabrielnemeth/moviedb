@@ -53,5 +53,10 @@
         </div>
     </div>
 </section>
+
+<ng-container *ngIf="mediaItem?.credits">
+    <p *ngFor="let cast of mediaItem?.credits?.cast">{{ cast.name }}</p>
+</ng-container>
+
 <app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"
                   [youtubeId]="youtubeId"></app-video-player>

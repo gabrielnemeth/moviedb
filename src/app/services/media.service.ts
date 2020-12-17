@@ -108,7 +108,7 @@ export class MediaService {
     public getMovieById(id: string): Observable<MediaItem> {
         return this.http
             .get<Movie>(
-                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`
+                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits`
             )
             .pipe(map((movie) => this.createMovieItem(movie)));
     }
@@ -116,7 +116,7 @@ export class MediaService {
     public getTvById(id: string): Observable<MediaItem> {
         return this.http
             .get<Tv>(
-                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos`
+                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits`
             )
             .pipe(map((tv) => this.createTvItem(tv)));
     }
@@ -184,6 +184,7 @@ export class MediaService {
             overview: movie.overview,
             runtime: movie.runtime,
             trailerVideoId: this.getTrailerVideoId(movie?.videos?.results),
+            credits: movie?.credits,
             type: MediaType.movie,
         };
     }
@@ -224,6 +225,7 @@ export class MediaService {
             popularity: tv.popularity,
             overview: tv.overview,
             trailerVideoId: this.getTrailerVideoId(tv?.videos?.results),
+            credits: tv?.credits,
             type: MediaType.tv,
         };
     }

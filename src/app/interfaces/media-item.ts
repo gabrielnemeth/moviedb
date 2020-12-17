@@ -1,4 +1,5 @@
 import { MediaType } from './media-type';
+import { Credits } from './credits';
 
 export interface MediaItem {
     id: number;
@@ -15,4 +16,5 @@ export interface MediaItem {
     overview?: string;
     runtime?: number;
     trailerVideoId?: string;
+    credits?: Credits;
 }

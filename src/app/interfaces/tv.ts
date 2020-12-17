@@ -1,11 +1,13 @@
 import { Genre } from './genre';
 import { Video } from './video';
+import { Credits } from './credits';
 
 export interface Tv {
     backdrop_path: string | null;
     created_by: CreatedBy[];
     episode_run_time: number[];
     first_air_date: string;
+    credits?: Credits;
     genres: Genre[];
     homepage: string;
     id: number;
