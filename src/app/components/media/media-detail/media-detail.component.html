@@ -54,9 +54,29 @@
     </div>
 </section>
 
-<ng-container *ngIf="mediaItem?.credits">
-    <p *ngFor="let cast of mediaItem?.credits?.cast">{{ cast.name }}</p>
-</ng-container>
+<section class="section">
+    <div class="container">
+        <ng-container *ngIf="mediaItem?.credits">
+
+            <div class="columns is-multiline is-mobile">
+                <div class="column is-3" *ngFor="let cast of mediaItem?.credits?.cast">
+                    <img
+                        *ngIf="cast.profile_path !== null; else noImage"
+                        src="https://image.tmdb.org/t/p/w500/{{ cast.profile_path }}"
+                        alt="{{ cast.name }}"
+                    />
+                    {{ cast.name }}
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</section>
+
+<ng-template #noImage>
+    <div class="no-cast-image-holder">
+        <i class="fas fa-user"></i>
+    </div>
+</ng-template>
 
 <app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"
                   [youtubeId]="youtubeId"></app-video-player>

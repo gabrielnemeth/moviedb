@@ -1,3 +1,5 @@
+@import "~bulma/sass/utilities/initial-variables.sass";
+
 .hero-bg {
     align-items: stretch;
     min-height: 100vh;
@@ -5,4 +7,9 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: rgb(0 0 0 / 84%);
+}
+
+.no-cast-image-holder {
+    background-color: $grey-light;
+    color: $grey-lighter;
 }
