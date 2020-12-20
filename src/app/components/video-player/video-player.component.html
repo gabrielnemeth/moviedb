@@ -3,15 +3,15 @@
     <div class="modal-content">
 
         <div class="player-wrapper" [@showHide]="isPlayerReady ? 'show' : 'hide'">
-            <vime-player
+            <vm-player
                 #player
                 playsinline
             >
-                <vime-youtube cookies="true" [videoId]="youtubeId"></vime-youtube>
-                <vime-poster (vLoaded)="posterLoaded()"></vime-poster>
-                <vime-skeleton [effect]="'none'"></vime-skeleton>
-                <vime-default-ui></vime-default-ui>
-            </vime-player>
+                <vm-youtube cookies="true" [videoId]="youtubeId"></vm-youtube>
+                <vm-poster (vmLoaded)="posterLoaded()"></vm-poster>
+                
+                <vm-default-ui></vm-default-ui>
+            </vm-player>
         </div>
     </div>
     <div class="spinner fa-3x" *ngIf="!isPlayerReady">

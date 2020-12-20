@@ -13,7 +13,7 @@ import {
     transition,
     trigger,
 } from '@angular/animations';
-import { VimePlayer } from '@vime/angular';
+import { Player } from '@vime/angular';
 
 @Component({
     selector: 'app-video-player',
@@ -57,7 +57,7 @@ export class VideoPlayerComponent {
     public closePlayer: EventEmitter<void> = new EventEmitter();
 
     @ViewChild('player')
-    public player!: VimePlayer;
+    public player!: Player;
 
     public open = true;
     public isPlayerReady: boolean;
