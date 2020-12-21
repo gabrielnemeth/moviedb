@@ -215,7 +215,10 @@ export class MediaService {
         return {
             id: tv.id,
             title: tv.name,
-            genres: tv.genres.map((genre) => genre.name),
+            genres: take(
+                tv.genres.map((genre) => genre.name),
+                2
+            ),
             img: {
                 poster: tv.poster_path,
                 backdrop: tv.backdrop_path,
