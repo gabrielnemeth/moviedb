@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, zip } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { merge, Observable, of, zip } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../interfaces/genre';
 import { Movie } from '../interfaces/movie';
@@ -9,7 +9,7 @@ import { MovieSearchResponse } from '../interfaces/response/movie-search-respons
 import { MultiSearchResponse } from '../interfaces/response/multi-search-response';
 import { PersonSearchResponse } from '../interfaces/response/person-search-response';
 import { TvSearchResponse } from '../interfaces/response/tv-search-response';
-import { Tv } from '../interfaces/tv';
+import { Season, Tv } from '../interfaces/tv';
 import { Person } from '../interfaces/person';
 import { MediaType } from '../interfaces/media-type';
 import { VideoResponse } from '../interfaces/response/video-response';
@@ -21,8 +21,11 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/state';
 import { selectTimeWindow } from '../store/trending/trending.reducer';
 import { MediaItem } from '../interfaces/media-item';
-import { isNil, take } from 'lodash-es';
+import { flatten, flattenDeep, isNil, take, uniqBy } from 'lodash-es';
 import { Video } from '../interfaces/video';
+import { Credits } from '../interfaces/credits';
+import { Cast } from '../interfaces/cast';
+import { SeasonDetail } from '../interfaces/season-detail';
 
 @Injectable({
     providedIn: 'root',
@@ -118,7 +121,69 @@ export class MediaService {
             .get<Tv>(
                 `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits`
             )
-            .pipe(map((tv) => this.createTvItem(tv)));
+            .pipe(
+                switchMap((tv) =>
+                    this.getCreditsForSeasons(id, tv.seasons).pipe(
+                        map((cast) => ({ tv, cast }))
+                    )
+                ),
+                map((data) => this.createTvItem(data))
+            );
+    }
+
+    private getCreditsForSeasons(
+        id: string,
+        season: Season[]
+    ): Observable<Cast[]> {
+        const seasonNumbers = season.map((s) => s.season_number);
+        const credits$ = seasonNumbers.map((seasonNumber) =>
+            this.http.get<SeasonDetail>(
+                `${environment.themoviedb.baseUrl}tv/${id}/season/${seasonNumber}?api_key=${this.apiKey}&language=en-US&append_to_response=credits`
+            )
+        );
+
+        return zip(...credits$).pipe(
+            map((seasons) => this.getCastFromSeasons(seasons))
+        );
+    }
+
+    private getCastFromSeasons(seasonData: SeasonDetail[]): Cast[] {
+        const seasonsWithCast = seasonData
+            .filter((s) => !isNil(s.credits))
+            // tslint:disable-next-line:no-non-null-assertion
+            .filter((s) => s.credits!.cast.length > 0);
+        const cast = seasonsWithCast.map((s) =>
+            s.credits?.cast.map((c) => ({
+                id: c.id,
+                name: c.name,
+                characterName: c.character,
+                imagePath: c.profile_path,
+            }))
+        );
+        const flattenedCast = flattenDeep(cast);
+        const uniqCast = uniqBy(flattenedCast, 'id');
+
+        const seasonsWithGuestStars = seasonData
+            .filter(
+                (s) =>
+                    s.episodes.filter((e) => e.guest_stars.length > 0).length >
+                    0
+            )
+            .map((s) =>
+                s.episodes.map((e) =>
+                    e.guest_stars.map((gs) => ({
+                        id: gs.id,
+                        name: gs.name,
+                        characterName: gs.character,
+                        imagePath: gs.profile_path,
+                    }))
+                )
+            );
+
+        const flattenedGuestStars = flattenDeep(seasonsWithGuestStars);
+        const uniqGuestStars = uniqBy(flattenedGuestStars, 'id');
+
+        return uniqBy([...uniqCast, ...uniqGuestStars], 'id') as Cast[];
     }
 
     public getPersonById(id: string): Observable<MediaItem> {
@@ -184,7 +249,7 @@ export class MediaService {
             overview: movie.overview,
             runtime: movie.runtime,
             trailerVideoId: this.getTrailerVideoId(movie?.videos?.results),
-            credits: movie?.credits,
+            cast: this.createCastFromCredit(movie?.credits),
             type: MediaType.movie,
         };
     }
@@ -211,24 +276,24 @@ export class MediaService {
         };
     }
 
-    private createTvItem(tv: Tv): MediaItem {
+    private createTvItem(data: { tv: Tv; cast: Cast[] }): MediaItem {
         return {
-            id: tv.id,
-            title: tv.name,
+            id: data.tv.id,
+            title: data.tv.name,
             genres: take(
-                tv.genres.map((genre) => genre.name),
+                data.tv.genres.map((genre) => genre.name),
                 2
             ),
             img: {
-                poster: tv.poster_path,
-                backdrop: tv.backdrop_path,
+                poster: data.tv.poster_path,
+                backdrop: data.tv.backdrop_path,
             },
-            releaseDate: tv.first_air_date,
-            voteAverage: tv.vote_average,
-            popularity: tv.popularity,
-            overview: tv.overview,
-            trailerVideoId: this.getTrailerVideoId(tv?.videos?.results),
-            credits: tv?.credits,
+            releaseDate: data.tv.first_air_date,
+            voteAverage: data.tv.vote_average,
+            popularity: data.tv.popularity,
+            overview: data.tv.overview,
+            trailerVideoId: this.getTrailerVideoId(data.tv?.videos?.results),
+            cast: data.cast,
             type: MediaType.tv,
         };
     }
@@ -300,5 +365,19 @@ export class MediaService {
         const videoToReturn = isNil(trailerVideo) ? teaserVideo : trailerVideo;
 
         return videoToReturn?.key;
+    }
+
+    private createCastFromCredit(
+        credits: Credits | undefined
+    ): Cast[] | undefined {
+        return credits?.cast.map(
+            (c) =>
+                ({
+                    id: c.id,
+                    name: c.name,
+                    characterName: c.character,
+                    imagePath: c.profile_path,
+                } as Cast)
+        );
     }
 }

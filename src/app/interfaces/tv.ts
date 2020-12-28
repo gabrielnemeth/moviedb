@@ -1,6 +1,7 @@
 import { Genre } from './genre';
 import { Video } from './video';
 import { Credits } from './credits';
+import { Episode } from './episode';
 
 export interface Tv {
     backdrop_path: string | null;

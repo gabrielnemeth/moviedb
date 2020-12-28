@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import * as moment from 'moment';
 import { MediaItem } from '../../../interfaces/media-item';
-import { isNil } from 'lodash-es';
+import { isNil, take } from 'lodash-es';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { Observable, of } from 'rxjs';
-import { Cast } from '../../../interfaces/credits';
 import { filter, map } from 'rxjs/operators';
+import { Cast } from 'src/app/interfaces/cast';
 
 @Component({
     selector: 'app-media-detail',
@@ -19,10 +19,10 @@ export class MediaDetailComponent {
     public set mediaItem(item: MediaItem | null) {
         this._mediaItem = item;
         this.castWithProfileOnly$ = of(item).pipe(
-            filter((i) => !isNil(i?.credits)),
-            map((i) =>
-                i?.credits?.cast.filter((cast) => !isNil(cast.profile_path))
-            )
+            filter((i) => !isNil(i?.cast)),
+            // tslint:disable-next-line:no-non-null-assertion
+            map((i) => i!.cast!.filter((cast) => !isNil(cast.imagePath))),
+            map((i) => take(i, 14))
         );
     }
 
