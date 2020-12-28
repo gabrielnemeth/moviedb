@@ -74,5 +74,32 @@
     </div>
 </section>
 
+<section class="section" *ngIf="mediaItem?.reviews as reviews">
+    <div class="container">
+        <h2 class="title">Reviews</h2>
+
+        <article class="media" *ngFor="let review of reviews">
+            <figure class="media-left">
+                <p class="avatar image is-64x64" *ngIf="review.author_details.avatar_path as imagePath">
+                    <img src="{{ imagePath }}">
+                </p>
+                <p *ngIf="!review.author_details.avatar_path" class="avatar-placeholder">
+                    {{ review.author_details.username.charAt(0) }}
+                </p>
+            </figure>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong *ngIf="review.author_details.name as name">{{ name }}</strong>
+                        <strong *ngIf="!review.author_details.name">{{ review.author_details.username }}</strong><small class="ml-2">{{ getDate(review.created_at, review.updated_at) }}</small>
+                        <br>
+                        {{ review.content }}
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
 <app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"
                   [youtubeId]="youtubeId"></app-video-player>

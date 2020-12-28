@@ -1,7 +1,7 @@
 import { Genre } from './genre';
 import { Video } from './video';
 import { Credits } from './credits';
-import { Episode } from './episode';
+import { ReviewResponse } from './response/review-response';
 
 export interface Tv {
     backdrop_path: string | null;
@@ -29,6 +29,7 @@ export interface Tv {
     poster_path: string | null;
     production_companies: Network[];
     production_countries: ProductionCountry[];
+    reviews?: ReviewResponse;
     seasons: Season[];
     spoken_languages: SpokenLanguage[];
     status: string;

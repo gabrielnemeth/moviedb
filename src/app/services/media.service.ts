@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { merge, Observable, of, zip } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, zip } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Genre } from '../interfaces/genre';
 import { Movie } from '../interfaces/movie';
@@ -21,11 +21,12 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/state';
 import { selectTimeWindow } from '../store/trending/trending.reducer';
 import { MediaItem } from '../interfaces/media-item';
-import { flatten, flattenDeep, isNil, take, uniqBy } from 'lodash-es';
+import { flattenDeep, isNil, take, uniqBy } from 'lodash-es';
 import { Video } from '../interfaces/video';
 import { Credits } from '../interfaces/credits';
 import { Cast } from '../interfaces/cast';
 import { SeasonDetail } from '../interfaces/season-detail';
+import { Review } from '../interfaces/review';
 
 @Injectable({
     providedIn: 'root',
@@ -111,7 +112,7 @@ export class MediaService {
     public getMovieById(id: string): Observable<MediaItem> {
         return this.http
             .get<Movie>(
-                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits`
+                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits,reviews`
             )
             .pipe(map((movie) => this.createMovieItem(movie)));
     }
@@ -119,7 +120,7 @@ export class MediaService {
     public getTvById(id: string): Observable<MediaItem> {
         return this.http
             .get<Tv>(
-                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits`
+                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits,reviews`
             )
             .pipe(
                 switchMap((tv) =>
@@ -247,6 +248,13 @@ export class MediaService {
             voteAverage: movie.vote_average,
             popularity: movie.popularity,
             overview: movie.overview,
+            reviews:
+                // tslint:disable-next-line:no-non-null-assertion
+                movie.reviews!.results.length > 0
+                    ? this.validateAvatarImages(
+                          movie.reviews?.results as Review[]
+                      )
+                    : undefined,
             runtime: movie.runtime,
             trailerVideoId: this.getTrailerVideoId(movie?.videos?.results),
             cast: this.createCastFromCredit(movie?.credits),
@@ -292,6 +300,13 @@ export class MediaService {
             voteAverage: data.tv.vote_average,
             popularity: data.tv.popularity,
             overview: data.tv.overview,
+            reviews:
+                // tslint:disable-next-line:no-non-null-assertion
+                data.tv.reviews!.results.length > 0
+                    ? this.validateAvatarImages(
+                          data.tv.reviews?.results as Review[]
+                      )
+                    : undefined,
             trailerVideoId: this.getTrailerVideoId(data.tv?.videos?.results),
             cast: data.cast,
             type: MediaType.tv,
@@ -379,5 +394,45 @@ export class MediaService {
                     imagePath: c.profile_path,
                 } as Cast)
         );
+    }
+
+    private getValidImagePath(
+        imagePath: string | undefined
+    ): string | undefined {
+        if (isNil(imagePath)) {
+            return imagePath;
+        }
+        const baseUrl = 'https://image.tmdb.org/t/p/w185';
+        const isValid = this.isValidHttpUrl(imagePath);
+        // / char is appended even for valid urls.
+        return isValid ? this.fixedUrl(imagePath) : `${baseUrl}${imagePath}`;
+    }
+
+    private fixedUrl(url: string): string {
+        // The service may append a / char at the beginning of the valid URL.
+        return url.charAt(0) === '/' ? url.substring(1) : url;
+    }
+
+    private isValidHttpUrl(urlToValidate: string): boolean {
+        let url;
+        try {
+            url = new URL(this.fixedUrl(urlToValidate));
+        } catch (_) {
+            return false;
+        }
+
+        return url.protocol === 'http:' || url.protocol === 'https:';
+    }
+
+    private validateAvatarImages(reviews: Review[]): Review[] {
+        return reviews.map((review) => ({
+            ...review,
+            author_details: {
+                ...review.author_details,
+                avatar_path: this.getValidImagePath(
+                    review.author_details.avatar_path
+                ),
+            },
+        }));
     }
 }

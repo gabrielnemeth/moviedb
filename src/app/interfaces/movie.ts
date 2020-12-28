@@ -1,6 +1,7 @@
 import { Genre } from './genre';
 import { Video } from './video';
 import { Credits } from './credits';
+import { ReviewResponse } from './response/review-response';
 
 export interface Movie {
     adult: boolean;
@@ -21,6 +22,7 @@ export interface Movie {
     production_countries: ProductionCountry[];
     release_date: string;
     revenue: number;
+    reviews?: ReviewResponse;
     runtime?: number;
     spoken_languages: SpokenLanguage[];
     status: string;

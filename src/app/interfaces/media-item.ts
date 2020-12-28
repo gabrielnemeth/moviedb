@@ -1,6 +1,6 @@
 import { MediaType } from './media-type';
-import { Credits } from './credits';
 import { Cast } from './cast';
+import { Review } from './review';
 
 export interface MediaItem {
     id: number;
@@ -15,6 +15,7 @@ export interface MediaItem {
     voteAverage?: number;
     popularity?: number;
     overview?: string;
+    reviews?: Review[];
     runtime?: number;
     trailerVideoId?: string;
     cast?: Cast[];

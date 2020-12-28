@@ -15,3 +15,22 @@
     overflow: hidden;
     display: flex;
 }
+
+.avatar img {
+    border-radius: 50%;
+    height: 64px;
+    width: 64px;
+}
+
+.avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    background-color: $grey-light;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $size-4;
+    font-weight: bold;
+    text-transform: capitalize;
+}
