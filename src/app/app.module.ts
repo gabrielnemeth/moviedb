@@ -35,6 +35,7 @@ import { VimeModule } from '@vime/angular';
 import { MediaTypeSwitchComponent } from './components/media-type-switch/media-type-switch.component';
 import { TimeSwitchComponent } from './components/time-switch/time-switch.component';
 import { MediaDetailComponent } from './components/media/media-detail/media-detail.component';
+import { ReviewContentComponent } from './components/media/media-detail/review-content/review-content.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +57,7 @@ import { MediaDetailComponent } from './components/media/media-detail/media-deta
         MediaTypeSwitchComponent,
         TimeSwitchComponent,
         MediaDetailComponent,
+        ReviewContentComponent,
     ],
     imports: [
         BrowserModule,

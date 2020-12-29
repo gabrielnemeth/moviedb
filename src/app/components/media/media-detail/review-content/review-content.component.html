@@ -1,0 +1,3 @@
+<p>{{ contentToDisplay }}
+    <ng-container *ngIf="contentToDisplay.length < content.length">...</ng-container>
+    <span *ngIf="contentToDisplay.length < content.length">&nbsp;<a (click)="showMore()">Show more</a></span></p>

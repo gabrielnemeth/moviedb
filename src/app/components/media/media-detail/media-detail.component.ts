@@ -70,6 +70,8 @@ export class MediaDetailComponent {
         },
     };
 
+    public showAllReviews: boolean;
+
     public getStyle(
         imagePath: string | null | undefined
     ): {
