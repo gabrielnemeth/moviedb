@@ -56,23 +56,21 @@
     </div>
 </section>
 
-<section class="section">
+<section class="section" *ngIf="mediaItem?.cast">
     <div class="container">
-        <ng-container *ngIf="mediaItem?.cast">
-            <h2 class="title">Cast</h2>
-            <swiper [config]="config">
-                <div class="has-text-centered" *ngFor="let cast of castWithProfileOnly$ | async">
-                    <div class="img-wrapper mb-2">
-                        <img
-                            src="https://image.tmdb.org/t/p/h632/{{ cast.imagePath }}"
-                            alt="{{ cast.name }}"
-                        />
-                    </div>
-                    <p><b>{{ cast.name }}</b></p>
-                    <p>{{ cast.characterName }}</p>
+        <h2 class="title">Cast</h2>
+        <swiper [config]="config">
+            <div class="has-text-centered" *ngFor="let cast of castWithProfileOnly$ | async">
+                <div class="img-wrapper mb-2">
+                    <img
+                        src="https://image.tmdb.org/t/p/h632/{{ cast.imagePath }}"
+                        alt="{{ cast.name }}"
+                    />
                 </div>
-            </swiper>
-        </ng-container>
+                <p><b>{{ cast.name }}</b></p>
+                <p>{{ cast.characterName }}</p>
+            </div>
+        </swiper>
     </div>
 </section>
 
@@ -81,61 +79,21 @@
         <h2 class="title">Reviews <small class="is-size-4 has-text-grey">({{ reviews.length }})</small></h2>
 
         <ng-container *ngFor="let review of reviews; first as isFirst">
-            <article class="media mb-5" *ngIf="isFirst">
-                <figure class="media-left">
-                    <p class="avatar image is-64x64" *ngIf="review.author_details.avatar_path as imagePath">
-                        <img src="{{ imagePath }}">
-                    </p>
-                    <p *ngIf="!review.author_details.avatar_path" class="avatar-placeholder">
-                        {{ review.author_details.username.charAt(0) }}
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong *ngIf="review.author_details.name as name">{{ name }}</strong>
-                            <strong
-                                *ngIf="!review.author_details.name">{{ review.author_details.username }}</strong><small
-                            class="ml-2">{{ getDate(review.created_at, review.updated_at) }}</small>
-                            <br>
-                            <app-review-content [content]="review.content"></app-review-content>
-                        </p>
-                    </div>
-                </div>
-            </article>
+            <app-review *ngIf="isFirst" [review]="review"></app-review>
         </ng-container>
-        <a (click)="showAllReviews = true" *ngIf="reviews.length > 1" class="is-size-6 has-text-black">Read all reviews <i class="is-size-7 fas fa-angle-double-right"></i></a>
+        <a (click)="showAllReviews = true" *ngIf="reviews.length > 1" class="is-size-6 has-text-black">Read all reviews
+            <i class="is-size-7 fas fa-angle-double-right"></i></a>
 
         <div class="modal" [ngClass]="{'is-active': showAllReviews}">
             <div class="modal-background"></div>
             <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-title">Reviews <small class="is-size-4 has-text-grey">({{ reviews.length }})</small></p>
+                    <p class="modal-card-title">Reviews <small class="is-size-4 has-text-grey">({{ reviews.length }}
+                        )</small></p>
                     <button class="delete" aria-label="close" (click)="showAllReviews = false"></button>
                 </header>
                 <section class="modal-card-body">
-                    <article class="media" *ngFor="let review of reviews">
-                        <figure class="media-left">
-                            <p class="avatar image is-64x64" *ngIf="review.author_details.avatar_path as imagePath">
-                                <img src="{{ imagePath }}">
-                            </p>
-                            <p *ngIf="!review.author_details.avatar_path" class="avatar-placeholder">
-                                {{ review.author_details.username.charAt(0) }}
-                            </p>
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong *ngIf="review.author_details.name as name">{{ name }}</strong>
-                                    <strong
-                                        *ngIf="!review.author_details.name">{{ review.author_details.username }}</strong><small
-                                    class="ml-2">{{ getDate(review.created_at, review.updated_at) }}</small>
-                                    <br>
-                                    <app-review-content [content]="review.content"></app-review-content>
-                                </p>
-                            </div>
-                        </div>
-                    </article>
+                    <app-review *ngFor="let review of reviews" [review]="review"></app-review>
                 </section>
                 <footer class="modal-card-foot">
                 </footer>

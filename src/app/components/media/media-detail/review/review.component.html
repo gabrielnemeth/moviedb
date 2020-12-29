@@ -1,0 +1,21 @@
+<figure class="media-left">
+    <p class="avatar image is-64x64" *ngIf="review.author_details.avatar_path as imagePath">
+        <img src="{{ imagePath }}">
+    </p>
+    <p *ngIf="!review.author_details.avatar_path" class="avatar-placeholder">
+        {{ review.author_details.username.charAt(0) }}
+    </p>
+</figure>
+<div class="media-content">
+    <div class="content">
+        <p>
+            <strong *ngIf="review.author_details.name as name">{{ name }}</strong>
+            <strong
+                *ngIf="!review.author_details.name">{{ review.author_details.username }}</strong><small
+            class="ml-2">{{ getDate(review.created_at, review.updated_at) }}</small>
+            <app-rating-badge *ngIf="review.author_details.rating as rating" [rating]="rating"></app-rating-badge>
+            <br>
+            <app-review-content [content]="review.content"></app-review-content>
+        </p>
+    </div>
+</div>

@@ -112,11 +112,4 @@ export class MediaDetailComponent {
     public closePlayer(): void {
         this.openModal = false;
     }
-
-    public getDate(created: string, updated?: string): string {
-        const format = 'MMMM D, YYYY';
-        return !isNil(updated)
-            ? moment(updated).format(format)
-            : moment(created).format(format);
-    }
 }

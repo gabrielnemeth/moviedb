@@ -36,6 +36,8 @@ import { MediaTypeSwitchComponent } from './components/media-type-switch/media-t
 import { TimeSwitchComponent } from './components/time-switch/time-switch.component';
 import { MediaDetailComponent } from './components/media/media-detail/media-detail.component';
 import { ReviewContentComponent } from './components/media/media-detail/review-content/review-content.component';
+import { RatingBadgeComponent } from './components/media/media-detail/review-badge/rating-badge.component';
+import { ReviewComponent } from './components/media/media-detail/review/review.component';
 
 @NgModule({
     declarations: [
@@ -58,6 +60,8 @@ import { ReviewContentComponent } from './components/media/media-detail/review-c
         TimeSwitchComponent,
         MediaDetailComponent,
         ReviewContentComponent,
+        RatingBadgeComponent,
+        ReviewComponent,
     ],
     imports: [
         BrowserModule,
