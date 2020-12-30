@@ -14,7 +14,7 @@ Simple movie database website with Angular, NgRx and Bulma.
 
 -   Install dependencies
     ```
-    npm install
+    yarn
     ```
 -   Run the app with `ng-cli`
     ```
