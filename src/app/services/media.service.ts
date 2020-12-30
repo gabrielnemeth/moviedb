@@ -151,7 +151,7 @@ export class MediaService {
     private getCastFromSeasons(seasonData: SeasonDetail[]): Cast[] {
         const seasonsWithCast = seasonData
             .filter((s) => !isNil(s.credits))
-            // tslint:disable-next-line:no-non-null-assertion
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             .filter((s) => s.credits!.cast.length > 0);
         const cast = seasonsWithCast.map((s) =>
             s.credits?.cast.map((c) => ({
@@ -249,7 +249,7 @@ export class MediaService {
             popularity: movie.popularity,
             overview: movie.overview,
             reviews:
-                // tslint:disable-next-line:no-non-null-assertion
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 movie.reviews!.results.length > 0
                     ? this.validateAvatarImages(
                           movie.reviews?.results as Review[]
@@ -301,7 +301,7 @@ export class MediaService {
             popularity: data.tv.popularity,
             overview: data.tv.overview,
             reviews:
-                // tslint:disable-next-line:no-non-null-assertion
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 data.tv.reviews!.results.length > 0
                     ? this.validateAvatarImages(
                           data.tv.reviews?.results as Review[]

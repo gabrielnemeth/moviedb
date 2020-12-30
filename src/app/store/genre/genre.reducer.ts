@@ -19,12 +19,10 @@ const _genreReducer = createReducer(
     on(genresLoaded, (state, data) => ({ movie: data.movie, tv: data.tv }))
 );
 
-export function reducer(
+export const reducer = (
     state: GenreState | undefined,
     action: Action
-): GenreState {
-    return _genreReducer(state, action);
-}
+): GenreState => _genreReducer(state, action);
 
 export const selectGenres = (state: State): GenreState => state.genres;
 

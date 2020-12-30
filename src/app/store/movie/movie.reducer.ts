@@ -1,9 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { MovieListResult } from '../../interfaces/movie-list-result';
 import { moviesLoaded } from './movie.actions';
+import { MediaListItem } from '../../interfaces/media-list-item';
 
 export interface MovieState {
-    list: MovieListResult[];
+    list: MediaListItem[];
 }
 
 const initialState: MovieState = {
@@ -15,9 +15,7 @@ const movieReducer = createReducer(
     on(moviesLoaded, (state, data) => ({ ...state, list: data.list }))
 );
 
-export function reducer(
+export const reducer = (
     state: MovieState | undefined,
     action: Action
-): MovieState {
-    return movieReducer(state, action);
-}
+): MovieState => movieReducer(state, action);

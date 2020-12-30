@@ -16,12 +16,10 @@ const movieReducer = createReducer(
     on(searchedMediaLoaded, (state, data) => ({ ...state, list: data.list }))
 );
 
-export function reducer(
+export const reducer = (
     state: SearchedMediaState | undefined,
     action: Action
-): SearchedMediaState {
-    return movieReducer(state, action);
-}
+): SearchedMediaState => movieReducer(state, action);
 
 export const selectSearchedMedia = (state: State): MediaListItem[] =>
     state.searchResult.list;

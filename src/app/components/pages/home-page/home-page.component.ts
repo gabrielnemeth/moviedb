@@ -35,11 +35,11 @@ export class HomePageComponent implements OnInit {
         );
 
         this.youtubeId$ = this.trending$.pipe(
-            switchMap((trending) => {
-                return this.mediaService
+            switchMap((trending) =>
+                this.mediaService
                     .getVideo(trending.id, trending.type)
-                    .pipe(map((videoData) => videoData.results[0]?.key));
-            })
+                    .pipe(map((videoData) => videoData.results[0]?.key))
+            )
         );
 
         const trendingGenreIds$ = this.trending$.pipe(

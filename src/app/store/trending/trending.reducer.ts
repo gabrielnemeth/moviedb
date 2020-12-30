@@ -36,12 +36,10 @@ const trendingReducer = createReducer(
         selectedTimeWindow: data.selectedTimeWindow,
     }))
 );
-export function reducer(
+export const reducer = (
     state: TrendingState | undefined,
     action: Action
-): TrendingState {
-    return trendingReducer(state, action);
-}
+): TrendingState => trendingReducer(state, action);
 
 export const selectTrendingMedia = (state: State): MediaListItem[] =>
     state.trending.list;

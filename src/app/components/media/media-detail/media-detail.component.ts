@@ -20,7 +20,7 @@ export class MediaDetailComponent {
         this._mediaItem = item;
         this.castWithProfileOnly$ = of(item).pipe(
             filter((i) => !isNil(i?.cast)),
-            // tslint:disable-next-line:no-non-null-assertion
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             map((i) => i!.cast!.filter((cast) => !isNil(cast.imagePath))),
             map((i) => take(i, 14))
         );

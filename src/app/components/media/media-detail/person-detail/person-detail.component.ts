@@ -11,12 +11,12 @@ import { MediaItem } from '../../../../interfaces/media-item';
 export class PersonDetailComponent implements OnInit {
     public mediaItem$: Observable<MediaItem>;
 
-    constructor(
+    public constructor(
         private route: ActivatedRoute,
         private mediaService: MediaService
     ) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         const mediaItemId = this.route.snapshot.paramMap.get('id') || '';
         this.mediaItem$ = this.mediaService.getPersonById(mediaItemId);
     }

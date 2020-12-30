@@ -10,8 +10,8 @@ export class TrendingEffects {
     public loadingTrendingMedia$ = createEffect(() =>
         this.actions$.pipe(
             ofType(fetchTrendingMedia),
-            mergeMap((media) => {
-                return zip(
+            mergeMap((media) =>
+                zip(
                     this.mediaService.getTrendingMovies(),
                     this.mediaService.getTrendingTvs()
                 ).pipe(
@@ -20,8 +20,8 @@ export class TrendingEffects {
                             list: [...tvList, ...movieList],
                         })
                     )
-                );
-            })
+                )
+            )
         )
     );
 
