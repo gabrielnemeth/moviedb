@@ -6,13 +6,21 @@ import { TimeWindow } from '../../interfaces/time-window';
     templateUrl: './time-switch.component.html',
 })
 export class TimeSwitchComponent {
+    private _selectedTimeWindow: TimeWindow | null;
+    public dayActive: boolean;
+    public weekActive: boolean;
+
     @Input()
-    public selectedTimeWindow: TimeWindow | null;
+    public set selectedTimeWindow(time: TimeWindow | null) {
+        this._selectedTimeWindow = time;
+        this.dayActive = time === 'day';
+        this.weekActive = time === 'week';
+    }
+
+    public get selectedTimeWindow(): TimeWindow | null {
+        return this._selectedTimeWindow;
+    }
 
     @Output()
     public timeWindowSelect: EventEmitter<TimeWindow> = new EventEmitter<TimeWindow>();
-
-    public isActive(timeWindow: TimeWindow): boolean {
-        return this.selectedTimeWindow === timeWindow;
-    }
 }

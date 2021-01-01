@@ -14,6 +14,11 @@ import { Cast } from 'src/app/interfaces/cast';
 })
 export class MediaDetailComponent {
     private _mediaItem: MediaItem | null;
+    public style: {
+        [klass: string]: string;
+    };
+    public year: string;
+    public runtime?: string;
 
     @Input()
     public set mediaItem(item: MediaItem | null) {
@@ -24,6 +29,10 @@ export class MediaDetailComponent {
             map((i) => i!.cast!.filter((cast) => !isNil(cast.imagePath))),
             map((i) => take(i, 14))
         );
+
+        this.style = this.getStyle(item?.img?.backdrop);
+        this.year = this.getYear(item?.releaseDate);
+        this.runtime = this.formatRuntime(item?.runtime);
     }
 
     public get mediaItem(): MediaItem | null {
@@ -72,10 +81,10 @@ export class MediaDetailComponent {
 
     public showAllReviews: boolean;
 
-    public getStyle(
+    private getStyle(
         imagePath: string | null | undefined
     ): {
-        [klass: string]: any;
+        [klass: string]: string;
     } {
         return {
             'background-image': `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${imagePath})`,
@@ -85,12 +94,14 @@ export class MediaDetailComponent {
         };
     }
 
-    public getYear(date: string | undefined): string {
+    private getYear(date: string | undefined): string {
         return date ? new Date(date).getFullYear().toString() : '';
     }
 
-    public formatRuntime(runtime: number | undefined): string {
-        console.assert(!isNil(runtime), `Runtime can't be undefined.`);
+    private formatRuntime(runtime: number | undefined): string | undefined {
+        if (isNil(runtime)) {
+            return runtime;
+        }
         const hours = moment.duration(runtime, 'minutes').hours();
         const minutes = moment.duration(runtime, 'minutes').minutes();
 

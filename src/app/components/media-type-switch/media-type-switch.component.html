@@ -1,6 +1,6 @@
 <div class="field has-addons">
     <p class="control">
-        <button class="button is-small" [ngClass]="{'is-active is-link': isActive(MediaType.movie)}"
+        <button class="button is-small" [ngClass]="{'is-active is-link': movieActive}"
                 (click)="mediaTypeSelect.emit(MediaType.movie)">
                   <span class="icon is-small">
                     <i class="fas fa-film"></i>
@@ -8,7 +8,7 @@
         </button>
     </p>
     <p class="control">
-        <button class="button is-small" [ngClass]="{'is-active is-link': isActive(MediaType.tv)}"
+        <button class="button is-small" [ngClass]="{'is-active is-link': tvActive}"
                 (click)="mediaTypeSelect.emit(MediaType.tv)">
                       <span class="icon is-small">
                         <i class="fas fa-tv"></i>

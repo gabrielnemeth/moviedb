@@ -9,13 +9,25 @@ import * as moment from 'moment';
     styleUrls: ['./review.component.scss'],
 })
 export class ReviewComponent {
+    private _review: Review;
+    public date: string;
+    public initialChar: string;
+
     @Input()
-    public review: Review;
+    public set review(rev: Review) {
+        this._review = rev;
+        this.date = this.getDate(rev.created_at, rev.updated_at);
+        this.initialChar = rev.author_details.username.charAt(0);
+    }
+
+    public get review(): Review {
+        return this._review;
+    }
 
     @HostBinding('class')
     public class = 'media';
 
-    public getDate(created: string, updated?: string): string {
+    private getDate(created: string, updated?: string): string {
         const format = 'MMMM D, YYYY';
         return !isNil(updated)
             ? moment(updated).format(format)

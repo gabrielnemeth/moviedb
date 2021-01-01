@@ -21,6 +21,9 @@ export class HomePageComponent implements OnInit {
     public youtubeId: string;
     public openModal: boolean;
     public genres$: Observable<(Genre | undefined)[]>;
+    public style$: Observable<{
+        [klass: string]: string;
+    }>;
 
     public constructor(
         private store: Store<State>,
@@ -32,6 +35,10 @@ export class HomePageComponent implements OnInit {
             map((trending) => trending[random(0, trending.length - 1)]),
             filter((trending) => !isNil(trending)),
             shareReplay(1)
+        );
+
+        this.style$ = this.trending$.pipe(
+            map((trending) => this.getStyle(trending.img?.backdrop))
         );
 
         this.youtubeId$ = this.trending$.pipe(
@@ -62,7 +69,7 @@ export class HomePageComponent implements OnInit {
         );
     }
 
-    public getStyle(
+    private getStyle(
         imagePath: string | null | undefined
     ): {
         [klass: string]: any;

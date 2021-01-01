@@ -3,7 +3,7 @@
         <img src="{{ imagePath }}">
     </p>
     <p *ngIf="!review.author_details.avatar_path" class="avatar-placeholder">
-        {{ review.author_details.username.charAt(0) }}
+        {{ initialChar }}
     </p>
 </figure>
 <div class="media-content">
@@ -12,7 +12,7 @@
             <strong *ngIf="review.author_details.name as name">{{ name }}</strong>
             <strong
                 *ngIf="!review.author_details.name">{{ review.author_details.username }}</strong><small
-            class="ml-2">{{ getDate(review.created_at, review.updated_at) }}</small>
+            class="ml-2">{{ date }}</small>
             <app-rating-badge *ngIf="review.author_details.rating as rating" [rating]="rating"></app-rating-badge>
             <br>
             <app-review-content [content]="review.content"></app-review-content>

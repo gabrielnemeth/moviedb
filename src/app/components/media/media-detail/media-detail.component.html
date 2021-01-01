@@ -1,7 +1,7 @@
 <section
     *ngIf="mediaItem"
     class="hero is-fullheight"
-    [ngStyle]="getStyle(mediaItem?.img?.backdrop)"
+    [ngStyle]="this.style"
 >
     <div class="hero-bg">
         <div class="hero-head">
@@ -43,9 +43,9 @@
                                     <p class="mr-2" *ngFor="let genre of genres">{{ genre }}</p>
                                 </div>
                                 <p class="level-item"
-                                   *ngIf="mediaItem?.runtime">{{ formatRuntime(mediaItem.runtime) }}</p>
+                                   *ngIf="mediaItem?.runtime">{{ runtime }}</p>
                                 <p *ngIf="mediaItem?.releaseDate"
-                                   class="level-item">{{ getYear(mediaItem.releaseDate) }}</p>
+                                   class="level-item">{{ year }}</p>
                             </div>
                         </div>
                         <p class="has-text-white">{{mediaItem?.overview}}</p>

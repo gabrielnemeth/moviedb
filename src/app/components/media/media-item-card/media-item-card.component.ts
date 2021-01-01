@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../../../store/state';
 import { Router } from '@angular/router';
 import { MediaType } from '../../../interfaces/media-type';
+import { isNil } from 'lodash-es';
 
 @Component({
     selector: 'app-media-item-card',
@@ -14,15 +15,30 @@ import { MediaType } from '../../../interfaces/media-type';
     styleUrls: ['./media-item-card.component.scss'],
 })
 export class MediaItemCardComponent {
+    private _media: MediaListItem;
+    public year?: string;
+    public genre$: Observable<string | undefined>;
+
     @Input()
-    public media: MediaListItem;
+    public set media(item: MediaListItem) {
+        this._media = item;
+        this.year = this.getYear(item.releaseDate);
+        this.genre$ = this.getGenreString(item.genresIds, item.type);
+    }
+
+    public get media(): MediaListItem {
+        return this._media;
+    }
 
     public constructor(private store: Store<State>, private router: Router) {}
 
-    public getGenreString(
-        ids: number[],
+    private getGenreString(
+        ids: number[] | undefined,
         mediaType: MediaType
     ): Observable<string | undefined> {
+        if (isNil(ids)) {
+            return of(undefined);
+        }
         // Return only first if there are more genres for the movie.
         const firstId = ids.slice(0, 1);
         return firstId.length > 0
@@ -32,7 +48,10 @@ export class MediaItemCardComponent {
             : of(undefined);
     }
 
-    public getYear(date: string): string {
+    private getYear(date: string | undefined): string | undefined {
+        if (isNil(date)) {
+            return date;
+        }
         return new Date(date).getFullYear().toString();
     }
 

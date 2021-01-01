@@ -1,5 +1,5 @@
 <section class="hero is-fullheight" *ngIf="(trending$ | async) as trending"
-         [ngStyle]="getStyle(trending?.img?.backdrop)">
+         [ngStyle]="this.style$ | async">
     <div class="hero-gradient">
         <div class="hero-bg">
         <div class="hero-head">
