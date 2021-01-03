@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, mergeMap } from 'rxjs/operators';
 import { MediaService } from '../../services/media.service';
-import { fetchTrendingMedia, trendingMediaLoaded } from './trending.actions';
+import { featuredMediaLoaded, fetchFeaturedMedia } from './featured.actions';
 
 @Injectable()
-export class TrendingEffects {
-    public loadingTrendingMedia$ = createEffect(() =>
+export class FeaturedEffects {
+    public loadingFeaturedMedia$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(fetchTrendingMedia),
+            ofType(fetchFeaturedMedia),
             mergeMap((media) =>
-                this.mediaService.getTrendingMediaForCurrentTimeWindow().pipe(
+                this.mediaService.getFeaturedMedia().pipe(
                     map((mediaList) =>
-                        trendingMediaLoaded({
+                        featuredMediaLoaded({
                             list: mediaList,
                         })
                     )

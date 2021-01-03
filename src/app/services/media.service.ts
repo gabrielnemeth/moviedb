@@ -87,26 +87,44 @@ export class MediaService {
         ).pipe(map(([movie, tv]) => ({ movie: movie.genres, tv: tv.genres })));
     }
 
-    public getTrendingMovies(): Observable<MediaListItem[]> {
-        return this.store.select(selectTimeWindow).pipe(
-            switchMap((timeWindow) =>
-                this.http.get<MovieSearchResponse>(
-                    `${environment.themoviedb.baseUrl}trending/movie/${timeWindow}?api_key=${this.apiKey}`
-                )
-            ),
-            map((movies) => this.createMediaListItemsFromMovies(movies))
+    public getFeaturedMedia(): Observable<MediaListItem[]> {
+        // Since the web service doesnt have featured media, we just use the trending one.
+        return zip(this.getTrendingMovies(), this.getTrendingTvs()).pipe(
+            map(([movie, tv]) => [...movie, ...tv])
         );
     }
 
-    public getTrendingTvs(): Observable<MediaListItem[]> {
-        return this.store.select(selectTimeWindow).pipe(
-            switchMap((timeWindow) =>
-                this.http.get<TvSearchResponse>(
-                    `${environment.themoviedb.baseUrl}trending/tv/${timeWindow}?api_key=${this.apiKey}`
+    public getTrendingMediaForCurrentTimeWindow(): Observable<MediaListItem[]> {
+        return this.store
+            .select(selectTimeWindow)
+            .pipe(
+                switchMap((timeWindow) =>
+                    zip(
+                        this.getTrendingMovies(timeWindow),
+                        this.getTrendingTvs(timeWindow)
+                    ).pipe(map(([movie, tv]) => [...movie, ...tv]))
                 )
-            ),
-            map((tvs) => this.createMediaListItemsFromTvs(tvs))
-        );
+            );
+    }
+
+    public getTrendingMovies(
+        timeWindow: 'day' | 'week' = 'week'
+    ): Observable<MediaListItem[]> {
+        return this.http
+            .get<MovieSearchResponse>(
+                `${environment.themoviedb.baseUrl}trending/movie/${timeWindow}?api_key=${this.apiKey}`
+            )
+            .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
+    }
+
+    public getTrendingTvs(
+        timeWindow: 'day' | 'week' = 'week'
+    ): Observable<MediaListItem[]> {
+        return this.http
+            .get<TvSearchResponse>(
+                `${environment.themoviedb.baseUrl}trending/tv/${timeWindow}?api_key=${this.apiKey}`
+            )
+            .pipe(map((tvs) => this.createMediaListItemsFromTvs(tvs)));
     }
 
     public getMovieById(id: string): Observable<MediaItem> {

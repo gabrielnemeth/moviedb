@@ -5,10 +5,11 @@ import { filter, map, shareReplay, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MediaService } from '../../../services/media.service';
 import { Genre } from '../../../interfaces/genre';
-import { selectTrendingMedia } from 'src/app/store/trending/trending.reducer';
 import { isNil, random } from 'lodash-es';
 import { MediaListItem } from '../../../interfaces/media-list-item';
 import { getGenresByIds } from '../../../store/genre/genre.reducer';
+import { selectFeaturedMedia } from '../../../store/featured/featured.reducer';
+import { fetchFeaturedMedia } from '../../../store/featured/featured.actions';
 
 @Component({
     selector: 'app-home-page',
@@ -16,7 +17,7 @@ import { getGenresByIds } from '../../../store/genre/genre.reducer';
     styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-    public trending$: Observable<MediaListItem>;
+    public featured$: Observable<MediaListItem>;
     public youtubeId$: Observable<string | undefined>;
     public youtubeId: string;
     public openModal: boolean;
@@ -31,17 +32,19 @@ export class HomePageComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.trending$ = this.store.select(selectTrendingMedia).pipe(
-            map((trending) => trending[random(0, trending.length - 1)]),
-            filter((trending) => !isNil(trending)),
+        this.store.dispatch(fetchFeaturedMedia());
+
+        this.featured$ = this.store.select(selectFeaturedMedia).pipe(
+            map((featured) => featured[random(0, featured.length - 1)]),
+            filter((featured) => !isNil(featured)),
             shareReplay(1)
         );
 
-        this.style$ = this.trending$.pipe(
+        this.style$ = this.featured$.pipe(
             map((trending) => this.getStyle(trending.img?.backdrop))
         );
 
-        this.youtubeId$ = this.trending$.pipe(
+        this.youtubeId$ = this.featured$.pipe(
             switchMap((trending) =>
                 this.mediaService
                     .getVideo(trending.id, trending.type)
@@ -49,7 +52,7 @@ export class HomePageComponent implements OnInit {
             )
         );
 
-        const trendingGenreIds$ = this.trending$.pipe(
+        const trendingGenreIds$ = this.featured$.pipe(
             filter(
                 (trending) => !isNil(trending) && !isNil(trending.genresIds)
             ),

@@ -25,6 +25,7 @@ import { SearchedMediaEffects } from './store/searched-media/searched-media.effe
 import * as searchedMediaReducer from './store/searched-media/searched-media.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
+import * as featuredReducer from './store/featured/featured.reducer';
 import { MovieDetailComponent } from './components/media/media-detail/movie-detail/movie-detail.component';
 import { TvDetailComponent } from './components/media/media-detail/tv-detail/tv-detail.component';
 import { PersonDetailComponent } from './components/media/media-detail/person-detail/person-detail.component';
@@ -38,6 +39,7 @@ import { MediaDetailComponent } from './components/media/media-detail/media-deta
 import { ReviewContentComponent } from './components/media/media-detail/review-content/review-content.component';
 import { RatingBadgeComponent } from './components/media/media-detail/review-badge/rating-badge.component';
 import { ReviewComponent } from './components/media/media-detail/review/review.component';
+import { FeaturedEffects } from './store/featured/featured.effects';
 
 @NgModule({
     declarations: [
@@ -75,6 +77,7 @@ import { ReviewComponent } from './components/media/media-detail/review/review.c
             searchResult: searchedMediaReducer.reducer,
             trending: trendingReducer.reducer,
             genres: genreReducer.reducer,
+            featured: featuredReducer.reducer,
         }),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
@@ -85,6 +88,7 @@ import { ReviewComponent } from './components/media/media-detail/review/review.c
             TrendingEffects,
             GenreEffects,
             SearchedMediaEffects,
+            FeaturedEffects,
         ]),
     ],
     providers: [],
