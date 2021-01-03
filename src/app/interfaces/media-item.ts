@@ -1,6 +1,7 @@
 import { MediaType } from './media-type';
 import { Cast } from './cast';
 import { Review } from './review';
+import { Facts } from './facts';
 
 export interface MediaItem {
     id: number;
@@ -19,4 +20,5 @@ export interface MediaItem {
     runtime?: number;
     trailerVideoId?: string;
     cast?: Cast[];
+    facts?: Facts;
 }

@@ -40,6 +40,7 @@ import { ReviewContentComponent } from './components/media/media-detail/review-c
 import { RatingBadgeComponent } from './components/media/media-detail/review-badge/rating-badge.component';
 import { ReviewComponent } from './components/media/media-detail/review/review.component';
 import { FeaturedEffects } from './store/featured/featured.effects';
+import { FactsComponent } from './components/media/media-detail/facts/facts.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,7 @@ import { FeaturedEffects } from './store/featured/featured.effects';
         ReviewContentComponent,
         RatingBadgeComponent,
         ReviewComponent,
+        FactsComponent,
     ],
     imports: [
         BrowserModule,

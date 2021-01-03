@@ -66,7 +66,7 @@ export interface LastEpisodeToAir {
 export interface Network {
     name: string;
     id: number;
-    logo_path: null | string;
+    logo_path?: string;
     origin_country: string;
 }
 

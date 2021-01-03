@@ -74,6 +74,13 @@
     </div>
 </section>
 
+<section class="section" *ngIf="mediaItem?.facts">
+    <div class="container">
+        <h2 class="title">Facts</h2>
+        <app-facts [facts]="mediaItem!.facts!"></app-facts>
+    </div>
+</section>
+
 <section class="section" *ngIf="mediaItem?.reviews as reviews">
     <div class="container">
         <h2 class="title">Reviews <small class="is-size-4 has-text-grey">({{ reviews.length }})</small></h2>

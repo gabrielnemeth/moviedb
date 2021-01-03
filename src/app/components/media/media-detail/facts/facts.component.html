@@ -1,0 +1,31 @@
+<div class="columns">
+    <div class="column" *ngIf="facts.originalTitle">
+        <h6 class="title is-6">Original Name</h6>
+        <p>{{ facts.originalTitle }}</p>
+    </div>
+    <div class="column" *ngIf="facts.status">
+        <h6 class="title is-6">Status</h6>
+        <p>{{ facts.status }}</p>
+    </div>
+    <div class="column" *ngIf="facts.networkName || facts.networkLogoPath">
+        <h6 class="title is-6">Network</h6>
+        <p *ngIf="!facts.networkLogoPath">{{ facts.networkName }}</p>
+        <img [src]="facts.networkLogoPath" [alt]="facts.networkName">
+    </div>
+    <div class="column" *ngIf="facts.type">
+        <h6 class="title is-6">Type</h6>
+        <p>{{ facts.type }}</p>
+    </div>
+    <div class="column" *ngIf="facts.originalLanguage">
+        <h6 class="title is-6">Original Language</h6>
+        <p>{{ facts.originalLanguage }}</p>
+    </div>
+    <div class="column" *ngIf="facts.budget">
+        <h6 class="title is-6">Budget</h6>
+        <p>{{ facts.budget | currency }}</p>
+    </div>
+    <div class="column" *ngIf="facts.revenue">
+        <h6 class="title is-6">Revenue</h6>
+        <p>{{ facts.revenue | currency }}</p>
+    </div>
+</div>

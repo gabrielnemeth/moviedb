@@ -9,7 +9,7 @@ import { MovieSearchResponse } from '../interfaces/response/movie-search-respons
 import { MultiSearchResponse } from '../interfaces/response/multi-search-response';
 import { PersonSearchResponse } from '../interfaces/response/person-search-response';
 import { TvSearchResponse } from '../interfaces/response/tv-search-response';
-import { Season, Tv } from '../interfaces/tv';
+import { Network, Season, Tv } from '../interfaces/tv';
 import { Person } from '../interfaces/person';
 import { MediaType } from '../interfaces/media-type';
 import { VideoResponse } from '../interfaces/response/video-response';
@@ -27,6 +27,8 @@ import { Credits } from '../interfaces/credits';
 import { Cast } from '../interfaces/cast';
 import { SeasonDetail } from '../interfaces/season-detail';
 import { Review } from '../interfaces/review';
+import { Facts } from '../interfaces/facts';
+import ISO6391 from 'iso-639-1';
 
 @Injectable({
     providedIn: 'root',
@@ -277,6 +279,7 @@ export class MediaService {
             trailerVideoId: this.getTrailerVideoId(movie?.videos?.results),
             cast: this.createCastFromCredit(movie?.credits),
             type: MediaType.movie,
+            facts: this.createMovieFacts(movie),
         };
     }
 
@@ -328,6 +331,7 @@ export class MediaService {
             trailerVideoId: this.getTrailerVideoId(data.tv?.videos?.results),
             cast: data.cast,
             type: MediaType.tv,
+            facts: this.createTvFacts(data.tv),
         };
     }
 
@@ -452,5 +456,40 @@ export class MediaService {
                 ),
             },
         }));
+    }
+
+    private createMovieFacts(movie: Movie): Facts {
+        return {
+            status: movie.status,
+            originalTitle: movie.original_title,
+            originalLanguage: ISO6391.getName(movie.original_language),
+            budget: movie.budget,
+            revenue: movie.revenue,
+        };
+    }
+
+    private createTvFacts(tv: Tv): Facts {
+        const networkFacts = this.getNetworkFact(tv.networks);
+        return {
+            status: tv.status,
+            originalTitle: tv.original_name,
+            originalLanguage: ISO6391.getName(tv.original_language),
+            type: tv.type,
+            networkName: networkFacts.name,
+            networkLogoPath: networkFacts.logoPath,
+        };
+    }
+
+    private getNetworkFact(
+        networks: Network[]
+    ): { name: string | undefined; logoPath: string | undefined } {
+        if (isNil(networks)) {
+            return { name: undefined, logoPath: undefined };
+        }
+
+        return {
+            name: networks[0].name,
+            logoPath: `https://image.tmdb.org/t/p/h30/${networks[0].logo_path}`,
+        };
     }
 }
