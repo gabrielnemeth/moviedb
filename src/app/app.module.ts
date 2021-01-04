@@ -41,6 +41,7 @@ import { RatingBadgeComponent } from './components/media/media-detail/review-bad
 import { ReviewComponent } from './components/media/media-detail/review/review.component';
 import { FeaturedEffects } from './store/featured/featured.effects';
 import { FactsComponent } from './components/media/media-detail/facts/facts.component';
+import { RecommendationsComponent } from './components/media/media-detail/recommendations/recommendations.component';
 
 @NgModule({
     declarations: [
@@ -66,6 +67,7 @@ import { FactsComponent } from './components/media/media-detail/facts/facts.comp
         RatingBadgeComponent,
         ReviewComponent,
         FactsComponent,
+        RecommendationsComponent,
     ],
     imports: [
         BrowserModule,

@@ -29,6 +29,7 @@ import { SeasonDetail } from '../interfaces/season-detail';
 import { Review } from '../interfaces/review';
 import { Facts } from '../interfaces/facts';
 import ISO6391 from 'iso-639-1';
+import { RecommendedMedia } from '../interfaces/recommended-media';
 
 @Injectable({
     providedIn: 'root',
@@ -132,7 +133,7 @@ export class MediaService {
     public getMovieById(id: string): Observable<MediaItem> {
         return this.http
             .get<Movie>(
-                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits,reviews`
+                `${environment.themoviedb.baseUrl}movie/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits,reviews,recommendations`
             )
             .pipe(map((movie) => this.createMovieItem(movie)));
     }
@@ -140,7 +141,7 @@ export class MediaService {
     public getTvById(id: string): Observable<MediaItem> {
         return this.http
             .get<Tv>(
-                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits,reviews`
+                `${environment.themoviedb.baseUrl}tv/${id}?api_key=${this.apiKey}&language=en-US&append_to_response=videos,credits,reviews,recommendations`
             )
             .pipe(
                 switchMap((tv) =>
@@ -268,6 +269,12 @@ export class MediaService {
             voteAverage: movie.vote_average,
             popularity: movie.popularity,
             overview: movie.overview,
+            recommendations: take(
+                movie.recommendations?.results
+                    .filter((rec) => !isNil(rec.backdrop_path))
+                    .map((rec) => this.createRecommendedMediaFromMovie(rec)),
+                6
+            ),
             reviews:
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 movie.reviews!.results.length > 0
@@ -321,6 +328,12 @@ export class MediaService {
             voteAverage: data.tv.vote_average,
             popularity: data.tv.popularity,
             overview: data.tv.overview,
+            recommendations: take(
+                data.tv.recommendations?.results
+                    .filter((rec) => !isNil(rec.backdrop_path))
+                    .map((rec) => this.createRecommendedMediaFromTv(rec)),
+                6
+            ),
             reviews:
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 data.tv.reviews!.results.length > 0
@@ -490,6 +503,24 @@ export class MediaService {
         return {
             name: networks[0].name,
             logoPath: `https://image.tmdb.org/t/p/h30/${networks[0].logo_path}`,
+        };
+    }
+
+    private createRecommendedMediaFromMovie(movie: Movie): RecommendedMedia {
+        return {
+            id: movie.id,
+            posterPath: `https://image.tmdb.org/t/p/w780/${movie.poster_path}`,
+            title: movie.title,
+            type: MediaType.movie,
+        };
+    }
+
+    private createRecommendedMediaFromTv(tv: Tv): RecommendedMedia {
+        return {
+            id: tv.id,
+            posterPath: `https://image.tmdb.org/t/p/w780/${tv.poster_path}`,
+            title: tv.name,
+            type: MediaType.tv,
         };
     }
 }

@@ -26,9 +26,12 @@ export interface Tv {
     original_name: string;
     overview: string;
     popularity: number;
-    poster_path: string | null;
+    poster_path?: string;
     production_companies: Network[];
     production_countries: ProductionCountry[];
+    recommendations?: {
+        results: Tv[];
+    };
     reviews?: ReviewResponse;
     seasons: Season[];
     spoken_languages: SpokenLanguage[];

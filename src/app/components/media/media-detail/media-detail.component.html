@@ -109,5 +109,13 @@
     </div>
 </section>
 
+
+<section class="section" *ngIf="mediaItem?.recommendations">
+    <div class="container">
+        <h2 class="title">Recommended</h2>
+        <app-recommendations [recommendations]="mediaItem!.recommendations!"></app-recommendations>
+    </div>
+</section>
+
 <app-video-player *ngIf="openModal" (closePlayer)="closePlayer()"
                   [youtubeId]="youtubeId"></app-video-player>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MediaService } from '../../../../services/media.service';
 import { MediaItem } from '../../../../interfaces/media-item';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-person-detail',
@@ -17,7 +18,9 @@ export class PersonDetailComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        const mediaItemId = this.route.snapshot.paramMap.get('id') || '';
-        this.mediaItem$ = this.mediaService.getPersonById(mediaItemId);
+        this.mediaItem$ = this.route.params.pipe(
+            map((param) => param.id),
+            switchMap((id) => this.mediaService.getPersonById(id))
+        );
     }
 }

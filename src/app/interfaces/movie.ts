@@ -17,10 +17,13 @@ export interface Movie {
     original_title: string;
     overview?: string;
     popularity: number;
-    poster_path: string | null;
+    poster_path?: string;
     production_companies: ProductionCompany[];
     production_countries: ProductionCountry[];
     release_date: string;
+    recommendations?: {
+        results: Movie[];
+    };
     revenue: number;
     reviews?: ReviewResponse;
     runtime?: number;

@@ -1,0 +1,10 @@
+<div class="columns is-mobile is-multiline recommended-media-list">
+    <div class="column is-full-mobile is-3-tablet is-2-desktop recommended-media"
+         (click)="showMediaItem(recommendation.type, recommendation.id)" *ngFor="let recommendation of recommendations">
+        <figure class="image">
+            <img class="poster" [alt]="recommendation.title" [src]="recommendation.posterPath">
+            <div class="media-item-image-blur"></div>
+        </figure>
+        <p class="media-title">{{recommendation.title}}</p>
+    </div>
+</div>
