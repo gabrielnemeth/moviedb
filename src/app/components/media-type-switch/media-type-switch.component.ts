@@ -14,7 +14,7 @@ export class MediaTypeSwitchComponent {
     public set selectedMediaType(type: MediaType | null) {
         this._selectedMediaType = type;
         this.movieActive = this.selectedMediaType === MediaType.movie;
-        this.movieActive = this.selectedMediaType === MediaType.tv;
+        this.tvActive = this.selectedMediaType === MediaType.tv;
     }
 
     public get selectedMediaType(): MediaType | null {

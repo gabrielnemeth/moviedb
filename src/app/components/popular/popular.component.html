@@ -1,0 +1,10 @@
+<ng-container *ngIf="firstMediaItems$ | async as mediaItems">
+    <app-sliding-items
+        *ngIf="mediaItems.length > 0"
+        [mediaItems]="mediaItems"
+        [selectedMediaType]="selectedMediaType$ | async"
+        [mediaTypeSwitcher]="true"
+        (mediaTypeSelect)="onMediaTypeSelect($event)"
+        [title]="'Popular'"
+    ></app-sliding-items>
+</ng-container>

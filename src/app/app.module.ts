@@ -25,6 +25,7 @@ import { SearchedMediaEffects } from './store/searched-media/searched-media.effe
 import * as searchedMediaReducer from './store/searched-media/searched-media.reducer';
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
+import * as popularReducer from './store/popular/popular.reducer';
 import * as featuredReducer from './store/featured/featured.reducer';
 import { MovieDetailComponent } from './components/media/media-detail/movie-detail/movie-detail.component';
 import { TvDetailComponent } from './components/media/media-detail/tv-detail/tv-detail.component';
@@ -42,6 +43,8 @@ import { ReviewComponent } from './components/media/media-detail/review/review.c
 import { FeaturedEffects } from './store/featured/featured.effects';
 import { FactsComponent } from './components/media/media-detail/facts/facts.component';
 import { RecommendationsComponent } from './components/media/media-detail/recommendations/recommendations.component';
+import { PopularComponent } from './components/popular/popular.component';
+import { PopularEffects } from './store/popular/popular.effects';
 
 @NgModule({
     declarations: [
@@ -63,6 +66,7 @@ import { RecommendationsComponent } from './components/media/media-detail/recomm
         MediaTypeSwitchComponent,
         TimeSwitchComponent,
         MediaDetailComponent,
+        PopularComponent,
         ReviewContentComponent,
         RatingBadgeComponent,
         ReviewComponent,
@@ -80,6 +84,7 @@ import { RecommendationsComponent } from './components/media/media-detail/recomm
         StoreModule.forRoot({
             searchResult: searchedMediaReducer.reducer,
             trending: trendingReducer.reducer,
+            popular: popularReducer.reducer,
             genres: genreReducer.reducer,
             featured: featuredReducer.reducer,
         }),
@@ -93,6 +98,7 @@ import { RecommendationsComponent } from './components/media/media-detail/recomm
             GenreEffects,
             SearchedMediaEffects,
             FeaturedEffects,
+            PopularEffects,
         ]),
     ],
     providers: [],
