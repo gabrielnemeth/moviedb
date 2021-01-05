@@ -28,3 +28,11 @@
 .genre:last-of-type:after {
     content: none;
 }
+
+.title {
+    cursor: pointer;
+}
+
+.title:hover {
+    text-decoration: underline;
+}

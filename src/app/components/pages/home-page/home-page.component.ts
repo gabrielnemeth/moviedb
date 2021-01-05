@@ -10,6 +10,8 @@ import { MediaListItem } from '../../../interfaces/media-list-item';
 import { getGenresByIds } from '../../../store/genre/genre.reducer';
 import { selectFeaturedMedia } from '../../../store/featured/featured.reducer';
 import { fetchFeaturedMedia } from '../../../store/featured/featured.actions';
+import { MediaType } from '../../../interfaces/media-type';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home-page',
@@ -28,7 +30,8 @@ export class HomePageComponent implements OnInit {
 
     public constructor(
         private store: Store<State>,
-        private mediaService: MediaService
+        private mediaService: MediaService,
+        private router: Router
     ) {}
 
     public ngOnInit(): void {
@@ -92,5 +95,18 @@ export class HomePageComponent implements OnInit {
 
     public closePlayer(): void {
         this.openModal = false;
+    }
+
+    public showMediaItem(type: MediaType, id: number): void {
+        let path;
+        if (type === MediaType.movie) {
+            path = '/movie';
+        }
+
+        if (type === MediaType.tv) {
+            path = '/tv';
+        }
+
+        this.router.navigate([path, id]);
     }
 }

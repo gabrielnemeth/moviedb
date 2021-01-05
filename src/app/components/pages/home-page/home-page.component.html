@@ -1,4 +1,4 @@
-<section class="hero is-fullheight" *ngIf="(featured$ | async) as trending"
+<section class="hero is-fullheight" *ngIf="(featured$ | async) as featured"
          [ngStyle]="this.style$ | async">
     <div class="hero-gradient">
         <div class="hero-bg">
@@ -12,20 +12,20 @@
                     <div class="column is-3">
                         <app-media-item-image
                             [largeShadow]="true"
-                            [src]="trending?.img?.poster"
-                            [alt]="trending.title"
+                            [src]="featured?.img?.poster"
+                            [alt]="featured.title"
                         ></app-media-item-image>
                     </div>
                     <div class="column is-flex is-align-items-flex-end">
                         <div class="is-flex is-flex-direction-column">
-                            <h1 class="title has-text-white">
-                                {{ trending.title }}
+                            <h1 class="title has-text-white" (click)="showMediaItem(featured.type, featured.id)">
+                                {{ featured.title }}
                             </h1>
                             <div class="is-flex mb-2">
-                                <span *ngIf="trending.voteAverage && trending.voteAverage > 0"
+                                <span *ngIf="featured.voteAverage && featured.voteAverage > 0"
                                       class="tag is-warning mr-4"><i
-                                    class="fas fa-star mr-1"></i><b>{{trending.voteAverage}}</b>/10</span>
-                                <span *ngIf="!trending.voteAverage || trending.voteAverage === 0"
+                                    class="fas fa-star mr-1"></i><b>{{featured.voteAverage}}</b>/10</span>
+                                <span *ngIf="!featured.voteAverage || featured.voteAverage === 0"
                                       class="tag is-light mr-4"><b>Not yet rated</b></span>
                                 <a class="has-text-white" *ngIf="(youtubeId$ | async) as youtubeId"
                                    (click)="playVideo(youtubeId)">
