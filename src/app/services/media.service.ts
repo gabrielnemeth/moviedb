@@ -254,12 +254,16 @@ export class MediaService {
     private createMediaListItemsFromMovies(
         movieSearchResponse: MovieSearchResponse
     ): MediaListItem[] {
-        return movieSearchResponse.results.map((movie) =>
-            this.createMovieListItem(movie)
-        );
+        return movieSearchResponse.results
+            .filter((movie) => !isNil(movie.id))
+            .map((movie) => this.createMovieListItem(movie));
     }
 
     private createMovieListItem(movie: MovieListResponse): MediaListItem {
+        if (isNil(movie.id)) {
+            throw TypeError('Movie must have an ID');
+        }
+
         return {
             id: movie.id,
             title: movie.title,
@@ -405,21 +409,25 @@ export class MediaService {
     private createMediaListItemsFromMulti(
         multiSearchResponse: MultiSearchResponse
     ): MediaListItem[] {
-        return multiSearchResponse.results.map((multi) => {
-            if (multi.media_type === MediaType.movie) {
-                return this.createMovieListItem(multi as MovieListResponse);
-            }
+        return multiSearchResponse.results
+            .filter((multi) => !isNil(multi.id))
+            .map((multi) => {
+                if (multi.media_type === MediaType.movie) {
+                    return this.createMovieListItem(multi as MovieListResponse);
+                }
 
-            if (multi.media_type === MediaType.tv) {
-                return this.createTvListItem(multi as TvListResponse);
-            }
+                if (multi.media_type === MediaType.tv) {
+                    return this.createTvListItem(multi as TvListResponse);
+                }
 
-            if (multi.media_type === MediaType.person) {
-                return this.createPersonListItem(multi as PersonListResponse);
-            }
+                if (multi.media_type === MediaType.person) {
+                    return this.createPersonListItem(
+                        multi as PersonListResponse
+                    );
+                }
 
-            throw new TypeError(`MediaListItem can't be undefined.`);
-        });
+                throw new TypeError(`MediaListItem can't be undefined.`);
+            });
     }
 
     private getTrailerVideoId(videos: Video[] | undefined): string | undefined {

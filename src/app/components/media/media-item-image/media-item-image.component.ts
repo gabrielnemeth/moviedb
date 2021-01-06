@@ -7,10 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class MediaItemImageComponent {
     @Input()
-    public src: string | null | undefined;
+    public src?: string | null;
 
     @Input()
-    public alt: string;
+    public alt?: string;
 
     @Input()
     public clickable: boolean;

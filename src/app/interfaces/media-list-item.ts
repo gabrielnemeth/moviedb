@@ -3,7 +3,7 @@ import { MediaType } from './media-type';
 export interface MediaListItem {
     id: number;
     type: MediaType;
-    title: string;
+    title?: string;
     img?: {
         poster?: string | null;
         backdrop?: string | null;
