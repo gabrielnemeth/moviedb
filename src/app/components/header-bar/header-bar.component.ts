@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-header-bar',
@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./header-bar.component.scss'],
 })
 export class HeaderBarComponent {
+    @Input()
+    public dark: boolean;
+
     public isMenuActive: boolean;
 
     public toggleMenu(): void {

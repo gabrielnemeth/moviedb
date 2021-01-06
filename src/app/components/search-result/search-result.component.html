@@ -1,3 +1,5 @@
+<app-header-bar [dark]="true"></app-header-bar>
+
 <ng-container *ngIf="mediaItems$ | async as mediaItems">
     <app-media-item-list
         *ngIf="mediaItems.length > 0"
