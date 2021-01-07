@@ -110,7 +110,7 @@
 </section>
 
 
-<section class="section" *ngIf="mediaItem?.recommendations">
+<section class="section" *ngIf="mediaItem?.recommendations && mediaItem!.recommendations!.length > 0">
     <div class="container">
         <h2 class="title">Recommended</h2>
         <app-recommendations [recommendations]="mediaItem!.recommendations!"></app-recommendations>
