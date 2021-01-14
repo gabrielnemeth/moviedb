@@ -526,7 +526,7 @@ export class MediaService {
     private getNetworkFact(
         networks: Network[]
     ): { name: string | undefined; logoPath: string | undefined } {
-        if (isNil(networks)) {
+        if (isNil(networks) || networks.length === 0) {
             return { name: undefined, logoPath: undefined };
         }
 
