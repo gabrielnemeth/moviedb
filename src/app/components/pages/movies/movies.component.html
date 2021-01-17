@@ -1,0 +1,31 @@
+<app-header-bar [dark]="true"></app-header-bar>
+
+<section class="section">
+    <div class="container">
+        <div class="dropdown" (click)="onDropdownClick()" [ngClass]="{'is-active': dropdownActive}">
+            <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+                    <span>{{ (selectedFilterType$ | async)?.label }}</span>
+                    <span class="icon is-small">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                <div class="dropdown-content">
+                    <a class="dropdown-item" (click)="onTypeClick(type.value)"
+                       *ngFor="let type of movieFilterTypes" [ngClass]="{'is-active': (selectedFilterType$ | async)?.value === type.value}">
+                        {{ type.label }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-container *ngIf="mediaItems$ | async as mediaItems">
+    <app-media-item-list
+        *ngIf="mediaItems.length > 0"
+        [mediaItems]="mediaItems"
+    ></app-media-item-list>
+</ng-container>

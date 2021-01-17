@@ -3,6 +3,8 @@ import { TrendingState } from './trending/trending.reducer';
 import { SearchedMediaState } from './searched-media/searched-media.reducer';
 import { FeaturedState } from './featured/featured.reducer';
 import { PopularState } from './popular/popular.reducer';
+import { MoviesState } from './movies/movies.reducer';
+import { PopularMoviesState } from './popular-movies/popular-movies.reducer';
 
 export interface State {
     searchResult: SearchedMediaState;
@@ -10,4 +12,6 @@ export interface State {
     popular: PopularState;
     genres: GenreState;
     featured: FeaturedState;
+    popularMovies: PopularMoviesState;
+    movies: MoviesState;
 }

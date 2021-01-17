@@ -26,7 +26,9 @@ import * as searchedMediaReducer from './store/searched-media/searched-media.red
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
 import * as popularReducer from './store/popular/popular.reducer';
+import * as popularMoviesReducer from './store/popular-movies/popular-movies.reducer';
 import * as featuredReducer from './store/featured/featured.reducer';
+import * as moviesReducer from './store/movies/movies.reducer';
 import { MovieDetailComponent } from './components/media/media-detail/movie-detail/movie-detail.component';
 import { TvDetailComponent } from './components/media/media-detail/tv-detail/tv-detail.component';
 import { PersonDetailComponent } from './components/media/media-detail/person-detail/person-detail.component';
@@ -45,6 +47,8 @@ import { FactsComponent } from './components/media/media-detail/facts/facts.comp
 import { RecommendationsComponent } from './components/media/media-detail/recommendations/recommendations.component';
 import { PopularComponent } from './components/popular/popular.component';
 import { PopularEffects } from './store/popular/popular.effects';
+import { MoviesComponent } from './components/pages/movies/movies.component';
+import { PopularMoviesEffects } from './store/popular-movies/popular-movies.effects';
 
 @NgModule({
     declarations: [
@@ -72,6 +76,7 @@ import { PopularEffects } from './store/popular/popular.effects';
         ReviewComponent,
         FactsComponent,
         RecommendationsComponent,
+        MoviesComponent,
     ],
     imports: [
         BrowserModule,
@@ -87,6 +92,8 @@ import { PopularEffects } from './store/popular/popular.effects';
             popular: popularReducer.reducer,
             genres: genreReducer.reducer,
             featured: featuredReducer.reducer,
+            popularMovies: popularMoviesReducer.reducer,
+            movies: moviesReducer.reducer,
         }),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
@@ -99,6 +106,7 @@ import { PopularEffects } from './store/popular/popular.effects';
             SearchedMediaEffects,
             FeaturedEffects,
             PopularEffects,
+            PopularMoviesEffects,
         ]),
     ],
     providers: [],
