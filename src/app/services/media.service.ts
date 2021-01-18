@@ -144,6 +144,30 @@ export class MediaService {
             .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
     }
 
+    public getNowPlayingMovies(): Observable<MediaListItem[]> {
+        return this.http
+            .get<MovieSearchResponse>(
+                `${environment.themoviedb.baseUrl}movie/now_playing?api_key=${this.apiKey}`
+            )
+            .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
+    }
+
+    public getUpcomingMovies(): Observable<MediaListItem[]> {
+        return this.http
+            .get<MovieSearchResponse>(
+                `${environment.themoviedb.baseUrl}movie/upcoming?api_key=${this.apiKey}`
+            )
+            .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
+    }
+
+    public getTopRatedMovies(): Observable<MediaListItem[]> {
+        return this.http
+            .get<MovieSearchResponse>(
+                `${environment.themoviedb.baseUrl}movie/top_rated?api_key=${this.apiKey}`
+            )
+            .pipe(map((movies) => this.createMediaListItemsFromMovies(movies)));
+    }
+
     public getPopularTvs(): Observable<MediaListItem[]> {
         return this.http
             .get<TvSearchResponse>(

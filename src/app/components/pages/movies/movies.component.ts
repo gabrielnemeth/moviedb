@@ -7,9 +7,14 @@ import {
 } from 'src/app/store/movies/movies.reducer';
 import { State } from 'src/app/store/state';
 import { MediaListItem } from '../../../interfaces/media-list-item';
-import { selectMoviesFilterType } from '../../../store/movies/movies.actions';
+import {
+    fetchNowPlayingMovies,
+    fetchPopularMovies,
+    fetchTopRatedMovies,
+    fetchUpcomingMovies,
+    selectMoviesFilterType,
+} from '../../../store/movies/movies.actions';
 import { map } from 'rxjs/operators';
-import { fetchPopularMovies } from '../../../store/popular-movies/popular-movies.actions';
 
 @Component({
     selector: 'app-search',
@@ -55,6 +60,10 @@ export class MoviesComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        // ToDo: handle on dropdown select
         this.store.dispatch(fetchPopularMovies());
+        this.store.dispatch(fetchNowPlayingMovies());
+        this.store.dispatch(fetchUpcomingMovies());
+        this.store.dispatch(fetchTopRatedMovies());
     }
 }

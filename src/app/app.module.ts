@@ -26,7 +26,6 @@ import * as searchedMediaReducer from './store/searched-media/searched-media.red
 import { TrendingEffects } from './store/trending/trending.effects';
 import * as trendingReducer from './store/trending/trending.reducer';
 import * as popularReducer from './store/popular/popular.reducer';
-import * as popularMoviesReducer from './store/popular-movies/popular-movies.reducer';
 import * as featuredReducer from './store/featured/featured.reducer';
 import * as moviesReducer from './store/movies/movies.reducer';
 import { MovieDetailComponent } from './components/media/media-detail/movie-detail/movie-detail.component';
@@ -46,9 +45,9 @@ import { FeaturedEffects } from './store/featured/featured.effects';
 import { FactsComponent } from './components/media/media-detail/facts/facts.component';
 import { RecommendationsComponent } from './components/media/media-detail/recommendations/recommendations.component';
 import { PopularComponent } from './components/popular/popular.component';
-import { PopularEffects } from './store/popular/popular.effects';
 import { MoviesComponent } from './components/pages/movies/movies.component';
-import { PopularMoviesEffects } from './store/popular-movies/popular-movies.effects';
+import { MoviesEffects } from './store/movies/movies.effects';
+import { PopularEffects } from './store/popular/popular.effects';
 
 @NgModule({
     declarations: [
@@ -92,7 +91,6 @@ import { PopularMoviesEffects } from './store/popular-movies/popular-movies.effe
             popular: popularReducer.reducer,
             genres: genreReducer.reducer,
             featured: featuredReducer.reducer,
-            popularMovies: popularMoviesReducer.reducer,
             movies: moviesReducer.reducer,
         }),
         StoreDevtoolsModule.instrument({
@@ -106,7 +104,7 @@ import { PopularMoviesEffects } from './store/popular-movies/popular-movies.effe
             SearchedMediaEffects,
             FeaturedEffects,
             PopularEffects,
-            PopularMoviesEffects,
+            MoviesEffects,
         ]),
     ],
     providers: [],
